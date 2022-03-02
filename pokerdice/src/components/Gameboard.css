@@ -1,0 +1,17 @@
+#gameboard {
+    font-family: 'PixelFont';
+    display: grid;
+    grid-template-columns: repeat(9, 100px);
+    grid-template-rows: repeat(9, 100px);
+    flex-wrap: wrap;
+    width: 900px;
+    height: 900px;
+    background-color: #b6862e;
+    
+}
+
+#gameboard .tile {
+    width: 100px;
+    height: 100px;
+}
+
