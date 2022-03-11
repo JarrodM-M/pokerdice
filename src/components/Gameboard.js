@@ -1,8 +1,8 @@
 import React from 'react';
 import './Gameboard.css';
 
-const verticalAxis = ['1', '2', '3', '4', '5', '6', '7', '8', '9']; 
-const horizontalAxis = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
+const verticalAxis = ['0', '1', '2', '3', '4', '5', '6', '7', '8']; 
+const horizontalAxis = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
 
 /*const boardArray = horizontalAxis.map((x) => (
     verticalAxis.map((y) => (
@@ -10,10 +10,10 @@ const horizontalAxis = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
 ))*/
 
 export default function Gameboard() {
-    const board = verticalAxis.map((x) => (
-        horizontalAxis.map((y) => (
-            <div className='tile' key= {y+x}>
-                [{y + x}]
+    const board = horizontalAxis.map((x) => (
+        verticalAxis.map((y) => (
+            <div className='tile' key= {x+y}>
+                [{x + y}]
             </div>))
     ));
 
