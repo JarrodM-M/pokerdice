@@ -10,14 +10,14 @@ const horizontalAxis = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
 ))*/
 
 export default function Gameboard() {
-    let board = [];
-
-    verticalAxis.map((x) => (
+    const board = verticalAxis.map((x) => (
         horizontalAxis.map((y) => (
-            board.push(<div className='tile' key= {y+x}>
-            [{y + x}]
-        </div>)))
+            <div className='tile' key= {y+x}>
+                [{y + x}]
+            </div>))
     ));
+
+    
 
     
     
