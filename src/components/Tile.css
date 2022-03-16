@@ -1,0 +1,6 @@
+.tile {
+    width: 100px;
+    height: 100px;
+    background-image: url("G:\Coding\pokerdice\src\assets\images\board\00.png");
+    background-size: 100px;
+}

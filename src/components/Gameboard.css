@@ -6,12 +6,11 @@
     flex-wrap: wrap;
     width: 900px;
     height: 900px;
-    background-color: #b6862e;
+    background-image: url('G:\Coding\pokerdice\src\assets\images\board\backgroundwithgrid.png');
+    background-size: 900px;
     
 }
 
-#gameboard .tile {
-    width: 100px;
-    height: 100px;
+@media screen {
+    
 }
-
