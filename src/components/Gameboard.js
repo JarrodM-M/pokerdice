@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Tile from './Tile'
 import './Gameboard.css';
 
@@ -13,11 +13,14 @@ export default function Gameboard() {
                 <Tile />
             </div>))
     ));
+    
+
+    const [boardState, setBoardState] = useState(board)
 
 
     return(
             <div id ='gameboard'>
-                {board};
+                {boardState};
                 {console.log(board)}
             </div>
     );
