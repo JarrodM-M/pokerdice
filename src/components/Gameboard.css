@@ -1,16 +1,10 @@
 #gameboard {
     font-family: 'PixelFont';
     display: grid;
-    grid-template-columns: repeat(9, 100px);
-    grid-template-rows: repeat(9, 100px);
-    flex-wrap: wrap;
+    grid-template-columns: repeat(9, 1fr);
     width: 900px;
     height: 900px;
     background-image: url('G:\Coding\pokerdice\src\assets\images\board\backgroundwithgrid.png');
-    background-size: 900px;
-    
-}
-
-@media screen {
+    background-size: contain;
     
 }
