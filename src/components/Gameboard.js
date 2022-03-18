@@ -20,7 +20,6 @@ export default function Gameboard() {
     return(
             <div id ='gameboard'>
                 {boardState}
-                {console.log(board)}
             </div>
     );
 }

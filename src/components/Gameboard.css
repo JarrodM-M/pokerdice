@@ -4,7 +4,7 @@
     grid-template-columns: repeat(9, 1fr);
     width: 900px;
     height: 900px;
-    background-image: url('G:\Coding\pokerdice\src\assets\images\board\backgroundwithgrid.png');
+    background-image: url('../assets/images/board/backgroundwithgrid.png');
     background-size: contain;
     
 }
