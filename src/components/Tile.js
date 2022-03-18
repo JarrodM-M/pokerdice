@@ -6,7 +6,7 @@ import { Board } from "./Gameboard"
 
 export default function Tile({x}) { 
     return (
-        <div >
+        <div className='tile-container' >
             <img src={straight} className='tile' /> 
         </div>
     )};
