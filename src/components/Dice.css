@@ -1,0 +1,28 @@
+.buttonDiv{
+    width: 250px;
+    padding: 10px;
+    display:flex;
+    justify-content: center;
+}
+#diceButton{
+    display: flex;
+    width: 100px;
+    justify-content: center;
+}
+.dice-container{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    height:50px;
+    width:250px;
+    padding: 10px
+}
+.dice{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-style:dotted;
+    border-radius: 20px;
+    max-height: 50px;
+    max-width: 50px;
+    font-family:'PixelFont';
+}
