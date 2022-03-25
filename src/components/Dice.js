@@ -1,9 +1,14 @@
 import './Dice.css'
 import React, { useState, useEffect } from 'react'
+import RollFunction from './Roll'
 
-const roll = () => Math.floor(Math.random() * 6 ) + 1
 
-export default function DiceOne(){
+const roll = () => 
+    Math.floor(Math.random() * 6 ) + 1
+
+
+
+export default function DiceFunction(){
     
     const [diceOne, setDiceOne] = useState('')
     const [diceTwo, setDiceTwo] = useState('')
