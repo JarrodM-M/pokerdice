@@ -1,6 +1,12 @@
 import './Dice.css'
 import React, { useState, useEffect } from 'react'
-import RollFunction from './Roll'
+import dicepicOne from '../assets/images/die1.png'
+import dicepicTwo from '../assets/images/die2.png'
+import dicepicThree from '../assets/images/die3.png'
+import dicepicFour from '../assets/images/die4.png'
+import dicepicFive from '../assets/images/die5.png'
+import dicepicSix from '../assets/images/die6.png'
+
 
 
 const roll = () => 
@@ -22,6 +28,17 @@ export default function DiceFunction(){
         setDiceThree(roll)
         setDiceFour(roll)
         setDiceFive(roll)
+
+    }
+
+    const [diceImageOne, setDiceImageOne] = useState({dicepicOne})
+
+    const imageSelector = () => {
+        setDiceImageOne(()=>{
+            if ( diceOne == 1)
+            return dicepicOne
+        })
+
     }
 
     return(
@@ -32,7 +49,7 @@ export default function DiceFunction(){
                 </button>
             </div>
             <div className='dice-container'>
-                <div className='dice'>{diceOne}</div>
+                <div className='dice'> <img className= 'dice-image' src={diceImageOne} /> </div>
                 <div className='dice'>{diceTwo}</div>
                 <div className='dice'>{diceThree}</div>
                 <div className='dice'>{diceFour}</div>
