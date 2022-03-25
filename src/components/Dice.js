@@ -1,14 +1,13 @@
 import './Dice.css'
 import React, { useState, useEffect } from 'react'
-import RollFunction from './Roll'
+
 
 
 const roll = () => 
     Math.floor(Math.random() * 6 ) + 1
 
 
-
-export default function DiceFunction(){
+/*export default function DiceFunction(){
     
     const [diceOne, setDiceOne] = useState('')
     const [diceTwo, setDiceTwo] = useState('')
@@ -40,4 +39,42 @@ export default function DiceFunction(){
             </div>
         </>
     )
+}
+*/
+
+export default function RollFunction(){
+    const [state, setState] = useState({ dieOne: 1, dieTwo: 1}) 
+    const dieOne = state.dieOne
+    const dieTwo = state.dieTwo
+    let imgTwo = './assets/images/die1.png '
+    let imgOne = './assets/images/die1.png '
+
+
+    function rollDieOne(){
+        setState({dieOne: roll(),  dieTwo: roll()})
+        console.log(dieOne)
+    }
+
+    useEffect(()=>{
+        let imgTwo =  `./assets/images/die${dieTwo}.png`
+        let imgOne =  `./assets/images/die${dieOne}.png`
+        console.log(imgOne)
+    },[])
+
+return (
+    <> 
+        <div className='buttonDiv'>
+            <button id='diceButton' onClick={rollDieOne}>
+                roll
+            </button>
+        </div>
+        <div >
+            <div id='dice-container' ><img src= {imgOne} alt='' id='dicepic'/></div>
+            <div id='dice-container' ><img src= {imgTwo} alt='' id='dicepic'/></div>
+
+        </div>
+    </>        
+)
+
+
 }
