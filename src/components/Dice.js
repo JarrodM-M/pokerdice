@@ -27,11 +27,11 @@ export default function DiceFunction(){
     const roll = () => Math.floor(Math.random() * 6 ) + 1
     
     // sets state of each Die and calls a different roll function for each
-    const [diceOne, setDiceOne] = useState(roll)
-    const [diceTwo, setDiceTwo] = useState(roll)
-    const [diceThree, setDiceThree] = useState(roll)
-    const [diceFour, setDiceFour] = useState(roll)
-    const [diceFive, setDiceFive] = useState(roll)
+    const [diceOne, setDiceOne] = useState(roll())
+    const [diceTwo, setDiceTwo] = useState(roll())
+    const [diceThree, setDiceThree] = useState(roll())
+    const [diceFour, setDiceFour] = useState(roll())
+    const [diceFive, setDiceFive] = useState(roll())
 
     //sets state for the die image shown before a roll has happened
     const [diceImageOne, setDiceImageOne] = useState(dicepicOne)
