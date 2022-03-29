@@ -22,6 +22,8 @@ const useToggle = (initialState) => {
 
 
 
+
+
 export default function DiceFunction(){
 
     const roll = () => Math.floor(Math.random() * 6 ) + 1
@@ -40,18 +42,38 @@ export default function DiceFunction(){
     const [diceImageFive, setDiceImageFive] = useState(dicepicOne)
 
     const [isToggledOne, toggleOne] = useToggle(false)
+    const [isToggledTwo, toggleTwo] = useToggle(false)
+    const [isToggledThree, toggleThree] = useToggle(false)
+    const [isToggledFour, toggleFour] = useToggle(false)
+    const [isToggledFive, toggleFive] = useToggle(false)
     
-    
+    console.log('toggle1:'+ isToggledOne)
+    console.log('toggle2:'+ isToggledTwo)
+    console.log('toggle3:'+ isToggledThree)
+    console.log('toggle4:'+ isToggledFour)
+    console.log('toggle5:'+ isToggledFive)
+
+    const setRoll = (prop, propfunc) => {
+        if (prop == false) propfunc(roll) 
+        else (propfunc(prev => prev))
+    }
 
     function handleRoll() {
 
-        if (isToggledOne == false) setDiceOne(roll)
-        else (setDiceOne(prev => prev) )
+        //if (isToggledOne == false) setDiceOne(roll)
+       // else (setDiceOne(prev => prev) )
         
-        setDiceTwo(roll)
+        setRoll( isToggledOne, setDiceOne)
+        setRoll( isToggledTwo, setDiceTwo)
+        setRoll( isToggledThree, setDiceThree)
+        setRoll( isToggledFour, setDiceFour)
+        setRoll( isToggledFive, setDiceFive)
+
+
+        /*setDiceTwo(roll)
         setDiceThree(roll)
         setDiceFour(roll)
-        setDiceFive(roll)
+        setDiceFive(roll)*/
 
         setDiceImageOne(imageSelector(diceOne))
         setDiceImageTwo(imageSelector(diceTwo))
@@ -84,10 +106,10 @@ export default function DiceFunction(){
             </div>
             <div className='dice-container'>
                 <div className='dice' onClick={toggleOne}> <img className= 'dice-image' src={diceImageOne} /> </div>
-                <div className='dice'><img className= 'dice-image' src={diceImageTwo} /></div>
-                <div className='dice'><img className= 'dice-image' src={diceImageThree} /></div>
-                <div className='dice'><img className= 'dice-image' src={diceImageFour} /></div>
-                <div className='dice'><img className= 'dice-image' src={diceImageFive} /></div>
+                <div className='dice' onClick={toggleTwo}><img className= 'dice-image' src={diceImageTwo} /></div>
+                <div className='dice' onClick={toggleThree}><img className= 'dice-image' src={diceImageThree} /></div>
+                <div className='dice' onClick={toggleFour}><img className= 'dice-image' src={diceImageFour} /></div>
+                <div className='dice' onClick={toggleFive}><img className= 'dice-image' src={diceImageFive} /></div>
             </div>
         </>
     )
