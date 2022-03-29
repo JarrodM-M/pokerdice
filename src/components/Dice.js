@@ -8,6 +8,7 @@ import dicepicFive from '../assets/images/die5.png'
 import dicepicSix from '../assets/images/die6.png'
 
 
+// custom hook to toggle true and false used to tell the handleRoll function if the toggled Die get's rolled again or if it's value is kept
 const useToggle = (initialState) => {
     const [isToggled, setIsToggled] = useState(initialState);
       
@@ -26,21 +27,24 @@ const useToggle = (initialState) => {
 
 export default function DiceFunction(){
 
+    // function for rolling a number 1-6 which represents a Die rolling
     const roll = () => Math.floor(Math.random() * 6 ) + 1
     
-    
+    // sets state of each Die and calls a different roll function for each
     const [diceOne, setDiceOne] = useState(roll)
     const [diceTwo, setDiceTwo] = useState(roll)
     const [diceThree, setDiceThree] = useState(roll)
     const [diceFour, setDiceFour] = useState(roll)
     const [diceFive, setDiceFive] = useState(roll)
 
+    //sets state for the die image shown before a roll has happened
     const [diceImageOne, setDiceImageOne] = useState(dicepicOne)
     const [diceImageTwo, setDiceImageTwo] = useState(dicepicOne)
     const [diceImageThree, setDiceImageThree] = useState(dicepicOne)
     const [diceImageFour, setDiceImageFour] = useState(dicepicOne)
     const [diceImageFive, setDiceImageFive] = useState(dicepicOne)
 
+    // call the custom toggle hook and assigns it to a variable and gives it an inital state of false. Used in onClick
     const [isToggledOne, toggleOne] = useToggle(false)
     const [isToggledTwo, toggleTwo] = useToggle(false)
     const [isToggledThree, toggleThree] = useToggle(false)
@@ -53,16 +57,15 @@ export default function DiceFunction(){
     console.log('toggle4:'+ isToggledFour)
     console.log('toggle5:'+ isToggledFive)
 
-    const setRoll = (prop, propfunc) => {
-        if (prop == false) propfunc(roll) 
-        else (propfunc(prev => prev))
-    }
+    
 
+    // function that handles what happens when the button is clicked to roll the dice
     function handleRoll() {
 
-        //if (isToggledOne == false) setDiceOne(roll)
-       // else (setDiceOne(prev => prev) )
+        /* if (isToggledOne == false) setDiceOne(roll)
+        else (setDiceOne(prev => prev) ) */
         
+        // passes in the boolean value for the toggle and the sets the State of the dice when rolled
         setRoll( isToggledOne, setDiceOne)
         setRoll( isToggledTwo, setDiceTwo)
         setRoll( isToggledThree, setDiceThree)
@@ -75,6 +78,7 @@ export default function DiceFunction(){
         setDiceFour(roll)
         setDiceFive(roll)*/
 
+        // calls the imageSelector function and sets the state of the image of the dice based on it's value after it's been rolled
         setDiceImageOne(imageSelector(diceOne))
         setDiceImageTwo(imageSelector(diceTwo))
         setDiceImageThree(imageSelector(diceThree))
@@ -85,8 +89,15 @@ export default function DiceFunction(){
         console.log(diceArray)
         
     }
-    
 
+    // function that takes in the toggled status of die and then rolls it if toggle=false or keeps the prev value if toggle=true
+    // **issue maybe here. after toggle occurs the roll doesn't update until the next roll. maybe useEffect here to fix?? 
+    const setRoll = (prop, propfunc) => {
+        if (prop == false) propfunc(roll) 
+        else (propfunc(prev => prev))
+    }
+    
+    // function that handles what image to assign based on the value of the die
     function imageSelector (number){
             if ( number == 1) return dicepicOne
             if ( number == 2) return dicepicTwo
