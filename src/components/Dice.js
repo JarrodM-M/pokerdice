@@ -53,6 +53,8 @@ export default function DiceFunction(){
     console.log('toggle4:'+ isToggledFour)
     console.log('toggle5:'+ isToggledFive)
 
+    const diceArray =[diceOne, diceTwo, diceThree, diceFour, diceFive]
+    console.log(diceArray)
     
 
     // function that handles what happens when the button is clicked to roll the dice
@@ -76,8 +78,8 @@ export default function DiceFunction(){
         setDiceImageFour(imageSelector(diceFour))
         setDiceImageFive(imageSelector(diceFive))
 
-        const diceArray =[diceOne, diceTwo, diceThree, diceFour, diceFive]
-        console.log(diceArray)
+        
+        
         
     }
 
