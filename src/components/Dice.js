@@ -21,10 +21,6 @@ const useToggle = (initialState) => {
     return [isToggled, toggle];
 }
 
-
-
-
-
 export default function DiceFunction(){
 
     // function for rolling a number 1-6 which represents a Die rolling
@@ -73,11 +69,6 @@ export default function DiceFunction(){
         setRoll( isToggledFive, setDiceFive)
 
 
-        /*setDiceTwo(roll)
-        setDiceThree(roll)
-        setDiceFour(roll)
-        setDiceFive(roll)*/
-
         // calls the imageSelector function and sets the state of the image of the dice based on it's value after it's been rolled
         setDiceImageOne(imageSelector(diceOne))
         setDiceImageTwo(imageSelector(diceTwo))
@@ -90,11 +81,12 @@ export default function DiceFunction(){
         
     }
 
-    // function that takes in the toggled status of die and then rolls it if toggle=false or keeps the prev value if toggle=true
+    // function that takes in the toggled status of die (prop) and the setState function of the die (propFunc)  
+    // Tells the setState to roll if the toggled state is false or to keep it's last roll if the toggled state is true
     // **issue maybe here. after toggle occurs the roll doesn't update until the next roll. maybe useEffect here to fix?? 
-    const setRoll = (prop, propfunc) => {
-        if (prop == false) propfunc(roll) 
-        else (propfunc(prev => prev))
+    const setRoll = (prop, propFunc) => {
+        if (prop == false) propFunc(roll) 
+        else (propFunc(prev => prev))
     }
     
     // function that handles what image to assign based on the value of the die
