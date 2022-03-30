@@ -25,13 +25,13 @@ export default function DiceFunction(){
 
     // function for rolling a number 1-6 which represents a Die rolling
     const roll = () => Math.floor(Math.random() * 6 ) + 1
-    
+ 
     // sets state of each Die and calls a different roll function for each
-    const [diceOne, setDiceOne] = useState(roll())
-    const [diceTwo, setDiceTwo] = useState(roll())
-    const [diceThree, setDiceThree] = useState(roll())
-    const [diceFour, setDiceFour] = useState(roll())
-    const [diceFive, setDiceFive] = useState(roll())
+    const [diceOne, setDiceOne] = useState('')
+    const [diceTwo, setDiceTwo] = useState('')
+    const [diceThree, setDiceThree] = useState('')
+    const [diceFour, setDiceFour] = useState('')
+    const [diceFive, setDiceFive] = useState('')
 
     //sets state for the die image shown before a roll has happened
     const [diceImageOne, setDiceImageOne] = useState(dicepicOne)
@@ -46,51 +46,43 @@ export default function DiceFunction(){
     const [isToggledThree, toggleThree] = useToggle(false)
     const [isToggledFour, toggleFour] = useToggle(false)
     const [isToggledFive, toggleFive] = useToggle(false)
-    
-    console.log('toggle1:'+ isToggledOne)
-    console.log('toggle2:'+ isToggledTwo)
-    console.log('toggle3:'+ isToggledThree)
-    console.log('toggle4:'+ isToggledFour)
-    console.log('toggle5:'+ isToggledFive)
 
-    const diceArray =[diceOne, diceTwo, diceThree, diceFour, diceFive]
-    console.log(diceArray)
+    // set number of times the roll button can be clicked before changing the player
+    const [rollCount, setRollCount] = useState(0)
     
+    const diceArray =[diceOne, diceTwo, diceThree, diceFour, diceFive]
+        
+    console.log(diceArray)
+    console.log('Number of rolls:'+ rollCount)
 
     // function that handles what happens when the button is clicked to roll the dice
     function handleRoll() {
 
-        /* if (isToggledOne == false) setDiceOne(roll)
-        else (setDiceOne(prev => prev) ) */
-        
         // passes in the boolean value for the toggle and the sets the State of the dice when rolled
-        setRoll( isToggledOne, setDiceOne)
-        setRoll( isToggledTwo, setDiceTwo)
-        setRoll( isToggledThree, setDiceThree)
-        setRoll( isToggledFour, setDiceFour)
-        setRoll( isToggledFive, setDiceFive)
+        setRoll( isToggledOne, setDiceOne, setDiceImageOne)
+        setRoll( isToggledTwo, setDiceTwo, setDiceImageTwo)
+        setRoll( isToggledThree, setDiceThree, setDiceImageThree)
+        setRoll( isToggledFour, setDiceFour, setDiceImageFour)
+        setRoll( isToggledFive, setDiceFive, setDiceImageFive)
 
+        // Counts number of times dice have been rollednpm
+        setRollCount(rollCount + 1)
+    }
 
-        // calls the imageSelector function and sets the state of the image of the dice based on it's value after it's been rolled
-        setDiceImageOne(imageSelector(diceOne))
-        setDiceImageTwo(imageSelector(diceTwo))
-        setDiceImageThree(imageSelector(diceThree))
-        setDiceImageFour(imageSelector(diceFour))
-        setDiceImageFive(imageSelector(diceFive))
-
-        
-        
-        
+    const reset = () => {
+        setRollCount(0)
     }
 
     // function that takes in the toggled status of die (prop) and the setState function of the die (propFunc)  
-    // Tells the setState to roll if the toggled state is false or to keep it's last roll if the toggled state is true
-    // **issue maybe here. after toggle occurs the roll doesn't update until the next roll. maybe useEffect here to fix?? 
-    const setRoll = (prop, propFunc) => {
-        if (prop == false) propFunc(roll) 
-        else (propFunc(prev => prev))
+    // Tells the setState to roll if the toggled state is false, 
+    const setRoll = (toggleValue, setDice, setDiceImage) => {
+        if (!toggleValue){
+            const rolledValue = roll();
+            setDice(rolledValue);
+            setDiceImage(imageSelector(rolledValue));  
+        }
     }
-    
+
     // function that handles what image to assign based on the value of the die
     function imageSelector (number){
             if ( number == 1) return dicepicOne
@@ -99,13 +91,12 @@ export default function DiceFunction(){
             if ( number == 4) return dicepicFour
             if ( number == 5) return dicepicFive
             return dicepicSix
-            
-        }
+    }
     
     return(
         <> 
             <div className='buttonDiv'>
-                <button id='diceButton' onClick={handleRoll}>
+                <button id='diceButton' onClick={handleRoll} disabled={rollCount >= 3}>
                 roll
                 </button>
             </div>

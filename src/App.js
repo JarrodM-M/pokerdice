@@ -1,5 +1,5 @@
 import './App.css';
-//import Gameboard from './components/Gameboard';
+import Gameboard from './components/Gameboard';
 import DiceFunction from './components/Dice';
 
 function App() {
