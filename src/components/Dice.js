@@ -69,9 +69,6 @@ export default function DiceFunction(){
         setRollCount(rollCount + 1)
     }
 
-    const reset = () => {
-        setRollCount(0)
-    }
 
     // function that takes in the toggled status of die (prop) and the setState function of the die (propFunc)  
     // Tells the setState to roll if the toggled state is false, 
