@@ -1,5 +1,5 @@
 import './Dice.css'
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useReducer, useCallback } from 'react'
 import dicepicOne from '../assets/images/die1.png'
 import dicepicTwo from '../assets/images/die2.png'
 import dicepicThree from '../assets/images/die3.png'
@@ -19,6 +19,19 @@ const useToggle = (initialState) => {
     );
       
     return [isToggled, toggle];
+}
+
+const initialRollCount = 0
+const reducer = (state, action) => {
+    switch (action) {
+        case 'increment':
+            return state + 1
+        case 'reset':
+            return initialRollCount
+        default:
+            return state
+    }
+        
 }
 
 export default function DiceFunction(){
@@ -48,7 +61,9 @@ export default function DiceFunction(){
     const [isToggledFive, toggleFive] = useToggle(false)
 
     // set number of times the roll button can be clicked before changing the player
-    const [rollCount, setRollCount] = useState(0)
+    //const [rollCount, setRollCount] = useState(0)
+
+    const [rollCount, dispatch] = useReducer(reducer, initialRollCount)
     
     const diceArray =[diceOne, diceTwo, diceThree, diceFour, diceFive]
         
@@ -66,7 +81,7 @@ export default function DiceFunction(){
         setRoll( isToggledFive, setDiceFive, setDiceImageFive)
 
         // Counts number of times dice have been rollednpm
-        setRollCount(rollCount + 1)
+        dispatch('increment')
     }
 
 
@@ -95,6 +110,9 @@ export default function DiceFunction(){
             <div className='buttonDiv'>
                 <button id='diceButton' onClick={handleRoll} disabled={rollCount >= 3}>
                 roll
+                </button>
+                <button id='diceButton' onClick={()=>dispatch('reset')}>
+                reset
                 </button>
             </div>
             <div className='dice-container'>
