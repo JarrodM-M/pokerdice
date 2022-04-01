@@ -8,9 +8,9 @@ function App() {
   return (
     <div id="app">
 
-      {/* <Gameboard />
-      <DiceFunction /> */}
-      <DiceModel />
+      {/* <Gameboard /> */}
+      <DiceFunction />
+      {/* <DiceModel />,<DiceModel />,<DiceModel />,<DiceModel />,<DiceModel /> */}
 
     </div>
   );

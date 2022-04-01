@@ -1,28 +1,21 @@
 import './Dice.css'
-import React, { useState, useReducer, useCallback } from 'react'
+import React, { useState, useReducer, } from 'react'
 import dicepicOne from '../assets/images/die1.png'
 import dicepicTwo from '../assets/images/die2.png'
 import dicepicThree from '../assets/images/die3.png'
 import dicepicFour from '../assets/images/die4.png'
 import dicepicFive from '../assets/images/die5.png'
 import dicepicSix from '../assets/images/die6.png'
+import useToggle  from './Toggle'
 
 
-// custom hook to toggle true and false used to tell the handleRoll function if the toggled Die get's rolled again or if it's value is kept
-const useToggle = (initialState) => {
-    const [isToggled, setIsToggled] = useState(initialState);
-      
-        
-    const toggle = useCallback(
-        () => setIsToggled(state => !state),
-        [setIsToggled],
-    );
-      
-    return [isToggled, toggle];
-}
 
-const initialRollCount = 0
-const reducer = (state, action) => {
+
+export default function DiceFunction(){
+
+    const initialRollCount = 0
+     
+    const reducer = (state, action) => {
     switch (action) {
         case 'increment':
             return state + 1
@@ -31,10 +24,7 @@ const reducer = (state, action) => {
         default:
             return state
     }
-        
 }
-
-export default function DiceFunction(){
 
     // function for rolling a number 1-6 which represents a Die rolling
     const roll = () => Math.floor(Math.random() * 6 ) + 1
@@ -60,9 +50,6 @@ export default function DiceFunction(){
     const [isToggledFour, toggleFour] = useToggle(false)
     const [isToggledFive, toggleFive] = useToggle(false)
 
-    // set number of times the roll button can be clicked before changing the player
-    //const [rollCount, setRollCount] = useState(0)
-
     const [rollCount, dispatch] = useReducer(reducer, initialRollCount)
     
     const diceArray =[diceOne, diceTwo, diceThree, diceFour, diceFive]
@@ -70,10 +57,30 @@ export default function DiceFunction(){
     console.log(diceArray)
     console.log('Number of rolls:'+ rollCount)
 
+    // Function used in handleRoll takes in the state of toggled dice and setStates of dice roll and it's image
+    // Will only setState of the Die and it's corresponding image if toggleValue = false (is not toggled), 
+    const setRoll = (toggleValue, setDice, setDiceImage) => {
+        if (!toggleValue){
+            const rolledValue = roll();
+            setDice(rolledValue);
+            setDiceImage(imageSelector(rolledValue));
+             
+        }
+    }
+
+    // function that handles what image to assign based on the value of the die
+    function imageSelector (number){
+            if ( number === 1) return dicepicOne
+            if ( number === 2) return dicepicTwo
+            if ( number === 3) return dicepicThree
+            if ( number === 4) return dicepicFour
+            if ( number === 5) return dicepicFive
+            return dicepicSix
+    }
+
     // function that handles what happens when the button is clicked to roll the dice
     function handleRoll() {
 
-        // passes in the boolean value for the toggle and the sets the State of the dice when rolled
         setRoll( isToggledOne, setDiceOne, setDiceImageOne)
         setRoll( isToggledTwo, setDiceTwo, setDiceImageTwo)
         setRoll( isToggledThree, setDiceThree, setDiceImageThree)
@@ -83,44 +90,23 @@ export default function DiceFunction(){
         // Counts number of times dice have been rollednpm
         dispatch('increment')
     }
-
-
-    // function that takes in the toggled status of die (prop) and the setState function of the die (propFunc)  
-    // Tells the setState to roll if the toggled state is false, 
-    const setRoll = (toggleValue, setDice, setDiceImage) => {
-        if (!toggleValue){
-            const rolledValue = roll();
-            setDice(rolledValue);
-            setDiceImage(imageSelector(rolledValue));  
-        }
-    }
-
-    // function that handles what image to assign based on the value of the die
-    function imageSelector (number){
-            if ( number == 1) return dicepicOne
-            if ( number == 2) return dicepicTwo
-            if ( number == 3) return dicepicThree
-            if ( number == 4) return dicepicFour
-            if ( number == 5) return dicepicFive
-            return dicepicSix
-    }
-    
+  
     return(
         <> 
             <div className='buttonDiv'>
                 <button id='diceButton' onClick={handleRoll} disabled={rollCount >= 3}>
                 roll
                 </button>
-                <button id='diceButton' onClick={()=>dispatch('reset')}>
+                <button id='diceButton'  onClick= {() =>dispatch('reset')} >
                 reset
                 </button>
             </div>
             <div className='dice-container'>
-                <div className='dice' onClick={toggleOne}> <img className= 'dice-image' src={diceImageOne} /> </div>
-                <div className='dice' onClick={toggleTwo}><img className= 'dice-image' src={diceImageTwo} /></div>
-                <div className='dice' onClick={toggleThree}><img className= 'dice-image' src={diceImageThree} /></div>
-                <div className='dice' onClick={toggleFour}><img className= 'dice-image' src={diceImageFour} /></div>
-                <div className='dice' onClick={toggleFive}><img className= 'dice-image' src={diceImageFive} /></div>
+                <div className='dice' onClick={toggleOne}> <img className= {isToggledOne ? 'dice-image-active' : 'dice-image'} alt='' src={diceImageOne} /> </div>
+                <div className='dice' onClick={toggleTwo}><img className= {isToggledTwo ? 'dice-image-active' : 'dice-image'}  alt='' src={diceImageTwo} /></div>
+                <div className='dice' onClick={toggleThree}><img className= {isToggledThree ? 'dice-image-active' : 'dice-image'} alt='' src={diceImageThree} /></div>
+                <div className='dice' onClick={toggleFour}><img className= {isToggledFour ? 'dice-image-active' : 'dice-image'}  alt='' src={diceImageFour} /></div>
+                <div className='dice' onClick={toggleFive}><img className= {isToggledFive ? 'dice-image-active' : 'dice-image'}  alt='' src={diceImageFive} /></div>
             </div>
         </>
     )
