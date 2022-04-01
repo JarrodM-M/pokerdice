@@ -1,4 +1,6 @@
+import React from 'react';
 import './Tile.css';
+
 import zeroZero from '../assets/images/board/00.png'
 import zeroOne from '../assets/images/board/01.png'
 import zeroTwo from '../assets/images/board/02.png'
