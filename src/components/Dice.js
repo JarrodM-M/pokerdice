@@ -97,7 +97,7 @@ export default function DiceFunction(){
                 <button id='diceButton' onClick={handleRoll} disabled={rollCount >= 3}>
                 roll
                 </button>
-                <button id='diceButton'  onClick= {() =>dispatch('reset')} >
+                <button id='diceButton'  onClick= {() => dispatch('reset')} >
                 reset
                 </button>
             </div>
