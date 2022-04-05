@@ -1,5 +1,5 @@
 import './Dice.css'
-import React, { useState, useReducer, } from 'react'
+import React, { useState, useReducer, useEffect, } from 'react'
 import dicepicOne from '../assets/images/die1.png'
 import dicepicTwo from '../assets/images/die2.png'
 import dicepicThree from '../assets/images/die3.png'
@@ -11,12 +11,9 @@ import useToggle  from './Toggle'
 // function for rolling a number 1-6 which represents a Die rolling
 const roll = () => Math.floor(Math.random() * 6 ) + 1
 
-
-export default function DiceFunction(){
-
-    const initialRollCount = 0
-     
-    const reducer = (state, action) => {
+// reducer function for controlling the number of times the roll button is clicked and reseting it back to 0
+const initialRollCount = 0
+const reducer = (state, action) => {
     switch (action) {
         case 'increment':
             return state + 1
@@ -27,6 +24,17 @@ export default function DiceFunction(){
     }
 }
 
+// function that handles what image to assign based on the value of the die
+function imageSelector (number){
+    if ( number === 1) return dicepicOne
+    if ( number === 2) return dicepicTwo
+    if ( number === 3) return dicepicThree
+    if ( number === 4) return dicepicFour
+    if ( number === 5) return dicepicFive
+    return dicepicSix
+}
+
+export default function DiceFunction(){
     // sets state of each Die and calls a different roll function for each
     const [diceOne, setDiceOne] = useState('')
     const [diceTwo, setDiceTwo] = useState('')
@@ -48,6 +56,7 @@ export default function DiceFunction(){
     const [isToggledFour, toggleFour] = useToggle(false)
     const [isToggledFive, toggleFive] = useToggle(false)
 
+    
     const [rollCount, dispatch] = useReducer(reducer, initialRollCount)
     
     const diceArray =[diceOne, diceTwo, diceThree, diceFour, diceFive]
@@ -55,6 +64,7 @@ export default function DiceFunction(){
     console.log(diceArray)
     console.log('Number of rolls:'+ rollCount)
 
+    
     // Function used in handleRoll takes in the state of toggled dice and setStates of dice roll and it's image
     // Will only setState of the Die and it's corresponding image if toggleValue = false (is not toggled), 
     const setRoll = (toggleValue, setDice, setDiceImage) => {
@@ -66,16 +76,6 @@ export default function DiceFunction(){
         }
     }
 
-    // function that handles what image to assign based on the value of the die
-    function imageSelector (number){
-            if ( number === 1) return dicepicOne
-            if ( number === 2) return dicepicTwo
-            if ( number === 3) return dicepicThree
-            if ( number === 4) return dicepicFour
-            if ( number === 5) return dicepicFive
-            return dicepicSix
-    }
-
     // function that handles what happens when the button is clicked to roll the dice
     function handleRoll() {
 
@@ -85,8 +85,11 @@ export default function DiceFunction(){
         setRoll( isToggledFour, setDiceFour, setDiceImageFour)
         setRoll( isToggledFive, setDiceFive, setDiceImageFive)
 
+        
+
         // Counts number of times dice have been rollednpm
         dispatch('increment')
+
     }
   
     return(
