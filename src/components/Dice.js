@@ -8,7 +8,8 @@ import dicepicFive from '../assets/images/die5.png'
 import dicepicSix from '../assets/images/die6.png'
 import useToggle  from './Toggle'
 
-
+// function for rolling a number 1-6 which represents a Die rolling
+const roll = () => Math.floor(Math.random() * 6 ) + 1
 
 
 export default function DiceFunction(){
@@ -26,9 +27,6 @@ export default function DiceFunction(){
     }
 }
 
-    // function for rolling a number 1-6 which represents a Die rolling
-    const roll = () => Math.floor(Math.random() * 6 ) + 1
- 
     // sets state of each Die and calls a different roll function for each
     const [diceOne, setDiceOne] = useState('')
     const [diceTwo, setDiceTwo] = useState('')
