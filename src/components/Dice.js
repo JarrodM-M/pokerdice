@@ -37,6 +37,9 @@ function imageSelector (number){
 export default function DiceFunction(){
     // sets state of each Die and calls a different roll function for each
     const [diceOne, setDiceOne] = useState('')
+    useEffect(()=>{
+        setDiceImageOne(imageSelector(diceOne))
+    })
     const [diceTwo, setDiceTwo] = useState('')
     const [diceThree, setDiceThree] = useState('')
     const [diceFour, setDiceFour] = useState('')
@@ -70,22 +73,24 @@ export default function DiceFunction(){
     const setRoll = (toggleValue, setDice, setDiceImage) => {
         if (!toggleValue){
             const rolledValue = roll();
-            setDice(rolledValue);
-            setDiceImage(imageSelector(rolledValue));
-             
+            setDice(rolledValue);             
         }
     }
 
     // function that handles what happens when the button is clicked to roll the dice
     function handleRoll() {
 
-        setRoll( isToggledOne, setDiceOne, setDiceImageOne)
-        setRoll( isToggledTwo, setDiceTwo, setDiceImageTwo)
-        setRoll( isToggledThree, setDiceThree, setDiceImageThree)
-        setRoll( isToggledFour, setDiceFour, setDiceImageFour)
-        setRoll( isToggledFive, setDiceFive, setDiceImageFive)
+        setRoll( isToggledOne, setDiceOne)
+        setRoll( isToggledTwo, setDiceTwo)
+        setRoll( isToggledThree, setDiceThree)
+        setRoll( isToggledFour, setDiceFour)
+        setRoll( isToggledFive, setDiceFive)
 
-        
+        // setDiceImageOne(imageSelector(diceOne))
+        // setDiceImageTwo(imageSelector(diceTwo))
+        // setDiceImageThree(imageSelector(diceThree))
+        // setDiceImageFour(imageSelector(diceFour))
+        // setDiceImageFive(imageSelector(diceFive))
 
         // Counts number of times dice have been rollednpm
         dispatch('increment')
