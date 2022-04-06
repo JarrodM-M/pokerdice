@@ -1,4 +1,4 @@
-import React, { useRef, Suspense } from 'react'
+import React, { useRef, Suspense, useState } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three/src/loaders/TextureLoader.js'
 import diceOneTexture from '../assets/images/textures/dice_1.jpeg'
@@ -16,6 +16,8 @@ function Box() {
     const texture_4 = useLoader(TextureLoader, diceFourTexture)
     const texture_5 = useLoader(TextureLoader, diceFiveTexture)
     const texture_6 = useLoader(TextureLoader, diceSixTexture)
+    const [hovered, hover] = useState(false)
+    const [clicked, click] = useState(false)
 
     const textures = [ texture_1, texture_2, texture_3, texture_4, texture_5, texture_6 ]
     
@@ -24,7 +26,13 @@ function Box() {
         mesh.current.rotation.x = mesh.current.rotation.y += 0.01
     })
     return (
-        <mesh ref={mesh}>
+        <mesh 
+          ref={mesh}
+          scale={clicked ? 1.5 : 1}
+        onClick={(event) => click(!clicked)}
+        onPointerOver={(event) => hover(true)}
+        onPointerOut={(event) => hover(false)}
+        >
             <boxBufferGeometry attach="geometry" />
             {textures.map((texture, index) => <meshStandardMaterial key={index} map={texture} attach={`material-${index}`} />)}
 
@@ -46,6 +54,10 @@ export default function DiceModel() {
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
       <pointLight position={[-10, -10, -10]} />
       <Suspense fallback={null}>
+        <Box />
+        <Box />
+        <Box />
+        <Box />
         <Box />
       </Suspense>
     </Canvas>
