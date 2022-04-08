@@ -28,20 +28,20 @@ function Box() {
     return (
         <mesh 
           ref={mesh}
-          scale={clicked ? 1.5 : 1}
-        onClick={(event) => click(!clicked)}
-        onPointerOver={(event) => hover(true)}
-        onPointerOut={(event) => hover(false)}
+          scale={hovered ? 2 : 1.5}
+          onClick={(event) => click(!clicked)}
+          onPointerOver={(event) => hover(true)}
+          onPointerOut={(event) => hover(false)}
         >
             <boxBufferGeometry attach="geometry" />
-            {textures.map((texture, index) => <meshStandardMaterial key={index} map={texture} attach={`material-${index}`} />)}
-
-            {/* <meshStandardMaterial map={texture_1} attach={"material-0"} />
-            <meshStandardMaterial map={texture_2} attach={"material-1"} />
-            <meshStandardMaterial map={texture_3} attach={"material-2"} />
-            <meshStandardMaterial map={texture_4} attach={"material-3"} />
-            <meshStandardMaterial map={texture_5} attach={"material-4"} />
-            <meshStandardMaterial map={texture_6} attach={"material-5"} /> */}
+            {textures.map((texture, index) => 
+              <meshStandardMaterial 
+                key={index} 
+                map={texture} 
+                attach={`material-${index}`}
+                color={clicked ? 'rgb(127, 103, 143)' : 'white'} 
+              />)
+            }
         </mesh>
     )
 }
