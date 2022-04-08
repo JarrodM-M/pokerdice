@@ -9,5 +9,5 @@ export default function useToggle (initialState) {
         [setIsToggled],
     );
       
-    return [isToggled, toggle];
+    return [isToggled, toggle, setIsToggled];
 }

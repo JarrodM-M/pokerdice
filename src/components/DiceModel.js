@@ -55,10 +55,6 @@ export default function DiceModel() {
       <pointLight position={[-10, -10, -10]} />
       <Suspense fallback={null}>
         <Box />
-        <Box />
-        <Box />
-        <Box />
-        <Box />
       </Suspense>
     </Canvas>
   )
