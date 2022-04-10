@@ -36,7 +36,7 @@ function Box() {
         <animated.mesh 
           ref={mesh}
           scale={scale}
-          onClick={(event) => click(!clicked), setPosition([3,0,0])}
+          onClick={(event) => {click(!clicked); setPosition([6,2,0])}}
           onPointerOver={(event) => hover(true)}
           onPointerOut={(event) => hover(false)}
           position = {position}
