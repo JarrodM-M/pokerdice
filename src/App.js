@@ -9,8 +9,8 @@ function App() {
     <div id="app">
 
       {/* <Gameboard /> */}
-      <DiceFunction />
-      {/* <DiceModel />,<DiceModel />,<DiceModel />,<DiceModel />,<DiceModel /> */}
+      {/* <DiceFunction /> */}
+      <DiceModel /> 
 
     </div>
   );
