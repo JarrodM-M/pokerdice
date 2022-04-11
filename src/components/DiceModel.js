@@ -36,10 +36,12 @@ function Box() {
         <animated.mesh 
           ref={mesh}
           scale={scale}
-          onClick={(event) => {click(!clicked); setPosition([6,2,0])}}
+          onClick={(event) => {click(!clicked); setPosition([0,3.15,0])}}
           onPointerOver={(event) => hover(true)}
           onPointerOut={(event) => hover(false)}
-          position = {position}
+          rotation = {position}
+
+          //dice face = rotation number; 1= [0,0,0], 6= [0,3.5,0]
         >
             <boxBufferGeometry attach="geometry" />
             {textures.map((texture, index) => 
