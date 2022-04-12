@@ -19,7 +19,7 @@ function Box() {
     const texture_6 = useLoader(TextureLoader, diceSixTexture)
     const [hovered, hover] = useState(false)
     const [clicked, click] = useState(false)
-    const [position, setPosition] = useState([0,0,0])
+    const [position, setPosition] = useState([0, 0, 0])
 
     const textures = [ texture_1, texture_2, texture_3, texture_4, texture_5, texture_6 ]
     
@@ -36,12 +36,12 @@ function Box() {
         <animated.mesh 
           ref={mesh}
           scale={scale}
-          onClick={(event) => {click(!clicked); setPosition([0,3.15,0])}}
+          onClick={(event) => {click(!clicked); setPosition([-1.57, 0, 0])}}
           onPointerOver={(event) => hover(true)}
           onPointerOut={(event) => hover(false)}
           rotation = {position}
 
-          //dice face = rotation number; 1= [0,0,0], 6= [0,3.5,0]
+          //dice face = rotation number; 1= [0, 0, 0], 2= [0, 1.55, 0], 3= [1.57, 0, 0], 4= [-1.57, 0, 0], 5= [0, 4.71, 0], 6= [0, 3.15, 1.571]
         >
             <boxBufferGeometry attach="geometry" />
             {textures.map((texture, index) => 
