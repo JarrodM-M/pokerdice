@@ -8,9 +8,15 @@ function App() {
   return (
     <div id="app">
 
-      {/* <Gameboard /> */}
+      <Gameboard />
       {/* <DiceFunction /> */}
-      <DiceModel /> 
+      <div id = 'dice-container'>
+        <DiceModel />
+        <DiceModel />
+        <DiceModel />
+        <DiceModel />
+        <DiceModel />
+      </div>  
 
     </div>
   );
