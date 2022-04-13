@@ -22,6 +22,8 @@ function Box(rotationArray) {
     const [position, setPosition] = useState([0, 0, 0])
 
     const textures = [ texture_1, texture_2, texture_3, texture_4, texture_5, texture_6 ]
+
+    
     
     const mesh = useRef()
     // useFrame(() => {

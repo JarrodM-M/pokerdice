@@ -47,6 +47,7 @@ export default function DiceFunction(){
         useEffect(()=>{
             // setDiceImageOne(imageSelector(diceOne));
             setDiceFaceOne(getRotation(diceOne));
+            console.log(getRotation(diceOne))
         },[diceOne]);
     const [diceTwo, setDiceTwo] = useState('')
         useEffect(()=>{
