@@ -7,10 +7,19 @@ import DiceFunction from './components/Dice';
 function App() {
   return (
     <div id="app">
+      {/* <div id = 'board'>
+        <Gameboard />
+      </div> */}
+      
+      <DiceFunction />
 
-      {/* <Gameboard /> */}
-      {/* <DiceFunction /> */}
-      <DiceModel /> 
+      {/* <div id='dice-container'>
+        <div id='die-container'><DiceModel /></div>
+        <div id='die-container'><DiceModel /></div>
+        <div id='die-container'><DiceModel /></div>
+        <div id='die-container'><DiceModel /></div>
+        <div id='die-container'><DiceModel /></div>
+      </div> */}
 
     </div>
   );

@@ -9,7 +9,7 @@ import diceFourTexture from '../assets/images/textures/dice_4.jpeg'
 import diceFiveTexture from '../assets/images/textures/dice_5.jpeg'
 import diceSixTexture from '../assets/images/textures/dice_6.jpeg'
 
-function Box() {
+function Box(rotationArray) {
 
     const texture_1 = useLoader(TextureLoader, diceFiveTexture)
     const texture_2 = useLoader(TextureLoader, diceTwoTexture)
@@ -28,7 +28,7 @@ function Box() {
     //     mesh.current.rotation.x = mesh.current.rotation.y += 0.01
     // })
     const {scale} = useSpring({
-        scale: hovered ? 2 : 1.5,
+        scale: hovered ? 3 : 2.5,
         config: config.wobbly
     })
     
@@ -36,10 +36,10 @@ function Box() {
         <animated.mesh 
           ref={mesh}
           scale={scale}
-          onClick={(event) => {click(!clicked); setPosition([-1.57, 0, 0])}}
+          onClick={(event) => {click(!clicked)}}
           onPointerOver={(event) => hover(true)}
           onPointerOut={(event) => hover(false)}
-          rotation = {position}
+          rotation = {rotationArray}
 
           //dice face = rotation number; 1= [0, 0, 0], 2= [0, 1.55, 0], 3= [1.57, 0, 0], 4= [-1.57, 0, 0], 5= [0, 4.71, 0], 6= [0, 3.15, 1.571]
         >
@@ -56,15 +56,15 @@ function Box() {
     )
 }
 
-export default function DiceModel() {
+export default function DiceModel(rotationState) {
   return (
 
-    <Canvas>
+    <Canvas style={{width: '100%' , height: '100%'}}>
       <ambientLight intensity={0.5} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
       <pointLight position={[-10, -10, -10]} />
       <Suspense fallback={null}>
-        <Box />
+        <Box rotationArray={rotationState}/>
       </Suspense>
     </Canvas>
   )
