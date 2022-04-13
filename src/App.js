@@ -1,8 +1,8 @@
-import './App.css';
-import React from 'react';
-import Gameboard from './components/Gameboard';
-import DiceModel from './components/DiceModel';
-import DiceFunction from './components/Dice';
+import "./App.css";
+import React from "react";
+import Gameboard from "./components/Gameboard";
+import DiceModel from "./components/DiceModel";
+import DiceFunction from "./components/Dice";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       {/* <div id = 'board'>
         <Gameboard />
       </div> */}
-      
+
       <DiceFunction />
 
       {/* <div id='dice-container'>
@@ -20,7 +20,6 @@ function App() {
         <div id='die-container'><DiceModel /></div>
         <div id='die-container'><DiceModel /></div>
       </div> */}
-
     </div>
   );
 }
