@@ -1,5 +1,5 @@
 import "./Dice.css";
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState, useReducer} from "react";
 // import dicepicOne from '../assets/images/die1.png'
 // import dicepicTwo from '../assets/images/die2.png'
 // import dicepicThree from '../assets/images/die3.png'
@@ -7,7 +7,6 @@ import React, { useState, useReducer, useEffect } from "react";
 // import dicepicFive from '../assets/images/die5.png'
 // import dicepicSix from '../assets/images/die6.png'
 import useToggle from "./Toggle";
-import getRotation from "./GetDiceFace";
 import DiceModel from "./DiceModel";
 
 // function for rolling a number 1-6 which represents a Die rolling
@@ -36,52 +35,15 @@ const reducer = (state, action) => {
 //     return dicepicOne
 // }
 
-const toggleClass = toggleState => {
-  return toggleState ? "dice-image-active" : "dice-image";
-};
 
 export default function DiceFunction() {
   // sets state of each Die and calls a different roll function for each
   const [diceOne, setDiceOne] = useState("");
-  useEffect(() => {
-    // setDiceImageOne(imageSelector(diceOne));
-    setDiceFaceOne(getRotation(diceOne));
-    console.log(getRotation(diceOne));
-  }, [diceOne]);
   const [diceTwo, setDiceTwo] = useState("");
-  useEffect(() => {
-    // setDiceImageTwo(imageSelector(diceTwo));
-    setDiceFaceTwo(getRotation(diceTwo));
-  }, [diceTwo]);
   const [diceThree, setDiceThree] = useState("");
-  useEffect(() => {
-    // setDiceImageThree(imageSelector(diceThree));
-    setDiceFaceThree(getRotation(diceThree));
-  }, [diceThree]);
   const [diceFour, setDiceFour] = useState("");
-  useEffect(() => {
-    // setDiceImageFour(imageSelector(diceFour));
-    setDiceFaceFour(getRotation(diceFour));
-  }, [diceFour]);
   const [diceFive, setDiceFive] = useState("");
-  useEffect(() => {
-    // setDiceImageFive(imageSelector(diceFive));
-    setDiceFaceFive(getRotation(diceFive));
-  }, [diceFive]);
 
-  //sets state for the die image shown before a roll has happened
-  // const [diceImageOne, setDiceImageOne] = useState(dicepicOne)
-  // const [diceImageTwo, setDiceImageTwo] = useState(dicepicOne)
-  // const [diceImageThree, setDiceImageThree] = useState(dicepicOne)
-  // const [diceImageFour, setDiceImageFour] = useState(dicepicOne)
-  // const [diceImageFive, setDiceImageFive] = useState(dicepicOne)
-
-  // pass this into dice model to set the face of the dice
-  const [diceFaceOne, setDiceFaceOne] = useState([0, 0, 0]);
-  const [diceFaceTwo, setDiceFaceTwo] = useState([0, 0, 0]);
-  const [diceFaceThree, setDiceFaceThree] = useState([0, 0, 0]);
-  const [diceFaceFour, setDiceFaceFour] = useState([0, 0, 0]);
-  const [diceFaceFive, setDiceFaceFive] = useState([0, 0, 0]);
 
   // call the custom toggle hook and assigns it to a variable and gives it an inital state of false. Used in onClick
   const [isToggledOne, toggleOne, setToggleOne] = useToggle(false);
@@ -94,7 +56,7 @@ export default function DiceFunction() {
 
   // Function used in handleRoll takes in the state of toggled dice and setStates of dice roll and it's image
   // Will only setState of the Die and it's corresponding image if toggleValue = false (is not toggled),
-  const setRoll = (toggleValue, setDice, setDiceImage) => {
+  const setRoll = (toggleValue, setDice) => {
     if (!toggleValue) {
       const rolledValue = roll();
       setDice(rolledValue);
@@ -116,7 +78,7 @@ export default function DiceFunction() {
   return (
     <>
       <div>
-        <DiceModel number={diceOne} />
+        <DiceModel number={diceOne} toggle={toggleOne} toggleState={isToggledOne}/>
       </div>
       <div className="buttonDiv">
         <button id="diceButton" onClick={handleRoll} disabled={rollCount >= 3}>

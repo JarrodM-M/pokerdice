@@ -27,7 +27,11 @@ const getRotation = diceNumber => {
   }
 };
 
-function Box({ number, isToggled, setIsToggled }) {
+const toggleClass = handleToggle => {
+  return handleToggle ? "rgb(127, 103, 143)" : "white";
+};
+
+function Box({ number, toggle, toggleState }) {
   const texture_1 = useLoader(TextureLoader, diceFiveTexture);
   const texture_2 = useLoader(TextureLoader, diceTwoTexture);
   const texture_3 = useLoader(TextureLoader, diceThreeTexture);
@@ -60,9 +64,9 @@ function Box({ number, isToggled, setIsToggled }) {
     <animated.mesh
       ref={mesh}
       scale={scale}
-      onClick={event => {
-        click(!clicked);
-      }}
+      onClick={ 
+        () => toggle
+      }
       onPointerOver={event => hover(true)}
       onPointerOut={event => hover(false)}
       rotation={getRotation(number)}
@@ -75,7 +79,7 @@ function Box({ number, isToggled, setIsToggled }) {
           key={index}
           map={texture}
           attach={`material-${index}`}
-          color={clicked ? "rgb(127, 103, 143)" : "white"}
+          color={toggleClass(toggleState)}
         />
       ))}
     </animated.mesh>
