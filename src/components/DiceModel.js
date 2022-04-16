@@ -1,5 +1,5 @@
-import React, { useRef, Suspense, useState, useEffect } from "react";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import React, { forwardRef, useRef, Suspense, useState, useImperativeHandle} from "react";
+import { Canvas, useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader.js";
 import { useSpring, animated, config } from "@react-spring/three";
 import diceOneTexture from "../assets/images/textures/dice_1.jpeg";
@@ -27,7 +27,7 @@ const getRotation = diceNumber => {
   }
 };
 
-function Box({ number, toggleFunc }) {
+const Box = forwardRef(({ number, toggleFunc, ref}) => {
   const texture_1 = useLoader(TextureLoader, diceFiveTexture);
   const texture_2 = useLoader(TextureLoader, diceTwoTexture);
   const texture_3 = useLoader(TextureLoader, diceThreeTexture);
@@ -45,6 +45,15 @@ function Box({ number, toggleFunc }) {
     texture_5,
     texture_6
   ];
+
+  const resetFunc = () =>{
+    click(false)
+  }
+
+  useImperativeHandle(ref, () =>({
+    resetFunc
+  }))
+  
 
   const mesh = useRef();
   // useFrame(() => {
@@ -82,7 +91,7 @@ function Box({ number, toggleFunc }) {
       ))}
     </animated.mesh>
   );
-}
+})
 
 export default function DiceModel(props) {
   
