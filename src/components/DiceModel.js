@@ -27,11 +27,7 @@ const getRotation = diceNumber => {
   }
 };
 
-const toggleClass = handleToggle => {
-  return handleToggle ? "rgb(127, 103, 143)" : "white";
-};
-
-function Box({ number, toggle, toggleState }) {
+function Box({ number, toggleFunc }) {
   const texture_1 = useLoader(TextureLoader, diceFiveTexture);
   const texture_2 = useLoader(TextureLoader, diceTwoTexture);
   const texture_3 = useLoader(TextureLoader, diceThreeTexture);
@@ -40,7 +36,6 @@ function Box({ number, toggle, toggleState }) {
   const texture_6 = useLoader(TextureLoader, diceSixTexture);
   const [hovered, hover] = useState(false);
   const [clicked, click] = useState(false);
-  const [position, setPosition] = useState([0, 0, 0]);
 
   const textures = [
     texture_1,
@@ -60,12 +55,15 @@ function Box({ number, toggle, toggleState }) {
     config: config.wobbly
   });
 
+  
+
   return (
     <animated.mesh
       ref={mesh}
       scale={scale}
-      onClick={ 
-        () => toggle
+      onClick={(event)=>
+        {click(!clicked);
+        toggleFunc(!clicked)}
       }
       onPointerOver={event => hover(true)}
       onPointerOut={event => hover(false)}
@@ -79,7 +77,7 @@ function Box({ number, toggle, toggleState }) {
           key={index}
           map={texture}
           attach={`material-${index}`}
-          color={toggleClass(toggleState)}
+          color={clicked ? "rgb(127, 103, 143)" : "white"}
         />
       ))}
     </animated.mesh>
@@ -87,6 +85,7 @@ function Box({ number, toggle, toggleState }) {
 }
 
 export default function DiceModel(props) {
+  
   return (
     <Canvas style={{ width: "100%", height: "100%" }}>
       <ambientLight intensity={0.5} />

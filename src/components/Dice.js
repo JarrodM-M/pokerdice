@@ -54,6 +54,10 @@ export default function DiceFunction() {
 
   const [rollCount, dispatch] = useReducer(reducer, initialRollCount);
 
+  const getClickOne = (click) => {
+    setToggleOne(click)
+  }
+
   // Function used in handleRoll takes in the state of toggled dice and setStates of dice roll and it's image
   // Will only setState of the Die and it's corresponding image if toggleValue = false (is not toggled),
   const setRoll = (toggleValue, setDice) => {
@@ -78,7 +82,7 @@ export default function DiceFunction() {
   return (
     <>
       <div>
-        <DiceModel number={diceOne} toggle={toggleOne} toggleState={isToggledOne}/>
+        <DiceModel number={diceOne} toggleFunc={getClickOne} />
       </div>
       <div className="buttonDiv">
         <button id="diceButton" onClick={handleRoll} disabled={rollCount >= 3}>
