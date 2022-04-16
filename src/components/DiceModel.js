@@ -51,7 +51,7 @@ function Box({ number, toggleFunc }) {
   //     mesh.current.rotation.x = mesh.current.rotation.y += 0.01
   // })
   const { scale } = useSpring({
-    scale: hovered ? 3 : 2.5,
+    scale: hovered ? 1.1 : 1,
     config: config.wobbly
   });
 
