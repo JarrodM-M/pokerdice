@@ -27,7 +27,9 @@ const getRotation = diceNumber => {
   }
 };
 
-const handleReset = 
+const handleReset = (number) => {
+  return number
+}
 
 
 const Box = ({ number, toggleFunc, resetValue, resetFunc}) => {
@@ -81,7 +83,7 @@ const Box = ({ number, toggleFunc, resetValue, resetFunc}) => {
           key={index}
           map={texture}
           attach={`material-${index}`}
-          color={resetValue ? "rgb(127, 103, 143)" : "white"}
+          color={handleReset(resetValue) ? "rgb(127, 103, 143)" : "white"}
         />
       ))}
     </animated.mesh>
