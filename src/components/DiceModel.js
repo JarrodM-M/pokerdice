@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, Suspense, useState, useImperativeHandle} from "react";
+import React, { useRef, Suspense, useState, useEffect} from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader.js";
 import { useSpring, animated, config } from "@react-spring/three";
@@ -27,7 +27,10 @@ const getRotation = diceNumber => {
   }
 };
 
-const Box = forwardRef(({ number, toggleFunc, ref}) => {
+const handleReset = 
+
+
+const Box = ({ number, toggleFunc, resetValue, resetFunc}) => {
   const texture_1 = useLoader(TextureLoader, diceFiveTexture);
   const texture_2 = useLoader(TextureLoader, diceTwoTexture);
   const texture_3 = useLoader(TextureLoader, diceThreeTexture);
@@ -36,6 +39,7 @@ const Box = forwardRef(({ number, toggleFunc, ref}) => {
   const texture_6 = useLoader(TextureLoader, diceSixTexture);
   const [hovered, hover] = useState(false);
   const [clicked, click] = useState(false);
+  
 
   const textures = [
     texture_1,
@@ -45,15 +49,6 @@ const Box = forwardRef(({ number, toggleFunc, ref}) => {
     texture_5,
     texture_6
   ];
-
-  const resetFunc = () =>{
-    click(false)
-  }
-
-  useImperativeHandle(ref, () =>({
-    resetFunc
-  }))
-  
 
   const mesh = useRef();
   // useFrame(() => {
@@ -71,8 +66,8 @@ const Box = forwardRef(({ number, toggleFunc, ref}) => {
       ref={mesh}
       scale={scale}
       onClick={(event)=>
-        {click(!clicked);
-        toggleFunc(!clicked)}
+        {resetFunc(!resetValue);
+        toggleFunc(!resetValue)}
       }
       onPointerOver={event => hover(true)}
       onPointerOut={event => hover(false)}
@@ -86,12 +81,12 @@ const Box = forwardRef(({ number, toggleFunc, ref}) => {
           key={index}
           map={texture}
           attach={`material-${index}`}
-          color={clicked ? "rgb(127, 103, 143)" : "white"}
+          color={resetValue ? "rgb(127, 103, 143)" : "white"}
         />
       ))}
     </animated.mesh>
   );
-})
+}
 
 export default function DiceModel(props) {
   
@@ -101,7 +96,7 @@ export default function DiceModel(props) {
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
       <pointLight position={[-10, -10, -10]} />
       <Suspense fallback={null}>
-        <Box {...props} />
+        <Box {...props}/>
       </Suspense>
     </Canvas>
   );
