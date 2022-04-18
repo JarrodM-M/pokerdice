@@ -1,4 +1,4 @@
-import React, { useRef, Suspense, useState, useEffect} from "react";
+import React, { useRef, Suspense, useState } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader.js";
 import { useSpring, animated, config } from "@react-spring/three";
@@ -27,12 +27,11 @@ const getRotation = diceNumber => {
   }
 };
 
-const handleReset = (number) => {
+const handleColor = (number) => {
   return number
 }
 
-
-const Box = ({ number, toggleFunc, resetValue, resetFunc}) => {
+const Box = ({ number, toggleFunc, resetValue}) => {
   const texture_1 = useLoader(TextureLoader, diceFiveTexture);
   const texture_2 = useLoader(TextureLoader, diceTwoTexture);
   const texture_3 = useLoader(TextureLoader, diceThreeTexture);
@@ -40,8 +39,6 @@ const Box = ({ number, toggleFunc, resetValue, resetFunc}) => {
   const texture_5 = useLoader(TextureLoader, diceOneTexture);
   const texture_6 = useLoader(TextureLoader, diceSixTexture);
   const [hovered, hover] = useState(false);
-  const [clicked, click] = useState(false);
-  
 
   const textures = [
     texture_1,
@@ -61,15 +58,12 @@ const Box = ({ number, toggleFunc, resetValue, resetFunc}) => {
     config: config.wobbly
   });
 
-  
-
   return (
     <animated.mesh
       ref={mesh}
       scale={scale}
       onClick={(event)=>
-        {resetFunc(!resetValue);
-        toggleFunc(!resetValue)}
+        {toggleFunc(!resetValue)}
       }
       onPointerOver={event => hover(true)}
       onPointerOut={event => hover(false)}
@@ -83,7 +77,7 @@ const Box = ({ number, toggleFunc, resetValue, resetFunc}) => {
           key={index}
           map={texture}
           attach={`material-${index}`}
-          color={handleReset(resetValue) ? "rgb(127, 103, 143)" : "white"}
+          color={handleColor(resetValue) ? "rgb(127, 103, 143)" : "white"}
         />
       ))}
     </animated.mesh>

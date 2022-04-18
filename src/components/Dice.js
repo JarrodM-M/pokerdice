@@ -1,11 +1,5 @@
 import "./Dice.css";
-import React, { useState, useReducer} from "react";
-// import dicepicOne from '../assets/images/die1.png'
-// import dicepicTwo from '../assets/images/die2.png'
-// import dicepicThree from '../assets/images/die3.png'
-// import dicepicFour from '../assets/images/die4.png'
-// import dicepicFive from '../assets/images/die5.png'
-// import dicepicSix from '../assets/images/die6.png'
+import React, { useState, useReducer } from "react";
 import useToggle from "./Toggle";
 import DiceModel from "./DiceModel";
 
@@ -25,19 +19,7 @@ const reducer = (state, action) => {
   }
 };
 
-// function that handles what image to assign based on the value of the die
-// function imageSelector (number){
-//     if ( number === 2) return dicepicTwo
-//     if ( number === 3) return dicepicThree
-//     if ( number === 4) return dicepicFour
-//     if ( number === 5) return dicepicFive
-//     if ( number === 6) return dicepicSix
-//     return dicepicOne
-// }
-
 export default function DiceFunction() {
-
-
   // sets state of each Die and calls a different roll function for each
   const [diceOne, setDiceOne] = useState("");
   const [diceTwo, setDiceTwo] = useState("");
@@ -46,16 +28,13 @@ export default function DiceFunction() {
   const [diceFive, setDiceFive] = useState("");
 
   // call the custom toggle hook and assigns it to a variable and gives it an inital state of false. Used in onClick
-  const [isToggledOne, toggleOne, setToggleOne] = useToggle(false);
-  const [isToggledTwo, toggleTwo, setToggleTwo] = useToggle(false);
-  const [isToggledThree, toggleThree, setToggleThree] = useToggle(false);
-  const [isToggledFour, toggleFour, setToggleFour] = useToggle(false);
-  const [isToggledFive, toggleFive, setToggleFive] = useToggle(false);
+  const [isToggledOne, setToggleOne] = useToggle(false);
+  const [isToggledTwo, setToggleTwo] = useToggle(false);
+  const [isToggledThree, setToggleThree] = useToggle(false);
+  const [isToggledFour, setToggleFour] = useToggle(false);
+  const [isToggledFive, setToggleFive] = useToggle(false);
 
   const [rollCount, dispatch] = useReducer(reducer, initialRollCount);
-
-  const [resetDice, setResetDice] = useState()
-
 
   const getClickOne = click => {
     setToggleOne(click);
@@ -86,7 +65,6 @@ export default function DiceFunction() {
     setDiceFive("");
   };
 
-
   // Function used in handleRoll takes in the state of toggled dice and setStates of dice roll and it's image
   // Will only setState of the Die and it's corresponding image if toggleValue = false (is not toggled),
   const setRoll = (toggleValue, setDice) => {
@@ -111,36 +89,41 @@ export default function DiceFunction() {
   return (
     <>
       <div id="dice-container">
-        <DiceModel
-          number={diceOne}
-          toggleFunc={getClickOne}
-          resetFunc={setResetDice}
-          resetValue={isToggledOne}
-        />
-        <DiceModel
-          number={diceTwo}
-          toggleFunc={getClickTwo}
-          resetFunc={setResetDice}
-          resetValue={isToggledTwo}
-        />
-        <DiceModel
-          number={diceThree}
-          toggleFunc={getClickThree}
-          resetFunc={setResetDice}
-          resetValue={isToggledThree}
+        <div>
+          <DiceModel
+            number={diceOne}
+            toggleFunc={getClickOne}
+            resetValue={isToggledOne}
           />
-        <DiceModel
-          number={diceFour}
-          toggleFunc={getClickFour}
-          resetFunc={setResetDice}
-          resetValue={isToggledFour}
+        </div>
+        <div>
+          <DiceModel
+            number={diceTwo}
+            toggleFunc={getClickTwo}
+            resetValue={isToggledTwo}
           />
-        <DiceModel
-          number={diceFive}
-          toggleFunc={getClickFive}
-          resetFunc={setResetDice}
-          resetValue={resetDice}
+        </div>
+        <div>
+          <DiceModel
+            number={diceThree}
+            toggleFunc={getClickThree}
+            resetValue={isToggledThree}
           />
+        </div>
+        <div>
+          <DiceModel
+            number={diceFour}
+            toggleFunc={getClickFour}
+            resetValue={isToggledFour}
+          />
+        </div>
+        <div>
+          <DiceModel
+            number={diceFive}
+            toggleFunc={getClickFive}
+            resetValue={isToggledFive}
+          />
+        </div>
       </div>
       <div className="buttonDiv">
         <button id="diceButton" onClick={handleRoll} disabled={rollCount >= 3}>
@@ -151,26 +134,11 @@ export default function DiceFunction() {
           onClick={() => {
             dispatch("reset");
             resetAll();
-            setResetDice(false);
-            
-            // setToggleOne(false);
-            // setToggleOne(false);
-            // toggleThree(false);
-            // toggleFour(false);
-            // toggleFive(false);
           }}
         >
           reset
         </button>
       </div>
-
-      {/* <div className="dice-container">
-        <div className='dice' onClick={toggleOne}> <img className= {toggleClass(isToggledOne)} alt='' src={diceImageOne} /> </div>
-        <div className='dice' onClick={toggleTwo}><img className= {toggleClass(isToggledTwo)}  alt='' src={diceImageTwo} /></div>
-        <div className='dice' onClick={toggleThree}><img className= {toggleClass(isToggledThree)} alt='' src={diceImageThree} /></div>
-        <div className='dice' onClick={toggleFour}><img className= {toggleClass(isToggledFour)}  alt='' src={diceImageFour} /></div>
-        <div className='dice' onClick={toggleFive}><img className= {toggleClass(isToggledFive)}  alt='' src={diceImageFive} /></div> 
-      </div> */}
     </>
   );
 }
