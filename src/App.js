@@ -6,7 +6,13 @@ import DiceFunction from "./components/Dice";
 function App() {
   return (
     <div id="app">
-      <DiceFunction />
+      <div id="gamesize">
+        <Gameboard />
+      </div>
+      <div id="dice">
+        <DiceFunction />
+      </div>
+      <div id="tokens"></div>
     </div>
   );
 }

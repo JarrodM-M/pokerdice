@@ -1,5 +1,5 @@
 import "./Dice.css";
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import useToggle from "./Toggle";
 import DiceModel from "./DiceModel";
 
@@ -22,6 +22,9 @@ const reducer = (state, action) => {
 export default function DiceFunction() {
   // sets state of each Die and calls a different roll function for each
   const [diceOne, setDiceOne] = useState("");
+  useEffect(() => {
+    console.log(diceOne);
+  }, [diceOne]);
   const [diceTwo, setDiceTwo] = useState("");
   const [diceThree, setDiceThree] = useState("");
   const [diceFour, setDiceFour] = useState("");
@@ -89,35 +92,35 @@ export default function DiceFunction() {
   return (
     <>
       <div id="dice-container">
-        <div>
+        <div id="dice-block">
           <DiceModel
             number={diceOne}
             toggleFunc={getClickOne}
             resetValue={isToggledOne}
           />
         </div>
-        <div>
+        <div id="dice-block">
           <DiceModel
             number={diceTwo}
             toggleFunc={getClickTwo}
             resetValue={isToggledTwo}
           />
         </div>
-        <div>
+        <div id="dice-block">
           <DiceModel
             number={diceThree}
             toggleFunc={getClickThree}
             resetValue={isToggledThree}
           />
         </div>
-        <div>
+        <div id="dice-block">
           <DiceModel
             number={diceFour}
             toggleFunc={getClickFour}
             resetValue={isToggledFour}
           />
         </div>
-        <div>
+        <div id="dice-block">
           <DiceModel
             number={diceFive}
             toggleFunc={getClickFive}
