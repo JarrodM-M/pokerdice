@@ -2,8 +2,8 @@
     font-family: 'PixelFont';
     display: grid;
     grid-template-columns: repeat(9, 1fr);
-    width: 500px;
-    height: 500px;
+    width: 100%;
+    height: 100%;
     background-image: url('../assets/images/board/backgroundwithgrid.png');
     background-size: contain;
     

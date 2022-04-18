@@ -9,12 +9,10 @@
     width: 100px;
     justify-content: center;
 }
-.dice-container{
+#dice-container{
     display:grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    height:50px;
-    width:250px;
-    padding: 10px
+    
 }
 .dice{
     display:flex;
