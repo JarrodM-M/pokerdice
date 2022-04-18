@@ -6,9 +6,7 @@ import DiceFunction from "./components/Dice";
 function App() {
   return (
     <div id="app">
-
       <DiceFunction />
-
     </div>
   );
 }

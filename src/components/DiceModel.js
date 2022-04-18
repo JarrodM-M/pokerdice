@@ -27,11 +27,11 @@ const getRotation = diceNumber => {
   }
 };
 
-const handleColor = (number) => {
-  return number
-}
+const handleColor = number => {
+  return number;
+};
 
-const Box = ({ number, toggleFunc, resetValue}) => {
+const Box = ({ number, toggleFunc, resetValue }) => {
   const texture_1 = useLoader(TextureLoader, diceFiveTexture);
   const texture_2 = useLoader(TextureLoader, diceTwoTexture);
   const texture_3 = useLoader(TextureLoader, diceThreeTexture);
@@ -62,9 +62,9 @@ const Box = ({ number, toggleFunc, resetValue}) => {
     <animated.mesh
       ref={mesh}
       scale={scale}
-      onClick={(event)=>
-        {toggleFunc(!resetValue)}
-      }
+      onClick={event => {
+        toggleFunc(!resetValue);
+      }}
       onPointerOver={event => hover(true)}
       onPointerOut={event => hover(false)}
       rotation={getRotation(number)}
@@ -82,17 +82,16 @@ const Box = ({ number, toggleFunc, resetValue}) => {
       ))}
     </animated.mesh>
   );
-}
+};
 
 export default function DiceModel(props) {
-  
   return (
     <Canvas style={{ width: "100%", height: "100%" }}>
       <ambientLight intensity={0.5} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
       <pointLight position={[-10, -10, -10]} />
       <Suspense fallback={null}>
-        <Box {...props}/>
+        <Box {...props} />
       </Suspense>
     </Canvas>
   );

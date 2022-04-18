@@ -1,36 +1,35 @@
-.buttonDiv{
-    width: 250px;
-    padding: 10px;
-    display:flex;
-    justify-content: center;
+.buttonDiv {
+  width: 250px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
 }
-#diceButton{
-    display: flex;
-    width: 100px;
-    justify-content: center;
+#diceButton {
+  display: flex;
+  width: 100px;
+  justify-content: center;
 }
-#dice-container{
-    display:grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    
+#dice-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
-.dice{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2px;
-    max-height: 50px;
-    max-width: 50px;
-    font-family:'PixelFont';
+.dice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  max-height: 50px;
+  max-width: 50px;
+  font-family: "PixelFont";
 }
-.dice-image{
-    max-height: 100%;
-    max-width: 100%;
+.dice-image {
+  max-height: 100%;
+  max-width: 100%;
 }
-.dice-image-active{
-    max-height: 100%;
-    max-width: 100%;
-    border-style: solid;
-    border-radius: 4px;
-    border-color: lightcoral;
+.dice-image-active {
+  max-height: 100%;
+  max-width: 100%;
+  border-style: solid;
+  border-radius: 4px;
+  border-color: lightcoral;
 }
