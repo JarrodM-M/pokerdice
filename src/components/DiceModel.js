@@ -27,8 +27,8 @@ const getRotation = diceNumber => {
   }
 };
 
-const handleColor = number => {
-  return number;
+const handleColor = booleanValue => {
+  return booleanValue;
 };
 
 const Box = ({ number, toggleFunc, resetValue }) => {
@@ -58,6 +58,10 @@ const Box = ({ number, toggleFunc, resetValue }) => {
     config: config.wobbly
   });
 
+  const { rotation } = useSpring({
+    rotation: getRotation(number)
+  });
+
   return (
     <animated.mesh
       ref={mesh}
@@ -67,7 +71,7 @@ const Box = ({ number, toggleFunc, resetValue }) => {
       }}
       onPointerOver={event => hover(true)}
       onPointerOut={event => hover(false)}
-      rotation={getRotation(number)}
+      rotation={rotation}
 
       //dice face = rotation number; 1= [0, 0, 0], 2= [0, 1.55, 0], 3= [1.57, 0, 0], 4= [-1.57, 0, 0], 5= [0, 4.71, 0], 6= [0, 3.15, 1.571]
     >
