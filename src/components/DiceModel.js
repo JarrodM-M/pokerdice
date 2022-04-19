@@ -11,6 +11,8 @@ import diceSixTexture from "../assets/images/textures/dice_6.jpeg";
 
 const getRotation = diceNumber => {
   switch (diceNumber) {
+    case 1:
+      return [0, 0, 0];
     case 2:
       return [0, 1.55, 0];
     case 3:
@@ -22,7 +24,7 @@ const getRotation = diceNumber => {
     case 6:
       return [0, 3.15, 1.571];
     default:
-      return [0, 0, 0];
+      return [0.65, 0.25, 0.2];
     // throw new Error(`She's gone too high Cap'n!`)
   }
 };
@@ -54,7 +56,7 @@ const Box = ({ number, toggleFunc, resetValue }) => {
   //     mesh.current.rotation.x = mesh.current.rotation.y += 0.01
   // })
   const { scale } = useSpring({
-    scale: hovered ? 3.7 : 4,
+    scale: hovered ? 2.5 : 3,
     config: config.wobbly
   });
 
@@ -92,7 +94,7 @@ export default function DiceModel(props) {
   return (
     <Canvas style={{ width: "100%", height: "100%" }}>
       <ambientLight intensity={0.5} />
-      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+      <spotLight position={[10, 10, 10]} angle={0.25} penumbra={1} />
       <pointLight position={[-10, -10, -10]} />
       <Suspense fallback={null}>
         <Box {...props} />
