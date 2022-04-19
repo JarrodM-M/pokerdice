@@ -26,10 +26,21 @@ export default function DiceFunction() {
     console.log(diceOne);
   }, [diceOne]);
   const [diceTwo, setDiceTwo] = useState("");
+  useEffect(() => {
+    console.log(diceTwo);
+  }, [diceTwo]);
   const [diceThree, setDiceThree] = useState("");
+  useEffect(() => {
+    console.log(diceThree);
+  }, [diceThree]);
   const [diceFour, setDiceFour] = useState("");
+  useEffect(() => {
+    console.log(diceFour);
+  }, [diceFour]);
   const [diceFive, setDiceFive] = useState("");
-
+  useEffect(() => {
+    console.log(diceFive);
+  }, [diceFive]);
   // call the custom toggle hook and assigns it to a variable and gives it an inital state of false. Used in onClick
   const [isToggledOne, setToggleOne] = useToggle(false);
   const [isToggledTwo, setToggleTwo] = useToggle(false);

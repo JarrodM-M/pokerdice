@@ -1,5 +1,5 @@
 import React, { useRef, Suspense, useState } from "react";
-import { Canvas, useLoader } from "@react-three/fiber";
+import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader.js";
 import { useSpring, animated, config } from "@react-spring/three";
 import diceOneTexture from "../assets/images/textures/dice_1.jpeg";
@@ -56,8 +56,23 @@ const Box = ({ number, toggleFunc, resetValue }) => {
   //     mesh.current.rotation.x = mesh.current.rotation.y += 0.01
   // })
   const { scale } = useSpring({
-    scale: hovered ? 2.5 : 3,
+    scale: hovered ? 3.2 : 2.9,
     config: config.wobbly
+  });
+
+  useFrame(({ clock }) => {
+    if (
+      number === 1 ||
+      number === 2 ||
+      number === 3 ||
+      number === 4 ||
+      number === 5 ||
+      number === 6
+    ) {
+    } else {
+      const a = clock.getElapsedTime();
+      mesh.current.rotation.x = a;
+    }
   });
 
   const { rotation } = useSpring({
