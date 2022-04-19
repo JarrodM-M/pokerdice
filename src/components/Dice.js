@@ -19,6 +19,17 @@ const reducer = (state, action) => {
   }
 };
 
+const showRollCount = number => {
+  switch (number) {
+    case 0:
+      return "First";
+    case 1:
+      return "Second";
+    case 2:
+      return "Final";
+  }
+};
+
 export default function DiceFunction() {
   // sets state of each Die and calls a different roll function for each
   const [diceOne, setDiceOne] = useState("");
@@ -141,7 +152,7 @@ export default function DiceFunction() {
       </div>
       <div className="buttonDiv">
         <button id="diceButton" onClick={handleRoll} disabled={rollCount >= 3}>
-          roll
+          {showRollCount(rollCount)} Roll
         </button>
         <button
           id="diceButton"

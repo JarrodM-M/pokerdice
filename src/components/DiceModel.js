@@ -60,7 +60,9 @@ const Box = ({ number, toggleFunc, resetValue }) => {
     config: config.wobbly
   });
 
-  useFrame(({ clock }) => {
+  const hoverBoolean = {};
+
+  useFrame(() => {
     if (
       number === 1 ||
       number === 2 ||
@@ -70,8 +72,7 @@ const Box = ({ number, toggleFunc, resetValue }) => {
       number === 6
     ) {
     } else {
-      const a = clock.getElapsedTime();
-      mesh.current.rotation.x = a;
+      mesh.current.rotation.x = mesh.current.rotation.y += 0.01;
     }
   });
 
