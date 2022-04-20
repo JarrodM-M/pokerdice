@@ -10,6 +10,7 @@ import diceFiveTexture from "../assets/images/textures/dice_5.jpeg";
 import diceSixTexture from "../assets/images/textures/dice_6.jpeg";
 
 const getRotation = diceNumber => {
+  // function to change the 3d dice face shown corresponding with the number rolled from Dice.js and it's rotation value [x,y,z]
   switch (diceNumber) {
     case 1:
       return [0, 0, 0];
@@ -24,16 +25,18 @@ const getRotation = diceNumber => {
     case 6:
       return [0, 3.15, 1.571];
     default:
-      return [0.65, 0.25, 0.2];
+      return [Math.PI / 0.65, 0.25, 0.2];
     // throw new Error(`She's gone too high Cap'n!`)
   }
 };
 
 const handleColor = booleanValue => {
+  // function to switch color of dice to show if it's been toggled
   return booleanValue;
 };
 
-const Box = ({ number, toggleFunc, resetValue }) => {
+const Box = ({ number, toggleFunc, toggleState }) => {
+  // getting the rolled dice value, function that sets toggle state, and toggle State from Dice.js
   const texture_1 = useLoader(TextureLoader, diceFiveTexture);
   const texture_2 = useLoader(TextureLoader, diceTwoTexture);
   const texture_3 = useLoader(TextureLoader, diceThreeTexture);
@@ -52,15 +55,16 @@ const Box = ({ number, toggleFunc, resetValue }) => {
   ];
 
   const mesh = useRef();
-  // useFrame(() => {
-  //     mesh.current.rotation.x = mesh.current.rotation.y += 0.01
-  // })
+
+  const { rotation } = useSpring({
+    rotation: getRotation(number)
+  });
+
   const { scale } = useSpring({
+    // adjust the size of the die and size when hovered
     scale: hovered ? 3.2 : 2.9,
     config: config.wobbly
   });
-
-  const hoverBoolean = {};
 
   useFrame(() => {
     if (
@@ -76,16 +80,12 @@ const Box = ({ number, toggleFunc, resetValue }) => {
     }
   });
 
-  const { rotation } = useSpring({
-    rotation: getRotation(number)
-  });
-
   return (
     <animated.mesh
       ref={mesh}
       scale={scale}
       onClick={event => {
-        toggleFunc(!resetValue);
+        toggleFunc(!toggleState);
       }}
       onPointerOver={event => hover(true)}
       onPointerOut={event => hover(false)}
@@ -94,12 +94,15 @@ const Box = ({ number, toggleFunc, resetValue }) => {
       //dice face = rotation number; 1= [0, 0, 0], 2= [0, 1.55, 0], 3= [1.57, 0, 0], 4= [-1.57, 0, 0], 5= [0, 4.71, 0], 6= [0, 3.15, 1.571]
     >
       <boxBufferGeometry attach="geometry" />
-      {textures.map((texture, index) => (
+      {textures.map((
+        texture,
+        index // maps the textures and attaches them to the box
+      ) => (
         <meshStandardMaterial
           key={index}
           map={texture}
           attach={`material-${index}`}
-          color={handleColor(resetValue) ? "rgb(127, 103, 143)" : "white"}
+          color={handleColor(toggleState) ? "rgb(127, 103, 143)" : "white"}
         />
       ))}
     </animated.mesh>
