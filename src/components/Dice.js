@@ -64,11 +64,11 @@ export default function DiceFunction() {
   // for the Use Reducer state
   const [rollCount, dispatch] = useReducer(reducer, initialRollCount);
 
-  const [playerToggle, setPlayerToggle] = useState("Red");
+  const [playerToggle, setPlayerToggle] = useState("red");
 
-  const handlePlayerToggle = toggleValue, set => {
-    if ((toggleValue = "red")) setPlayerToggle("blue");
-    else setPlayerToggle("red");
+  const handlePlayerToggle = (toggleValue, setFunction) => {
+    if ((toggleValue = "red")) setFunction("blue");
+    else setFunction("red");
   };
 
   // function passed into DiceModel to handle state when the die get Clicked
@@ -171,7 +171,8 @@ export default function DiceFunction() {
           onClick={() => {
             dispatch("reset");
             resetAll();
-            setplayerToggle();
+            handlePlayerToggle(playerToggle, setPlayerToggle);
+            console.log(playerToggle);
           }}
         >
           reset

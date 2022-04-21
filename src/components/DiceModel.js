@@ -25,7 +25,7 @@ const getRotation = diceNumber => {
     case 6:
       return [0, 3.15, 1.571];
     default:
-      return [Math.PI / 0.65, 0.25, 0.2];
+      return [0.65, 0.25, 0.2];
     // throw new Error(`She's gone too high Cap'n!`)
   }
 };
@@ -66,17 +66,11 @@ const Box = ({ number, toggleFunc, toggleState }) => {
     config: config.wobbly
   });
 
-  useFrame(() => {
-    if (
-      number === 1 ||
-      number === 2 ||
-      number === 3 ||
-      number === 4 ||
-      number === 5 ||
-      number === 6
-    ) {
-    } else {
-      mesh.current.rotation.x = mesh.current.rotation.y += 0.01;
+  useFrame(({ clock }) => {
+    if (!number) {
+      const a = clock.getElapsedTime();
+      mesh.current.rotation.x = a * 1.5;
+      mesh.current.rotation.y = a * 1.5;
     }
   });
 
@@ -111,7 +105,11 @@ const Box = ({ number, toggleFunc, toggleState }) => {
 
 export default function DiceModel(props) {
   return (
-    <Canvas style={{ width: "100%", height: "100%" }}>
+    <Canvas
+      camera={{ zoom: 15 }}
+      orthographic
+      style={{ width: "100%", height: "100%" }}
+    >
       <ambientLight intensity={0.5} />
       <spotLight position={[10, 10, 10]} angle={0.25} penumbra={1} />
       <pointLight position={[-10, -10, -10]} />
