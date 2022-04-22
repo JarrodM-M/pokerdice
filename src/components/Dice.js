@@ -32,6 +32,10 @@ const showRollCount = number => {
   }
 };
 
+const handlePlayerState = (state, setState) => {
+  state === "red" ? setState("blue") : setState("red");
+};
+
 export default function DiceFunction() {
   // sets state of each Die and calls a different roll function for each
   const [diceOne, setDiceOne] = useState("");
@@ -64,17 +68,15 @@ export default function DiceFunction() {
   // for the Use Reducer state
   const [rollCount, dispatch] = useReducer(reducer, initialRollCount);
 
-  const [playerToggle, setPlayerToggle] = useState("red");
-
-  const handlePlayerToggle = (toggleValue, setFunction) => {
-    if ((toggleValue = "red")) setFunction("blue");
-    else setFunction("red");
-  };
+  const [playerState, setPlayerState] = useState("red");
+  useEffect(() => {
+    console.log(playerState);
+  }, [playerState]);
 
   // function passed into DiceModel to handle state when the die get Clicked
-  const getClickOne = toggleState => {
+  function getClickOne(toggleState) {
     setToggleOne(toggleState);
-  };
+  }
   const getClickTwo = toggleState => {
     setToggleTwo(toggleState);
   };
@@ -171,8 +173,7 @@ export default function DiceFunction() {
           onClick={() => {
             dispatch("reset");
             resetAll();
-            handlePlayerToggle(playerToggle, setPlayerToggle);
-            console.log(playerToggle);
+            handlePlayerState(playerState, setPlayerState);
           }}
         >
           reset

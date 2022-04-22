@@ -69,8 +69,9 @@ const Box = ({ number, toggleFunc, toggleState }) => {
   useFrame(({ clock }) => {
     if (!number) {
       const a = clock.getElapsedTime();
-      mesh.current.rotation.x = a * 1.5;
-      mesh.current.rotation.y = a * 1.5;
+      mesh.current.rotation.x = a * 10;
+      // mesh.current.rotation.y = a * 3;
+      mesh.current.rotation.z = a * 3;
     }
   });
 
