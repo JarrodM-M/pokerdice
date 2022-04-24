@@ -2,6 +2,7 @@ import "./Dice.css";
 import React, { useState, useReducer, useEffect } from "react";
 import useToggle from "./Toggle";
 import DiceModel from "./DiceModel";
+import PlayerModel from "./PlayerModel";
 
 // function for rolling a number 1-6 which represents a Die rolling
 const roll = () => Math.floor(Math.random() * 6) + 1;
@@ -178,6 +179,9 @@ export default function DiceFunction() {
         >
           reset
         </button>
+      </div>
+      <div>
+        <PlayerModel classColor={playerState} />
       </div>
     </>
   );

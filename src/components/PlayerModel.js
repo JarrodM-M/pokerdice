@@ -1,13 +1,16 @@
 // this is where i'll build the model and animation for which current player is selected
+import "./PlayerModel.css";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserAstronaut } from "@fortawesome/free-solid-svg-icons";
 
-export default function PlayerModel() {
+export default function PlayerModel({ classColor }) {
+  const handleClassColor = `player-icon-${classColor}`;
+
   return (
     <div>
       <FontAwesomeIcon
-        className="player-icon"
+        className={handleClassColor}
         icon={faUserAstronaut}
         size="10x"
         inverse
