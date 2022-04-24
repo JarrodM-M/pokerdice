@@ -33,7 +33,7 @@ const showRollCount = number => {
   }
 };
 
-const handlePlayerState = (state, setState) => {
+const handlePlayerStateChange = (state, setState) => {
   state === "red" ? setState("blue") : setState("red");
 };
 
@@ -174,7 +174,7 @@ export default function DiceFunction() {
           onClick={() => {
             dispatch("reset");
             resetAll();
-            handlePlayerState(playerState, setPlayerState);
+            handlePlayerStateChange(playerState, setPlayerState);
           }}
         >
           reset
