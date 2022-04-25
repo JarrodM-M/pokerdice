@@ -39,26 +39,11 @@ const handlePlayerStateChange = (state, setState) => {
 
 export default function DiceFunction() {
   // sets state of each Die and calls a different roll function for each
-  const [diceOne, setDiceOne] = useState("");
-  useEffect(() => {
-    console.log(diceOne);
-  }, [diceOne]);
-  const [diceTwo, setDiceTwo] = useState("");
-  useEffect(() => {
-    console.log(diceTwo);
-  }, [diceTwo]);
-  const [diceThree, setDiceThree] = useState("");
-  useEffect(() => {
-    console.log(diceThree);
-  }, [diceThree]);
-  const [diceFour, setDiceFour] = useState("");
-  useEffect(() => {
-    console.log(diceFour);
-  }, [diceFour]);
-  const [diceFive, setDiceFive] = useState("");
-  useEffect(() => {
-    console.log(diceFive);
-  }, [diceFive]);
+  const [diceOne, setDiceOne] = useState(null);
+  const [diceTwo, setDiceTwo] = useState(null);
+  const [diceThree, setDiceThree] = useState(null);
+  const [diceFour, setDiceFour] = useState(null);
+  const [diceFive, setDiceFive] = useState(null);
   // call the custom toggle hook and assigns it to a variable and gives it an inital state of false. Used in onClick
   const [isToggledOne, setToggleOne] = useToggle(false);
   const [isToggledTwo, setToggleTwo] = useToggle(false);
@@ -69,27 +54,8 @@ export default function DiceFunction() {
   // for the Use Reducer state
   const [rollCount, dispatch] = useReducer(reducer, initialRollCount);
 
+  // sets the initial player state as red-player, for now
   const [playerState, setPlayerState] = useState("red");
-  useEffect(() => {
-    console.log(playerState);
-  }, [playerState]);
-
-  // function passed into DiceModel to handle state when the die get Clicked
-  function getClickOne(toggleState) {
-    setToggleOne(toggleState);
-  }
-  const getClickTwo = toggleState => {
-    setToggleTwo(toggleState);
-  };
-  const getClickThree = toggleState => {
-    setToggleThree(toggleState);
-  };
-  const getClickFour = toggleState => {
-    setToggleFour(toggleState);
-  };
-  const getClickFive = toggleState => {
-    setToggleFive(toggleState);
-  };
 
   // Resets the values and toggle selection on all dice. For use to start a new turn
   const resetAll = () => {
@@ -113,7 +79,7 @@ export default function DiceFunction() {
       const rolledValue = roll();
       setTimeout(function() {
         setDice(rolledValue);
-      }, 1000);
+      }, 750);
     }
   };
 
@@ -124,7 +90,6 @@ export default function DiceFunction() {
     setRoll(isToggledThree, setDiceThree);
     setRoll(isToggledFour, setDiceFour);
     setRoll(isToggledFive, setDiceFive);
-
     // Counts number of times dice have been rollednpm
     dispatch("increment");
   }
@@ -135,35 +100,35 @@ export default function DiceFunction() {
         <div className="dice-block">
           <DiceModel
             number={diceOne} // passes rolled number to the function in DiceModel that handles which dice face to show
-            toggleFunc={getClickOne} // sends the function that sets toggleState to the onClick of the DiceModel
+            toggleFunc={setToggleOne} // sends the function that sets toggleState to the onClick of the DiceModel
             toggleState={isToggledOne} // current state of the toggleValue
           />
         </div>
         <div className="dice-block">
           <DiceModel
             number={diceTwo}
-            toggleFunc={getClickTwo}
+            toggleFunc={setToggleTwo}
             toggleState={isToggledTwo}
           />
         </div>
         <div className="dice-block">
           <DiceModel
             number={diceThree}
-            toggleFunc={getClickThree}
+            toggleFunc={setToggleThree}
             toggleState={isToggledThree}
           />
         </div>
         <div className="dice-block">
           <DiceModel
             number={diceFour}
-            toggleFunc={getClickFour}
+            toggleFunc={setToggleFour}
             toggleState={isToggledFour}
           />
         </div>
         <div className="dice-block">
           <DiceModel
             number={diceFive}
-            toggleFunc={getClickFive}
+            toggleFunc={setToggleFive}
             toggleState={isToggledFive}
           />
         </div>
