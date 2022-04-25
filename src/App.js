@@ -5,14 +5,14 @@ import DiceFunction from "./components/Dice";
 
 function App() {
   return (
-    <div id="app">
-      <div id="gamesize">
+    <div className="app">
+      <div className="gamesize">
         <Gameboard />
       </div>
-      <div id="dice">
+      <div className="dice">
         <DiceFunction />
       </div>
-      <div id="tokens"></div>
+      <div className="tokens"></div>
     </div>
   );
 }

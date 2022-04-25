@@ -15,15 +15,15 @@ const getRotation = diceNumber => {
     case 1:
       return [0, 0, 0];
     case 2:
-      return [0, 1.55, 0];
+      return [0, Math.PI / 2, 0];
     case 3:
-      return [1.57, 0, 0];
+      return [Math.PI / 2, 0, 0];
     case 4:
-      return [-1.57, 0, 0];
+      return [(3 * Math.PI) / 2, 0, 0];
     case 5:
-      return [0, 4.71, 0];
+      return [0, (3 * Math.PI) / 2, 0];
     case 6:
-      return [0, 3.15, 1.571];
+      return [0, Math.PI, Math.PI / 2];
     default:
       return [0.65, 0.25, 0.2];
     // throw new Error(`She's gone too high Cap'n!`)

@@ -14,5 +14,5 @@ export default function Gameboard() {
 
   // const [boardState, setBoardState] = useState(board)
 
-  return <div id="gameboard">{board}</div>;
+  return <div className="gameboard">{board}</div>;
 }

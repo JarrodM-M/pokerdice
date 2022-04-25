@@ -98,19 +98,22 @@ export default function DiceFunction() {
     setToggleThree(false);
     setToggleFour(false);
     setToggleFive(false);
-    setDiceOne("");
-    setDiceTwo("");
-    setDiceThree("");
-    setDiceFour("");
-    setDiceFive("");
+    setDiceOne(null);
+    setDiceTwo(null);
+    setDiceThree(null);
+    setDiceFour(null);
+    setDiceFive(null);
   };
 
   // Function used in handleRoll takes in the state of toggled dice and setStates of dice roll and it's image
   // Will only setState of the Die and it's corresponding image if toggleValue = false (is not toggled),
   const setRoll = (toggleValue, setDice) => {
     if (!toggleValue) {
+      setDice(null);
       const rolledValue = roll();
-      setDice(rolledValue);
+      setTimeout(function() {
+        setDice(rolledValue);
+      }, 1000);
     }
   };
 
@@ -128,36 +131,36 @@ export default function DiceFunction() {
 
   return (
     <>
-      <div id="dice-container">
-        <div id="dice-block">
+      <div className="dice-container">
+        <div className="dice-block">
           <DiceModel
             number={diceOne} // passes rolled number to the function in DiceModel that handles which dice face to show
             toggleFunc={getClickOne} // sends the function that sets toggleState to the onClick of the DiceModel
             toggleState={isToggledOne} // current state of the toggleValue
           />
         </div>
-        <div id="dice-block">
+        <div className="dice-block">
           <DiceModel
             number={diceTwo}
             toggleFunc={getClickTwo}
             toggleState={isToggledTwo}
           />
         </div>
-        <div id="dice-block">
+        <div className="dice-block">
           <DiceModel
             number={diceThree}
             toggleFunc={getClickThree}
             toggleState={isToggledThree}
           />
         </div>
-        <div id="dice-block">
+        <div className="dice-block">
           <DiceModel
             number={diceFour}
             toggleFunc={getClickFour}
             toggleState={isToggledFour}
           />
         </div>
-        <div id="dice-block">
+        <div className="dice-block">
           <DiceModel
             number={diceFive}
             toggleFunc={getClickFive}
@@ -166,11 +169,15 @@ export default function DiceFunction() {
         </div>
       </div>
       <div className="buttonDiv">
-        <button id="diceButton" onClick={handleRoll} disabled={rollCount >= 3}>
+        <button
+          className="diceButton"
+          onClick={handleRoll}
+          disabled={rollCount >= 3}
+        >
           {showRollCount(rollCount)}
         </button>
         <button
-          id="diceButton"
+          className="diceButton"
           onClick={() => {
             dispatch("reset");
             resetAll();

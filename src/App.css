@@ -1,4 +1,4 @@
-#app {
+.app {
   height: 100vh;
   width: 100vw;
   background-color: #333333;
@@ -6,6 +6,6 @@
   margin: 0px;
 }
 
-#gamesize {
+.gamesize {
   max-width: 40%;
 }
