@@ -153,7 +153,7 @@ export default function Tile({ x, y }) {
         <img src={oneSix} alt="" className="tile" />
       </div>
     );
-  else if (x + y === "18" || x + y === "71")
+  else if (x + y === "18")
     return (
       <div className="tile-container">
         <img src={oneEight} alt="" className="tile" />
