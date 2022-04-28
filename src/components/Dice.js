@@ -3,7 +3,6 @@ import React, { useState, useReducer, useContext, useEffect } from "react";
 import useToggle from "./Toggle";
 import DiceModel from "./DiceModel";
 import PlayerModel from "./PlayerModel";
-import { DiceValueContext } from "../App";
 
 // function for rolling a number 1-6 which represents a Die rolling
 const roll = () => Math.floor(Math.random() * 6) + 1;
@@ -39,29 +38,13 @@ const handlePlayerStateChange = (state, setState) => {
 };
 
 export default function DiceFunction() {
-  const { setValue } = useContext(DiceValueContext);
-
   // sets state of each Die and calls a different roll function for each
   const [diceOne, setDiceOne] = useState(null);
-  useEffect(() => {
-    setValue([diceOne, diceTwo, diceThree, diceFour, diceFive]);
-  }, [diceOne]);
   const [diceTwo, setDiceTwo] = useState(null);
-  useEffect(() => {
-    setValue([diceOne, diceTwo, diceThree, diceFour, diceFive]);
-  }, [diceTwo]);
   const [diceThree, setDiceThree] = useState(null);
-  useEffect(() => {
-    setValue([diceOne, diceTwo, diceThree, diceFour, diceFive]);
-  }, [diceThree]);
   const [diceFour, setDiceFour] = useState(null);
-  useEffect(() => {
-    setValue([diceOne, diceTwo, diceThree, diceFour, diceFive]);
-  }, [diceFour]);
   const [diceFive, setDiceFive] = useState(null);
-  useEffect(() => {
-    setValue([diceOne, diceTwo, diceThree, diceFour, diceFive]);
-  }, [diceFive]);
+
   // call the custom toggle hook and assigns it to a variable and gives it an inital state of false. Used in onClick
   const [isToggledOne, setToggleOne] = useToggle(false);
   const [isToggledTwo, setToggleTwo] = useToggle(false);

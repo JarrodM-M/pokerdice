@@ -1,16 +1,9 @@
 import "./App.css";
-import React, { createContext, useState } from "react";
+import React from "react";
 import Gameboard from "./components/Gameboard";
 import DiceFunction from "./components/Dice";
 
-export const DiceValueContext = createContext({
-  value: null,
-  setValue: () => {}
-});
-
 function App() {
-  const [value, setValue] = useState(null);
-
   return (
     <DiceValueContext.Provider value={{ value, setValue }}>
       <div className="app">
