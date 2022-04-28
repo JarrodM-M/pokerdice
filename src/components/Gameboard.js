@@ -17,14 +17,14 @@ const isSubset = (a, b) => {
   return a1.length === 0;
 };
 
-export default function Gameboard() {
+export default function Gameboard({ dice }) {
   const board = horizontalAxis.map(x =>
     verticalAxis.map(y => (
       <Tile key={x + y} x={x} y={y} owner={null} piece={null}></Tile>
     ))
   );
 
-  const readValue = console.log(value);
+  const readValue = console.log(dice);
 
   // const [boardState, setBoardState] = useState(board)
 

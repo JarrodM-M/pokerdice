@@ -1,21 +1,22 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import Gameboard from "./components/Gameboard";
-import DiceFunction from "./components/Dice";
 
 function App() {
+  const [diceOne, setDiceOne] = useState("poop");
+  const [diceTwo, setDiceTwo] = useState(null);
+  const [diceThree, setDiceThree] = useState(null);
+  const [diceFour, setDiceFour] = useState(null);
+  const [diceFive, setDiceFive] = useState(null);
+
   return (
-    <DiceValueContext.Provider value={{ value, setValue }}>
-      <div className="app">
-        <div className="gamesize">
-          <Gameboard />
-        </div>
-        <div className="dice">
-          <DiceFunction />
-        </div>
-        <div className="tokens"></div>
+    <div className="app">
+      <div className="gamesize">
+        <Gameboard dice={diceOne} />
       </div>
-    </DiceValueContext.Provider>
+      <div className="dice">{/* <DiceFunction /> */}</div>
+      <div className="tokens"></div>
+    </div>
   );
 }
 
