@@ -1,5 +1,5 @@
 import "./Dice.css";
-import React, { useState, useReducer, useContext, useEffect } from "react";
+import React, { useState, useReducer } from "react";
 import useToggle from "./Toggle";
 import DiceModel from "./DiceModel";
 import PlayerModel from "./PlayerModel";
