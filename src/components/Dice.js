@@ -7,6 +7,18 @@ import PlayerModel from "./PlayerModel";
 // function for rolling a number 1-6 which represents a Die rolling
 const roll = () => Math.floor(Math.random() * 6) + 1;
 
+const diceModelProps = {
+  number,
+  toggleFunc,
+  toggleState
+};
+
+const handleDiceModelProps = () => {
+  diceModelProps.map(x => {
+    console.log;
+  });
+};
+
 // reducer function for controlling the number of times the roll button is clicked and reseting it back to 0
 const initialRollCount = 0;
 const reducer = (state, action) => {
