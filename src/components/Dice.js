@@ -37,13 +37,25 @@ const handlePlayerStateChange = (state, setState) => {
   state === "red" ? setState("blue") : setState("red");
 };
 
-export default function DiceFunction() {
+export default function DiceFunction({
+  diceOne,
+  setDiceOne,
+  diceTwo,
+  setDiceTwo,
+  diceThree,
+  setDiceThree,
+  diceFour,
+  setDiceFour,
+  diceFive,
+  setDiceFive,
+  resetDice
+}) {
   // sets state of each Die and calls a different roll function for each
-  const [diceOne, setDiceOne] = useState(null);
-  const [diceTwo, setDiceTwo] = useState(null);
-  const [diceThree, setDiceThree] = useState(null);
-  const [diceFour, setDiceFour] = useState(null);
-  const [diceFive, setDiceFive] = useState(null);
+  // const [diceOne, setDiceOne] = useState(null);
+  // const [diceTwo, setDiceTwo] = useState(null);
+  // const [diceThree, setDiceThree] = useState(null);
+  // const [diceFour, setDiceFour] = useState(null);
+  // const [diceFive, setDiceFive] = useState(null);
 
   // call the custom toggle hook and assigns it to a variable and gives it an inital state of false. Used in onClick
   const [isToggledOne, setToggleOne] = useToggle(false);
@@ -65,21 +77,22 @@ export default function DiceFunction() {
     setToggleThree(false);
     setToggleFour(false);
     setToggleFive(false);
-    setDiceOne(null);
-    setDiceTwo(null);
-    setDiceThree(null);
-    setDiceFour(null);
-    setDiceFive(null);
+    resetDice();
+    // setDiceOne(null);
+    // setDiceTwo(null);
+    // setDiceThree(null);
+    // setDiceFour(null);
+    // setDiceFive(null);
   };
 
   // Function used in handleRoll takes in the state of toggled dice and setStates of dice roll and it's image
   // Will only setState of the Die and it's corresponding image if toggleValue = false (is not toggled),
   const setRoll = (toggleValue, setDice) => {
     if (!toggleValue) {
-      setDice(null);
-      const rolledValue = roll();
+      //setDice(null);
+      //const rolledValue = roll();
       setTimeout(function() {
-        setDice(rolledValue);
+        setDice();
       }, 750);
     }
   };
@@ -91,7 +104,7 @@ export default function DiceFunction() {
     setRoll(isToggledThree, setDiceThree);
     setRoll(isToggledFour, setDiceFour);
     setRoll(isToggledFive, setDiceFive);
-    // Counts number of times dice have been rollednpm
+
     dispatch("increment");
   }
 
