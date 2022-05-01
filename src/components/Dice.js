@@ -4,21 +4,6 @@ import useToggle from "./Toggle";
 import DiceModel from "./DiceModel";
 import PlayerModel from "./PlayerModel";
 
-// function for rolling a number 1-6 which represents a Die rolling
-const roll = () => Math.floor(Math.random() * 6) + 1;
-
-const diceModelProps = {
-  number,
-  toggleFunc,
-  toggleState
-};
-
-const handleDiceModelProps = () => {
-  diceModelProps.map(x => {
-    console.log;
-  });
-};
-
 // reducer function for controlling the number of times the roll button is clicked and reseting it back to 0
 const initialRollCount = 0;
 const reducer = (state, action) => {
@@ -82,6 +67,15 @@ export default function DiceFunction({
   // sets the initial player state as red-player, for now
   const [playerState, setPlayerState] = useState("red");
 
+  //setting up object to map into the <DiceModel />
+  const diceModelProps = [
+    { prop1: diceOne, prop2: setToggleOne, prop3: isToggledOne },
+    { prop1: diceTwo, prop2: setToggleTwo, prop3: isToggledTwo },
+    { prop1: diceThree, prop2: setToggleThree, prop3: isToggledThree },
+    { prop1: diceFour, prop2: setToggleFour, prop3: isToggledFour },
+    { prop1: diceFive, prop2: setToggleFive, prop3: isToggledFive }
+  ];
+
   // Resets the values and toggle selection on all dice. For use to start a new turn
   const resetAll = () => {
     setToggleOne(false);
@@ -123,14 +117,18 @@ export default function DiceFunction({
   return (
     <>
       <div className="dice-container">
-        <div className="dice-block">
-          <DiceModel
-            number={diceOne} // passes rolled number to the function in DiceModel that handles which dice face to show
-            toggleFunc={setToggleOne} // sends the function that sets toggleState to the onClick of the DiceModel
-            toggleState={isToggledOne} // current state of the toggleValue
-          />
-        </div>
-        <div className="dice-block">
+        {diceModelProps.map(propInfo => {
+          return (
+            <div className="dice-block">
+              <DiceModel
+                number={propInfo.prop1}
+                toggleFunc={propInfo.prop2}
+                toggleState={propInfo.prop3}
+              />
+            </div>
+          );
+        })}
+        {/* <div className="dice-block">
           <DiceModel
             number={diceTwo}
             toggleFunc={setToggleTwo}
@@ -157,7 +155,7 @@ export default function DiceFunction({
             toggleFunc={setToggleFive}
             toggleState={isToggledFive}
           />
-        </div>
+        </div> */}
       </div>
       <div className="buttonDiv">
         <button

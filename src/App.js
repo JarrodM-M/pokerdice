@@ -1,42 +1,50 @@
 import "./App.css";
-import React, { useState, useReducer } from "react";
+import React, { useReducer } from "react";
 import Gameboard from "./components/Gameboard";
 import DiceFunction from "./components/Dice";
 
+const initialDiceValue = {
+  diceOne: null,
+  diceTwo: null,
+  diceThree: null,
+  diceFour: null,
+  diceFive: null
+};
+
+const diceReducer = (state, action) => {
+  switch (action.type) {
+    case "setDiceOne":
+      return { ...state, diceOne: Math.floor(Math.random() * 6) + 1 };
+    case "setDiceTwo":
+      return { ...state, diceTwo: Math.floor(Math.random() * 6) + 1 };
+    case "setDiceThree":
+      return { ...state, diceThree: Math.floor(Math.random() * 6) + 1 };
+    case "setDiceFour":
+      return { ...state, diceFour: Math.floor(Math.random() * 6) + 1 };
+    case "setDiceFive":
+      return { ...state, diceFive: Math.floor(Math.random() * 6) + 1 };
+    case "reset":
+      return initialDiceValue;
+    default:
+      return state;
+  }
+};
+
 function App() {
-  const initialDiceValue = {
-    diceOne: null,
-    diceTwo: null,
-    diceThree: null,
-    diceFour: null,
-    diceFive: null
-  };
-
-  const diceReducer = (state, action) => {
-    switch (action.type) {
-      case "setDiceOne":
-        return { ...state, diceOne: Math.floor(Math.random() * 6) + 1 };
-      case "setDiceTwo":
-        return { ...state, diceTwo: Math.floor(Math.random() * 6) + 1 };
-      case "setDiceThree":
-        return { ...state, diceThree: Math.floor(Math.random() * 6) + 1 };
-      case "setDiceFour":
-        return { ...state, diceFour: Math.floor(Math.random() * 6) + 1 };
-      case "setDiceFive":
-        return { ...state, diceFive: Math.floor(Math.random() * 6) + 1 };
-      case "reset":
-        return initialDiceValue;
-      default:
-        return state;
-    }
-  };
-
   const [diceRoll, dispatch] = useReducer(diceReducer, initialDiceValue);
+
+  const allDiceValues = [
+    diceRoll.diceOne,
+    diceRoll.diceTwo,
+    diceRoll.diceThree,
+    diceRoll.diceFour,
+    diceRoll.diceFive
+  ];
 
   return (
     <div className="app">
       <div className="gamesize">
-        <Gameboard />
+        <Gameboard dice={allDiceValues} />
       </div>
       <div className="dice">
         <DiceFunction
