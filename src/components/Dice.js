@@ -107,7 +107,6 @@ export default function DiceFunction({
     setRoll(isToggledThree, setDiceThree);
     setRoll(isToggledFour, setDiceFour);
     setRoll(isToggledFive, setDiceFive);
-
     dispatch("increment");
   }
 

@@ -33,18 +33,18 @@ const diceReducer = (state, action) => {
 function App() {
   const [diceRoll, dispatch] = useReducer(diceReducer, initialDiceValue);
 
-  const allDice = [
-    diceRoll.diceOne,
-    diceRoll.diceTwo,
-    diceRoll.diceThree,
-    diceRoll.diceFour,
-    diceRoll.diceFive
-  ];
-
   return (
     <div className="app">
       <div className="gamesize">
-        <Gameboard dice={allDice} />
+        <Gameboard
+          dice={[
+            diceRoll.diceOne,
+            diceRoll.diceTwo,
+            diceRoll.diceThree,
+            diceRoll.diceFour,
+            diceRoll.diceFive
+          ]}
+        />
       </div>
       <div className="dice">
         <DiceFunction
