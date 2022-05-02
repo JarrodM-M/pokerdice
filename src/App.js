@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import Gameboard from "./components/Gameboard";
 import DiceFunction from "./components/Dice";
 
@@ -14,16 +14,16 @@ const initialDiceValue = {
 const diceReducer = (state, action) => {
   switch (action.type) {
     case "setDiceOne":
-      return { ...state, diceOne: Math.floor(Math.random() * 6) + 1 };
+      return { ...state, diceOne: action.payload };
     case "setDiceTwo":
-      return { ...state, diceTwo: Math.floor(Math.random() * 6) + 1 };
+      return { ...state, diceTwo: action.payload };
     case "setDiceThree":
-      return { ...state, diceThree: Math.floor(Math.random() * 6) + 1 };
+      return { ...state, diceThree: action.payload };
     case "setDiceFour":
-      return { ...state, diceFour: Math.floor(Math.random() * 6) + 1 };
+      return { ...state, diceFour: action.payload };
     case "setDiceFive":
-      return { ...state, diceFive: Math.floor(Math.random() * 6) + 1 };
-    case "reset":
+      return { ...state, diceFive: action.payload };
+    case "resetAll":
       return initialDiceValue;
     default:
       return state;
@@ -33,7 +33,7 @@ const diceReducer = (state, action) => {
 function App() {
   const [diceRoll, dispatch] = useReducer(diceReducer, initialDiceValue);
 
-  const allDiceValues = [
+  const allDice = [
     diceRoll.diceOne,
     diceRoll.diceTwo,
     diceRoll.diceThree,
@@ -44,20 +44,20 @@ function App() {
   return (
     <div className="app">
       <div className="gamesize">
-        <Gameboard dice={allDiceValues} />
+        <Gameboard dice={allDice} />
       </div>
       <div className="dice">
         <DiceFunction
-          resetDice={() => dispatch({ type: "reset" })}
-          setDiceOne={() => dispatch({ type: "setDiceOne" })}
+          resetDice={() => dispatch({ type: "resetAll" })}
+          setDiceOne={x => dispatch({ type: "setDiceOne", payload: x })}
           diceOne={diceRoll.diceOne}
-          setDiceTwo={() => dispatch({ type: "setDiceTwo" })}
+          setDiceTwo={x => dispatch({ type: "setDiceTwo", payload: x })}
           diceTwo={diceRoll.diceTwo}
-          setDiceThree={() => dispatch({ type: "setDiceThree" })}
+          setDiceThree={x => dispatch({ type: "setDiceThree", payload: x })}
           diceThree={diceRoll.diceThree}
-          setDiceFour={() => dispatch({ type: "setDiceFour" })}
+          setDiceFour={x => dispatch({ type: "setDiceFour", payload: x })}
           diceFour={diceRoll.diceFour}
-          setDiceFive={() => dispatch({ type: "setDiceFive" })}
+          setDiceFive={x => dispatch({ type: "setDiceFive", payload: x })}
           diceFive={diceRoll.diceFive}
         />
       </div>

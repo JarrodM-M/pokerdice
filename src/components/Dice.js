@@ -4,6 +4,8 @@ import useToggle from "./Toggle";
 import DiceModel from "./DiceModel";
 import PlayerModel from "./PlayerModel";
 
+const roll = () => Math.floor(Math.random() * 6) + 1;
+
 // reducer function for controlling the number of times the roll button is clicked and reseting it back to 0
 const initialRollCount = 0;
 const reducer = (state, action) => {
@@ -84,21 +86,16 @@ export default function DiceFunction({
     setToggleFour(false);
     setToggleFive(false);
     resetDice();
-    // setDiceOne(null);
-    // setDiceTwo(null);
-    // setDiceThree(null);
-    // setDiceFour(null);
-    // setDiceFive(null);
   };
 
   // Function used in handleRoll takes in the state of toggled dice and setStates of dice roll and it's image
   // Will only setState of the Die and it's corresponding image if toggleValue = false (is not toggled),
   const setRoll = (toggleValue, setDice) => {
     if (!toggleValue) {
-      //setDice(null);
-      //const rolledValue = roll();
+      setDice(null);
+      const rolledValue = roll();
       setTimeout(function() {
-        setDice();
+        setDice(rolledValue);
       }, 750);
     }
   };
@@ -128,34 +125,6 @@ export default function DiceFunction({
             </div>
           );
         })}
-        {/* <div className="dice-block">
-          <DiceModel
-            number={diceTwo}
-            toggleFunc={setToggleTwo}
-            toggleState={isToggledTwo}
-          />
-        </div>
-        <div className="dice-block">
-          <DiceModel
-            number={diceThree}
-            toggleFunc={setToggleThree}
-            toggleState={isToggledThree}
-          />
-        </div>
-        <div className="dice-block">
-          <DiceModel
-            number={diceFour}
-            toggleFunc={setToggleFour}
-            toggleState={isToggledFour}
-          />
-        </div>
-        <div className="dice-block">
-          <DiceModel
-            number={diceFive}
-            toggleFunc={setToggleFive}
-            toggleState={isToggledFive}
-          />
-        </div> */}
       </div>
       <div className="buttonDiv">
         <button
