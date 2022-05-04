@@ -3,41 +3,37 @@ import React, { useReducer, useState } from "react";
 import Gameboard from "./components/Gameboard";
 import DiceFunction from "./components/Dice";
 
+const roll = () => Math.floor(Math.random() * 6) + 1;
+
 const initialDiceValue = {
-  allDice: {
-    diceOne: null,
-    diceTwo: null,
-    diceThree: null,
-    diceFour: null,
-    diceFive: null
-  }
+  toggled: [false, false, false, false, false],
+  diceOne: null,
+  diceTwo: null,
+  diceThree: null,
+  diceFour: null,
+  diceFive: null
 };
 
 const diceReducer = (state, action) => {
   switch (action.type) {
-    case "setDice":
+    case "toggle":
       return {
         ...state,
-        allDice: {
-          diceOne: action.payload,
-          diceTwo: action.payload,
-          diceThree: action.payload,
-          diceFour: action.payload,
-          diceFive: action.payload
-        }
+        toggled: action.toggled
       };
-    case "setDiceTwo":
-      return { ...state, diceTwo: action.payload };
-    case "setDiceThree":
-      return { ...state, diceThree: action.payload };
-    case "setDiceFour":
-      return { ...state, diceFour: action.payload };
-    case "setDiceFive":
-      return { ...state, diceFive: action.payload };
+    case "roll":
+      return {
+        ...state,
+        diceOne: !state.toggled[0] ? roll() : state.diceOne,
+        diceTwo: !state.toggled[1] ? roll() : state.diceTwo,
+        diceThree: !state.toggled[2] ? roll() : state.diceThree,
+        diceFour: !state.toggled[3] ? roll() : state.diceFour,
+        diceFive: !state.toggled[4] ? roll() : state.diceFive
+      };
     case "resetAll":
       return initialDiceValue;
     default:
-      return state;
+      throw new Error(`Invalid state ${state}`);
   }
 };
 
@@ -50,19 +46,7 @@ function App() {
         <Gameboard dice={[diceRoll.allDice]} />
       </div>
       <div className="dice">
-        <DiceFunction
-          resetDice={() => dispatch({ type: "resetAll" })}
-          setDiceOne={x => dispatch({ type: "setDice", payload: x })}
-          diceOne={diceRoll.diceOne}
-          setDiceTwo={x => dispatch({ type: "setDiceTwo", payload: x })}
-          diceTwo={diceRoll.diceTwo}
-          setDiceThree={x => dispatch({ type: "setDiceThree", payload: x })}
-          diceThree={diceRoll.diceThree}
-          setDiceFour={x => dispatch({ type: "setDiceFour", payload: x })}
-          diceFour={diceRoll.diceFour}
-          setDiceFive={x => dispatch({ type: "setDiceFive", payload: x })}
-          diceFive={diceRoll.diceFive}
-        />
+        <DiceFunction diceRoll={diceRoll} dispatch={dispatch} />
       </div>
       <div className="tokens"></div>
     </div>
