@@ -45,24 +45,55 @@ import eightFour from "../assets/images/board/84.png";
 
 export default function Tile({ x, y }) {
   if (x + y === "00" || x + y === "88")
+  {const isSubset = (a, b) => {
+    let a1 = [...a];
+    if (a.length > b.length) return false;
+    for (let i = 0; i < a.length; i++) {
+      if (b.includes(a[i])) {
+        a1 = a1.filter(subsetNum => subsetNum !== a[i]);
+      }
+    }}
+    return a1.length === 0;
+  };
     return (
       <div className="tile-container">
         <img src={zeroZero} alt="" className="tile" />
       </div>
     );
-  else if (x + y === "01" || x + y === "87")
+  else if (x + y === "01" || x + y === "87"){const isSubset = (a, b) => {
+    let a1 = [...a];
+    if (a.length > b.length) return false;
+    for (let i = 0; i < a.length; i++) {
+      if (b.includes(a[i])) {
+        a1 = a1.filter(subsetNum => subsetNum !== a[i]);
+      }
+    }}
     return (
       <div className="tile-container">
         <img src={zeroOne} alt="" className="tile" />
       </div>
     );
-  else if (x + y === "02" || x + y === "86")
+  else if (x + y === "02" || x + y === "86"){const isSubset = (a, b) => {
+    let a1 = [...a];
+    if (a.length > b.length) return false;
+    for (let i = 0; i < a.length; i++) {
+      if (b.includes(a[i])) {
+        a1 = a1.filter(subsetNum => subsetNum !== a[i]);
+      }
+    }}
     return (
       <div className="tile-container">
         <img src={zeroTwo} alt="" className="tile" />
       </div>
     );
-  else if (x + y === "03" || x + y === "85")
+  else if (x + y === "03" || x + y === "85"){const isSubset = (a, b) => {
+    let a1 = [...a];
+    if (a.length > b.length) return false;
+    for (let i = 0; i < a.length; i++) {
+      if (b.includes(a[i])) {
+        a1 = a1.filter(subsetNum => subsetNum !== a[i]);
+      }
+    }}
     return (
       <div className="tile-container">
         <img src={zeroThree} alt="" className="tile" />
