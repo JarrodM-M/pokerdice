@@ -1,5 +1,7 @@
 import React from "react";
+import classNames from "classnames/bind";
 import "./Tile.css";
+import styles from "./Tile.css";
 
 import zeroZero from "../assets/images/board/00.png";
 import zeroOne from "../assets/images/board/01.png";
@@ -42,11 +44,28 @@ import sevenEight from "../assets/images/board/78.png";
 import eightFour from "../assets/images/board/84.png";
 
 /*<img src="G:\Coding\pokerdice\src\assets\images\board\00.png"></img>*/
+let cx = classNames.bind(styles);
+
+const isSubset = (a, b) => {
+  let a1 = [...a];
+  if (a.length > b.length) return false;
+  for (let i = 0; i < a.length; i++) {
+    if (b.includes(a[i])) {
+      a1 = a1.filter(subsetNum => subsetNum !== a[i]);
+    }
+  }
+  return a1.length === 0;
+};
 
 export default function Tile({ x, y }) {
+  let tileValue = [];
+  let className = cx({
+    tileContainer: true,
+    tileContainerSel: isSubset(tileValue, dice)
+  });
   if (x + y === "00" || x + y === "88")
     return (
-      <div className="tile-container">
+      <div className={className}>
         <img src={zeroZero} alt="" className="tile" />
       </div>
     );

@@ -20,11 +20,18 @@ const isSubset = (a, b) => {
 export default function Gameboard({ dice }) {
   const board = horizontalAxis.map(x =>
     verticalAxis.map(y => (
-      <Tile key={x + y} x={x} y={y} owner={null} piece={null}></Tile>
+      <Tile
+        key={x + y}
+        x={x}
+        y={y}
+        owner={null}
+        piece={null}
+        dice={dice}
+      ></Tile>
     ))
   );
 
-  const readValue = console.log(dice);
+  const readValue = console.log(isSubset([2, 2], dice));
 
   // const [boardState, setBoardState] = useState(board)
 
