@@ -1,4 +1,4 @@
-import React, { useRef, Suspense, useState } from "react";
+import React, { useRef, Suspense, useState, useEffect } from "react";
 import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader.js";
 import { useSpring, animated, config } from "@react-spring/three";
@@ -35,7 +35,7 @@ const handleColor = booleanValue => {
   return booleanValue;
 };
 
-const Box = ({ number, toggleFunc, toggleState }) => {
+const Box = ({ number: outerNumber, toggleFunc, toggleState, delay }) => {
   // getting the rolled dice value, function that sets toggle state, and toggle State from Dice.js
   const texture_1 = useLoader(TextureLoader, diceFiveTexture);
   const texture_2 = useLoader(TextureLoader, diceTwoTexture);
@@ -44,6 +44,12 @@ const Box = ({ number, toggleFunc, toggleState }) => {
   const texture_5 = useLoader(TextureLoader, diceOneTexture);
   const texture_6 = useLoader(TextureLoader, diceSixTexture);
   const [hovered, hover] = useState(false);
+  const [number, setNumber] = useState(outerNumber);
+  useEffect(() => {
+    setTimeout(() => {
+      setNumber(outerNumber);
+    }, delay);
+  }, [outerNumber]);
 
   const textures = [
     texture_1,

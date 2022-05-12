@@ -5,10 +5,6 @@ import DiceFunction from "./components/Dice";
 
 const roll = () => Math.floor(Math.random() * 6) + 1;
 
-const handleNull = () => {
-  return null;
-};
-
 const initialDiceValue = {
   toggled: [false, false, false, false, false],
   diceOne: null,
@@ -16,13 +12,6 @@ const initialDiceValue = {
   diceThree: null,
   diceFour: null,
   diceFive: null
-};
-
-const handleRoll = () => {
-  handleNull();
-  setTimeout(function() {
-    roll();
-  }, 750);
 };
 
 const diceReducer = (state, action) => {

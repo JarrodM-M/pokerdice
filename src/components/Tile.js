@@ -47,18 +47,19 @@ import eightFour from "../assets/images/board/84.png";
 let cx = classNames.bind(styles);
 
 const isSubset = (a, b) => {
-  let a1 = [...a];
   if (a.length > b.length) return false;
-  for (let i = 0; i < a.length; i++) {
+  let i = a.length;
+  while (i--) {
     if (b.includes(a[i])) {
-      a1 = a1.filter(subsetNum => subsetNum !== a[i]);
+      b.splice(b.indexOf(a[i]), 1);
+      a.splice(i, 1);
     }
   }
-  return a1.length === 0;
+  return a.length === 0;
 };
 
-export default function Tile({ x, y }) {
-  let tileValue = [];
+export default function Tile({ x, y, dice }) {
+  let tileValue = [0];
   let className = cx({
     tileContainer: true,
     tileContainerSel: isSubset(tileValue, dice)

@@ -39,11 +39,36 @@ export default function DiceFunction({
 
   //setting up object to map into the <DiceModel />
   const diceModelProps = [
-    { prop1: diceOne, prop2: () => toggle(0), prop3: toggled[0] },
-    { prop1: diceTwo, prop2: () => toggle(1), prop3: toggled[1] },
-    { prop1: diceThree, prop2: () => toggle(2), prop3: toggled[2] },
-    { prop1: diceFour, prop2: () => toggle(3), prop3: toggled[3] },
-    { prop1: diceFive, prop2: () => toggle(4), prop3: toggled[4] }
+    {
+      number: diceOne,
+      toggleFunc: () => toggle(0),
+      toggleState: toggled[0],
+      delay: 500
+    },
+    {
+      number: diceTwo,
+      toggleFunc: () => toggle(1),
+      toggleState: toggled[1],
+      delay: 650
+    },
+    {
+      number: diceThree,
+      toggleFunc: () => toggle(2),
+      toggleState: toggled[2],
+      delay: 800
+    },
+    {
+      number: diceFour,
+      toggleFunc: () => toggle(3),
+      toggleState: toggled[3],
+      delay: 950
+    },
+    {
+      number: diceFive,
+      toggleFunc: () => toggle(4),
+      toggleState: toggled[4],
+      delay: 1100
+    }
   ];
 
   // Resets the values and toggle selection on all dice. For use to start a new turn
@@ -58,14 +83,10 @@ export default function DiceFunction({
   return (
     <>
       <div className="dice-container">
-        {diceModelProps.map(propInfo => {
+        {diceModelProps.map(props => {
           return (
             <div className="dice-block">
-              <DiceModel
-                number={propInfo.prop1}
-                toggleFunc={propInfo.prop2}
-                toggleState={propInfo.prop3}
-              />
+              <DiceModel {...props} />
             </div>
           );
         })}
