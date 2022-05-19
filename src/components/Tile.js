@@ -58,28 +58,168 @@ const isSubset = (a, b) => {
   return a.length === 0;
 };
 
-let className = {};
+const sortStraight = a => {
+  let i = a.sort();
+  return i === [1, 2, 3, 4, 5] || i === [2, 3, 4, 5, 6];
+};
 
-let srcValue = {};
+const sortFullHouse = a => {
+  let i = a.sort();
+  return (
+    i === [i[0], i[0], i[2], i[2], i[2]] || i === [i[0], i[0], i[0], i[2], i[2]]
+  );
+};
 
-const tileFunction = (xValue, yValue, diceValue) => {
+const luckySeven = a => {
+  let i = a.reduce((x, y) => x + y, 0);
+  return i === 7;
+};
+
+const luckyEleven = a => {
+  let i = a.reduce((x, y) => x + y, 0);
+  return i === 11;
+};
+
+const tileFunction = (xValue, yValue, dice) => {
   if (xValue + yValue === "00" || xValue + yValue === "88") {
-    console.log("first");
-    const tileValue = [1, 2, 3, 4, 5];
-    const srcValue = { zeroZero };
-    let className = cx({
-      tileContainer: true,
-      tileContainerSel: isSubset(tileValue, diceValue)
-    });
+    const tileBoolean = sortStraight(dice);
+    return { imgSrc: zeroZero, tile: tileBoolean };
+  } else if (xValue + yValue === "01" || xValue + yValue === "87") {
+    const tileBoolean = isSubset([6, 6, 6, 6], dice);
+    return { imgSrc: zeroOne, tile: tileBoolean };
+  } else if (xValue + yValue === "02" || xValue + yValue === "86") {
+    const tileBoolean = isSubset([5, 5, 6, 6], dice);
+    return { imgSrc: zeroTwo, tile: tileBoolean };
+  } else if (xValue + yValue === "03" || xValue + yValue === "85") {
+    const tileBoolean = isSubset([4, 4, 6, 6], dice);
+    return { imgSrc: zeroThree, tile: tileBoolean };
+  } else if (xValue + yValue === "04") {
+    const tileBoolean = isSubset([2, 2], dice);
+    return { imgSrc: zeroFour, tile: tileBoolean };
+  } else if (xValue + yValue === "05" || xValue + yValue === "83") {
+    const tileBoolean = isSubset([3, 3, 6, 6], dice);
+    return { imgSrc: zeroFive, tile: tileBoolean };
+  } else if (xValue + yValue === "06" || xValue + yValue === "82") {
+    const tileBoolean = isSubset([2, 2, 6, 6], dice);
+    return { imgSrc: zeroSix, tile: tileBoolean };
+  } else if (xValue + yValue === "07" || xValue + yValue === "81") {
+    const tileBoolean = isSubset([1, 1, 6, 6], dice);
+    return { imgSrc: zeroSeven, tile: tileBoolean };
+  } else if (xValue + yValue === "08" || xValue + yValue === "80") {
+    const tileBoolean = sortStraight(dice);
+    return { imgSrc: zeroEight, tile: tileBoolean };
+  } else if (xValue + yValue === "10") {
+    const tileBoolean = isSubset([6, 6], dice);
+    return { imgSrc: oneZero, tile: tileBoolean };
+  } else if (
+    xValue + yValue === "11" ||
+    xValue + yValue === "17" ||
+    xValue + yValue === "22" ||
+    xValue + yValue === "26" ||
+    xValue + yValue === "33" ||
+    xValue + yValue === "35" ||
+    xValue + yValue === "53" ||
+    xValue + yValue === "62" ||
+    xValue + yValue === "66" ||
+    xValue + yValue === "71" ||
+    xValue + yValue === "77"
+  ) {
+    const tileBoolean = sortFullHouse(dice);
+    return { imgSrc: oneOne, tile: tileBoolean };
+  } else if (xValue + yValue === "12" || xValue + yValue === "76") {
+    const tileBoolean = isSubset([1, 1, 5, 5], dice);
+    return { imgSrc: oneTwo, tile: tileBoolean };
+  } else if (xValue + yValue === "13" || xValue + yValue === "75") {
+    const tileBoolean = isSubset([2, 2, 5, 5], dice);
+    return { imgSrc: oneThree, tile: tileBoolean };
+  } else if (xValue + yValue === "14" || xValue + yValue === "74") {
+    const tileBoolean = isSubset([3, 3, 5, 5], dice);
+    return { imgSrc: oneFour, tile: tileBoolean };
+  } else if (xValue + yValue === "15" || xValue + yValue === "73") {
+    const tileBoolean = isSubset([4, 4, 5, 5], dice);
+    return { imgSrc: oneFive, tile: tileBoolean };
+  } else if (xValue + yValue === "16" || xValue + yValue === "72") {
+    const tileBoolean = isSubset([5, 5, 5, 5], dice);
+    return { imgSrc: oneSix, tile: tileBoolean };
+  } else if (xValue + yValue === "80") {
+    const tileBoolean = isSubset([5, 5], dice);
+    return { imgSrc: oneEight, tile: tileBoolean };
+  } else if (xValue + yValue === "20" || xValue + yValue === "68") {
+    const tileBoolean = isSubset([4, 4, 4, 4], dice);
+    return { imgSrc: twoZero, tile: tileBoolean };
+  } else if (xValue + yValue === "21" || xValue + yValue === "67") {
+    const tileBoolean = isSubset([2, 2, 2], dice);
+    return { imgSrc: twoOne, tile: tileBoolean };
+  } else if (xValue + yValue === "23" || xValue + yValue === "65") {
+    const tileBoolean = isSubset([3, 3, 4, 4], dice);
+    return { imgSrc: twoThree, tile: tileBoolean };
+  } else if (xValue + yValue === "24" || xValue + yValue === "64") {
+    const tileBoolean = isSubset([1, 1, 1, 1], dice);
+    return { imgSrc: twoFour, tile: tileBoolean };
+  } else if (xValue + yValue === "25" || xValue + yValue === "63") {
+    const tileBoolean = isSubset([2, 2, 4, 4], dice);
+    return { imgSrc: twoFive, tile: tileBoolean };
+  } else if (xValue + yValue === "27" || xValue + yValue === "61") {
+    const tileBoolean = isSubset([6, 6, 6], dice);
+    return { imgSrc: twoSeven, tile: tileBoolean };
+  } else if (xValue + yValue === "28" || xValue + yValue === "60") {
+    const tileBoolean = isSubset([1, 1, 4, 4], dice);
+    return { imgSrc: twoEight, tile: tileBoolean };
+  } else if (xValue + yValue === "30" || xValue + yValue === "58") {
+    const tileBoolean = isSubset([4, 4, 4], dice);
+    return { imgSrc: threeZero, tile: tileBoolean };
+  } else if (xValue + yValue === "31" || xValue + yValue === "57") {
+    const tileBoolean = isSubset([1, 1, 1], dice);
+    return { imgSrc: threeOne, tile: tileBoolean };
+  } else if (xValue + yValue === "32" || xValue + yValue === "56") {
+    const tileBoolean = isSubset([3, 3, 3, 3], dice);
+    return { imgSrc: threeTwo, tile: tileBoolean };
+  } else if (xValue + yValue === "34" || xValue + yValue === "54") {
+    const tileBoolean = isSubset([2, 2, 3, 3], dice);
+    return { imgSrc: threeFour, tile: tileBoolean };
+  } else if (xValue + yValue === "36" || xValue + yValue === "52") {
+    const tileBoolean = isSubset([1, 1, 3, 3], dice);
+    return { imgSrc: threeSix, tile: tileBoolean };
+  } else if (xValue + yValue === "37" || xValue + yValue === "51") {
+    const tileBoolean = isSubset([3, 3, 3], dice);
+    return { imgSrc: threeSeven, tile: tileBoolean };
+  } else if (xValue + yValue === "38" || xValue + yValue === "50") {
+    const tileBoolean = isSubset([5, 5, 5], dice);
+    return { imgSrc: threeEight, tile: tileBoolean };
+  } else if (xValue + yValue === "40" || xValue + yValue === "48") {
+    const tileBoolean = luckySeven(dice);
+    return { imgSrc: fourZero, tile: tileBoolean };
+  } else if (xValue + yValue === "41" || xValue + yValue === "47") {
+    const tileBoolean = isSubset([1, 1, 2, 2], dice);
+    return { imgSrc: fourOne, tile: tileBoolean };
+  } else if (xValue + yValue === "42" || xValue + yValue === "46") {
+    const tileBoolean = luckyEleven(dice);
+    return { imgSrc: fourTwo, tile: tileBoolean };
+  } else if (xValue + yValue === "43" || xValue + yValue === "45") {
+    const tileBoolean = isSubset([2, 2, 2, 2], dice);
+    return { imgSrc: fourThree, tile: tileBoolean };
+  } else if (xValue + yValue === "44") {
+    const tileBoolean = false;
+    return { imgSrc: fourFour, tile: tileBoolean };
+  } else if (xValue + yValue === "70") {
+    const tileBoolean = isSubset([5, 5], dice);
+    return { imgSrc: sevenZero, tile: tileBoolean };
+  } else if (xValue + yValue === "78") {
+    const tileBoolean = isSubset([3, 3], dice);
+    return { imgSrc: sevenEight, tile: tileBoolean };
   }
+  const tileBoolean = isSubset([1, 1], dice);
+  return { imgSrc: eightFour, tile: tileBoolean };
 };
 
 export default function Tile({ x, y, dice }) {
-  tileFunction(x, y, dice);
-
+  const { imgSrc, tile } = tileFunction(x, y, dice);
+  let className = cx(styles.tileContainer, {
+    tileContainerSel: tile
+  });
   return (
     <div className={className}>
-      <img src={srcValue} alt="" className="tile" />
+      <img src={imgSrc} alt="" className="tile" />
     </div>
   );
 }
