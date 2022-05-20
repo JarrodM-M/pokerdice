@@ -119,6 +119,7 @@ const tileFunction = (xValue, yValue, dice) => {
     xValue + yValue === "33" ||
     xValue + yValue === "35" ||
     xValue + yValue === "53" ||
+    xValue + yValue === "55" ||
     xValue + yValue === "62" ||
     xValue + yValue === "66" ||
     xValue + yValue === "71" ||
@@ -141,8 +142,8 @@ const tileFunction = (xValue, yValue, dice) => {
   } else if (xValue + yValue === "16" || xValue + yValue === "72") {
     const tileBoolean = isSubset([5, 5, 5, 5], dice);
     return { imgSrc: oneSix, tile: tileBoolean };
-  } else if (xValue + yValue === "80") {
-    const tileBoolean = isSubset([5, 5], dice);
+  } else if (xValue + yValue === "18") {
+    const tileBoolean = isSubset([4, 4], dice);
     return { imgSrc: oneEight, tile: tileBoolean };
   } else if (xValue + yValue === "20" || xValue + yValue === "68") {
     const tileBoolean = isSubset([4, 4, 4, 4], dice);
@@ -213,7 +214,8 @@ const tileFunction = (xValue, yValue, dice) => {
 };
 
 export default function Tile({ x, y, dice }) {
-  const { imgSrc, tile } = tileFunction(x, y, dice);
+  let a = [...dice];
+  const { imgSrc, tile } = tileFunction(x, y, a);
   let className = cx(styles.tileContainer, {
     tileContainerSel: tile
   });
