@@ -95,7 +95,7 @@ export default function DiceFunction({
         <button
           className="diceButton"
           onClick={handleRoll}
-          disabled={rollCount >= 3}
+          // disabled={rollCount >= 3}
         >
           {showRollCount(rollCount)}
         </button>
