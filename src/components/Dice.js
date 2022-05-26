@@ -43,31 +43,36 @@ export default function DiceFunction({
       number: diceOne,
       toggleFunc: () => toggle(0),
       toggleState: toggled[0],
-      delay: 500
+      delay: 500,
+      key: "diceOneKey"
     },
     {
       number: diceTwo,
       toggleFunc: () => toggle(1),
       toggleState: toggled[1],
-      delay: 650
+      delay: 600,
+      key: "diceTwoKey"
     },
     {
       number: diceThree,
       toggleFunc: () => toggle(2),
       toggleState: toggled[2],
-      delay: 800
+      delay: 700,
+      key: "diceThreeKey"
     },
     {
       number: diceFour,
       toggleFunc: () => toggle(3),
       toggleState: toggled[3],
-      delay: 950
+      delay: 800,
+      key: "diceFourKey"
     },
     {
       number: diceFive,
       toggleFunc: () => toggle(4),
       toggleState: toggled[4],
-      delay: 1100
+      delay: 900,
+      key: "diceFiveKey"
     }
   ];
 
@@ -86,7 +91,7 @@ export default function DiceFunction({
         {diceModelProps.map(props => {
           return (
             <div className="dice-block">
-              <DiceModel {...props} />
+              <DiceModel {...props} key={props.key} />
             </div>
           );
         })}

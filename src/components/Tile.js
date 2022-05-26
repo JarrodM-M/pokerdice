@@ -224,7 +224,7 @@ export default function Tile({ x, y, dice }) {
     tileContainerSel: tile
   });
   return (
-    <div className={className}>
+    <div className={className} onClick={console.log}>
       <img src={imgSrc} alt="" className="tile" />
     </div>
   );

@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 import Gameboard from "./components/Gameboard";
 import DiceFunction from "./components/Dice";
 
