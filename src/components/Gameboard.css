@@ -1,9 +1,1 @@
-.gameboard {
-  display: grid; 
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
-  gap: 0px 0px; 
-  grid-area: 1 / 1 / 2 / 2;
-  background-image: url("../assets/images/board/space/grid-background-space.png");
-  background-size: contain;
-}
+

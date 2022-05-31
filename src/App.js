@@ -42,20 +42,16 @@ function App() {
 
   return (
     <div className="app">
-      <div className="gamesize">
-        <Gameboard
-          dice={[
-            diceRoll.diceOne,
-            diceRoll.diceTwo,
-            diceRoll.diceThree,
-            diceRoll.diceFour,
-            diceRoll.diceFive
-          ]}
-        />
-      </div>
-      <div className="dice">
-        <DiceFunction diceRoll={diceRoll} dispatch={dispatch} />
-      </div>
+      <Gameboard
+        dice={[
+          diceRoll.diceOne,
+          diceRoll.diceTwo,
+          diceRoll.diceThree,
+          diceRoll.diceFour,
+          diceRoll.diceFive
+        ]}
+      />
+      <DiceFunction diceRoll={diceRoll} dispatch={dispatch} />
       <div className="tokens"></div>
     </div>
   );

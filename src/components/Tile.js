@@ -220,7 +220,8 @@ const tileFunction = (xValue, yValue, dice) => {
 export default function Tile({ x, y, dice }) {
   let a = [...dice];
   const { imgSrc, tile } = tileFunction(x, y, a);
-  let className = cx(styles.tileContainer, {
+  let className = cx({
+    tileContainer: true,
     tileContainerSel: tile
   });
   return (

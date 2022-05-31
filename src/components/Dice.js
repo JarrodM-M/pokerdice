@@ -1,4 +1,5 @@
 import "./Dice.css";
+import "../App.css";
 import React, { useState } from "react";
 import DiceModel from "./DiceModel";
 import PlayerModel from "./PlayerModel";
@@ -87,9 +88,7 @@ export default function DiceFunction({
 
   return (
     <div className="dice-and-player">
-      <div className="dice-container">
-        <div className="dice-grid-one"></div>
-        <div className="dice-grid-two"></div>
+      <div className="dice">
         {diceModelProps.map(props => {
           return (
             <div className={props.key}>
@@ -98,7 +97,7 @@ export default function DiceFunction({
           );
         })}
       </div>
-      <div className="buttonDiv">
+      <div className="roll-button">
         <button
           className="diceButton"
           onClick={handleRoll}
