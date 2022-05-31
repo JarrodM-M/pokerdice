@@ -1,8 +1,17 @@
+.dice-and-player {
+  display: grid; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: 0.5fr 1.5fr; 
+  gap: 0px 0px; 
+  grid-area: 1 / 2 / 3 / 3;
+}
+
+.player-icon {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
 .buttonDiv {
-  width: 250px;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
+  grid-area: 1 / 1 / 2 / 2;
 }
 .diceButton {
   display: flex;
@@ -11,10 +20,45 @@
   justify-content: center;
 }
 .dice-container {
-  display: flex;
+  display: grid; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: 1fr 1fr; 
+  gap: 0px 0px; 
+  grid-area: 2 / 1 / 3 / 2;
 }
 
-.dice-block {
-  max-width: 100px;
-  max-height: 100px;
+.dice-grid-one {
+  display: grid; 
+  grid-template-columns: 0.8fr 1.6fr 1.6fr 0.8fr; 
+  grid-template-rows: 1fr 0.6fr 0.8fr 1.6fr; 
+  gap: 0px 0px; 
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.dice-grid-two {
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr 0.5fr; 
+  gap: 0px 0px; 
+  grid-area: 2 / 1 / 3 / 2;
+}
+
+.diceOneKey {
+  grid-area: 4 / 2 / 5 / 3;
+}
+
+.diceTwoKey {
+  grid-area: 4 / 3 / 5 / 4;
+}
+
+.diceThreeKey {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.diceFourKey {
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+.diceFiveKey {
+  grid-area: 1 / 3 / 2 / 4;
 }
