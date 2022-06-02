@@ -2,7 +2,6 @@ import "./Dice.css";
 import "../App.css";
 import React, { useState } from "react";
 import DiceModel from "./DiceModel";
-import PlayerModel from "./PlayerModel";
 
 // reducer function for controlling the number of times the roll button is clicked and reseting it back to 0
 const showRollCount = number => {
@@ -24,7 +23,9 @@ const handlePlayerStateChange = (state, setState) => {
 
 export default function DiceFunction({
   diceRoll: { diceOne, diceTwo, diceThree, diceFour, diceFive, toggled },
-  dispatch
+  dispatch,
+  playerState,
+  setPlayerState
 }) {
   const toggle = index => {
     const newToggle = [...toggled];
@@ -34,9 +35,6 @@ export default function DiceFunction({
 
   // for the Use Reducer state
   const [rollCount, setRollCount] = useState(0);
-
-  // sets the initial player state as red-player, for now
-  const [playerState, setPlayerState] = useState("red");
 
   //setting up object to map into the <DiceModel />
   const diceModelProps = [
@@ -116,12 +114,6 @@ export default function DiceFunction({
         >
           reset
         </button>
-      </div>
-      <div className="player-token">
-        <div className="player-icon">
-          <PlayerModel classColor={playerState} />
-        </div>
-        <div className="tokens"></div>
       </div>
     </>
   );
