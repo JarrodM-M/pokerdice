@@ -87,16 +87,17 @@ export default function DiceFunction({
   }
 
   return (
-    <div className="dice-and-player">
+    <>
       <div className="dice">
         {diceModelProps.map(props => {
           return (
-            <div className={props.key}>
+            <div className="diceModel">
               <DiceModel {...props} key={props.key} />
             </div>
           );
         })}
       </div>
+
       <div className="roll-button">
         <button
           className="diceButton"
@@ -116,9 +117,12 @@ export default function DiceFunction({
           reset
         </button>
       </div>
-      <div className="player-icon">
-        <PlayerModel classColor={playerState} />
+      <div className="player-token">
+        <div className="player-icon">
+          <PlayerModel classColor={playerState} />
+        </div>
+        <div className="tokens"></div>
       </div>
-    </div>
+    </>
   );
 }

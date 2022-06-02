@@ -52,7 +52,8 @@ function App() {
         ]}
       />
       <DiceFunction diceRoll={diceRoll} dispatch={dispatch} />
-      <div className="tokens"></div>
+      <div className="title">Poker Dice</div>
+      <div className="settings-rules">S R</div>
     </div>
   );
 }

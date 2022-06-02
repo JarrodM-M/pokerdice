@@ -4,8 +4,12 @@
 }
 .tileContainer {
   pointer-events: none;
+  height: 100%;
+  width: 100%;
 }
 .tileContainerSel {
   transition: all 1s ease-in-out ;
   background-color: rgba(0, 0, 255, 0.144);
+  height: 100%;
+  width: 100%;
 }

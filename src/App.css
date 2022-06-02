@@ -1,64 +1,37 @@
-.app {  display: grid;
-  grid-template-columns: 1.4fr 0.6fr;
-  grid-template-rows: 1.6fr 0.4fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "board-grid dice-and-player"
-    "tokens dice-and-player";
-  max-width: 100vw;
-  max-height: 100vh;
+.app {  display: grid; 
+  grid-template-columns: 1.6fr 0.4fr; 
+  grid-template-rows: 0.2fr 2.4fr 0.4fr; 
+  gap: 0px 0px; 
+  width:100%;
+  height: 100%;
 
 }
 
-.board-grid {  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  grid-template-rows: repeat(9, 1fr);
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    ". . . . . . . . ."
-    ". . . . . . . . ."
-    ". . . . . . . . ."
-    ". . . . . . . . ."
-    ". . . . . . . . ."
-    ". . . . . . . . ."
-    ". . . . . . . . ."
-    ". . . . . . . . ."
-    ". . . . . . . . .";
-  grid-area: board-grid;
+.board-grid {  display: grid; 
+  grid-template-columns: repeat(9, 1fr); 
+  grid-template-rows: repeat(9, 1fr); 
+  gap: 0px 0px; 
+  grid-area: 2 / 1 / 3 / 2; 
   background-image: url('./assets/images/board/space/grid-background-space.png');
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
-.tokens { grid-area: tokens; }
+.tokens { grid-area: 2 / 1 / 3 / 2; }
 
-.dice-and-dlayer {  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 0.5fr 1.5fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "player-icon"
-    "dice-and-roll";
-  grid-area: dice-and-player;
+.player-token {  display: grid; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: repeat(2, 1fr); 
+  gap: 0px 0px; 
+  grid-area: 2 / 2 / 3 / 3;
 }
 
-.player-icon { grid-area: player-icon; }
+.player-icon { grid-area: 1 / 1 / 2 / 2; }
 
-.dice-and-roll {  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 0.5fr 1.5fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "roll-button"
-    "dice";
-  grid-area: dice-and-roll;
+.roll-button { grid-area: 3 / 2 / 4 / 3; }
+
+.dice { grid-area: 3 / 1 / 4 / 2;
+display: flex;
 }
-
-.roll-button { grid-area: roll-button; }
-
-.dice { grid-area: dice; }
 
 
