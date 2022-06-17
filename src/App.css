@@ -12,6 +12,10 @@
   display: grid; 
   grid-template-columns: repeat(9, 1fr); 
   grid-template-rows: repeat(9, 1fr); 
+  margin: auto;
+  aspect-ratio: 1;
+  height: 100%;
+  width: auto;
   gap: 0px 0px; 
   background-image: url('./assets/images/board/space/grid-background-space.png');
   background-size: contain;
@@ -38,5 +42,6 @@
 }
 
 .gameboard-container { 
+  display: flex;
   overflow: auto;
 }
