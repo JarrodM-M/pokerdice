@@ -217,10 +217,6 @@ const tileFunction = (xValue, yValue, dice) => {
   return { imgSrc: eightFour, tile: tileBoolean };
 };
 
-const handlePlayerStateChange = (state, setState) => {
-  state === "red" ? setState("blue") : setState("red");
-};
-
 export default function Tile({
   x,
   y,
@@ -228,9 +224,7 @@ export default function Tile({
   dispatch,
   playerState,
   setPlayerState,
-  setRollCount,
-  handleSelection,
-  owner
+  setRollCount
 }) {
   let a = [...dice];
   const { imgSrc, tile } = tileFunction(x, y, a);
@@ -242,16 +236,18 @@ export default function Tile({
   return (
     <div
       className={className}
-      onClick={() =>
-        handleSelection(
-          tile,
-          owner,
-          playerState,
-          resetAll,
-          handlePlayerStateChange(playerState, setPlayerState),
-          setRollCount
-        )
-      }
+      onClick={() => {
+        console.log(tile);
+        if (tile) {
+          resetAll();
+          setRollCount(0);
+          if (playerState === "red") {
+            setPlayerState("blue");
+          } else {
+            setPlayerState("red");
+          }
+        }
+      }}
     >
       <img src={imgSrc} alt="" className="tile" />
     </div>
