@@ -43,5 +43,5 @@
 
 .gameboard-container { 
   display: flex;
-  overflow: auto;
+  overflow: hidden;
 }

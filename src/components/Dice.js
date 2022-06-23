@@ -25,16 +25,15 @@ export default function DiceFunction({
   diceRoll: { diceOne, diceTwo, diceThree, diceFour, diceFive, toggled },
   dispatch,
   playerState,
-  setPlayerState
+  setPlayerState,
+  rollCount,
+  setRollCount
 }) {
   const toggle = index => {
     const newToggle = [...toggled];
     newToggle[index] = !newToggle[index];
     dispatch({ type: "toggle", toggled: newToggle });
   };
-
-  // for the Use Reducer state
-  const [rollCount, setRollCount] = useState(0);
 
   //setting up object to map into the <DiceModel />
   const diceModelProps = [

@@ -38,11 +38,31 @@ const diceReducer = (state, action) => {
   }
 };
 
+const handleSelection = (
+  isTileOpen,
+  owner,
+  player,
+  reset,
+  playerChange,
+  rollCount
+) => {
+  if (isTileOpen === true) {
+    owner = { player };
+    reset();
+    playerChange();
+    rollCount(0);
+  }
+};
+
 function App() {
   const [diceRoll, dispatch] = useReducer(diceReducer, initialDiceValue);
 
   // sets the initial player state as red-player, for now
   const [playerState, setPlayerState] = useState("red");
+
+  const [isTileOpen, setIsTileOpen] = useState(false);
+
+  const [rollCount, setRollCount] = useState(0);
 
   return (
     <div className="app">
@@ -57,6 +77,13 @@ function App() {
             diceRoll.diceFour,
             diceRoll.diceFive
           ]}
+          playerState={playerState}
+          setPlayerState={setPlayerState}
+          isTileOpen={isTileOpen}
+          setIsTileOpen={setIsTileOpen}
+          dispatch={dispatch}
+          handleSelection={handleSelection}
+          setRollCount={setRollCount}
         />
       </div>
       <div className="player-token">
@@ -67,8 +94,11 @@ function App() {
       </div>
       <DiceFunction
         setPlayerState={setPlayerState}
+        playerState={playerState}
         diceRoll={diceRoll}
         dispatch={dispatch}
+        rollCount={rollCount}
+        setRollCount={setRollCount}
       />
     </div>
   );

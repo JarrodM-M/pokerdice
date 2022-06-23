@@ -13,7 +13,7 @@
   min-width: 0;
   min-height: 0;
   transition: all 1s ease-in-out ;
-  background-color: rgba(0, 0, 255, 0.144);
+  background-color: rgba(255, 255, 255, 0.438);
   height: 100%;
   width: 100%;
 }
