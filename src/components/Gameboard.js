@@ -7,6 +7,8 @@ const verticalAxis = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
 
 const horizontalAxis = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
 
+const theGameboard = [{ x: 0, y: 0, owner: null }];
+
 export default function Gameboard({
   dice,
   playerState,
