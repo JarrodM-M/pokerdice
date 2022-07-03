@@ -217,18 +217,7 @@ const tileFunction = (xValue, yValue, dice) => {
   return { imgSrc: eightFour, tile: tileBoolean };
 };
 
-export default function Tile({
-  x,
-  y,
-  dice,
-  dispatch,
-  playerState,
-  setPlayerState,
-  setRollCount,
-  owner,
-  setOwner
-}) {
-  const [tileOwner, setTileOwner] = useState(null);
+export default function Tile({ x, y, dice, playerState, setOwner }) {
   let a = [...dice];
   const { imgSrc, tile } = tileFunction(x, y, a);
   let className = cx({
@@ -237,21 +226,14 @@ export default function Tile({
     tileContainerBlue: tileOwner === "blue",
     tileContainerRed: tileOwner === "red"
   });
-  const resetAll = () => dispatch({ type: "resetAll" });
   return (
     <div
       className={className}
       onClick={() => {
         console.log(tile);
         if (tile) {
-          resetAll();
-          setRollCount(0);
           setTileOwner(playerState);
-          if (playerState === "red") {
-            setPlayerState("blue");
-          } else {
-            setPlayerState("red");
-          }
+          setOwner();
         }
       }}
     >

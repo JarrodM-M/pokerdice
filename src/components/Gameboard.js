@@ -20,27 +20,38 @@ export default function Gameboard({
   dispatch
 }) {
   console.log(numberArray);
-  const [owner, setOwner] = useState(null);
-  const board = horizontalAxis.map(x =>
-    verticalAxis.map(y => (
-      <Tile
-        key={x + y}
-        x={x}
-        y={y}
-        owner={owner}
-        setOwner={setOwner}
-        dice={dice}
-        playerState={playerState}
-        setPlayerState={setPlayerState}
-        handleSelection={handleSelection}
-        dispatch={dispatch}
-        setRollCount={setRollCount}
-      ></Tile>
-    ))
-  );
-  const [boardState, setBoardState] = useState(board);
-  useEffect(() => {}, [boardState]);
-  console.log(board);
+  const [boardState, setBoardState] = useState(numberArray);
+  const resetAll = () => dispatch({ type: "resetAll" });
+  const setOwner = (x, y) => {
+    resetAll();
+    setRollCount(0);
+    if (playerState === "red") {
+      setPlayerState("blue");
+    } else {
+      setPlayerState("red");
+    }
+    console.log(x, y, playerState);
+  };
 
-  return <div className="board-grid">{board}</div>;
+  return (
+    <div className="board-grid">
+      {boardState.map(row =>
+        row.map(({ x, y, owner }) => (
+          <Tile
+            key={x + y}
+            x={x}
+            y={y}
+            owner={owner}
+            setOwner={() => setOwner(x, y)}
+            dice={dice}
+            playerState={playerState}
+            setPlayerState={setPlayerState}
+            handleSelection={handleSelection}
+            dispatch={dispatch}
+            setRollCount={setRollCount}
+          ></Tile>
+        ))
+      )}
+    </div>
+  );
 }
