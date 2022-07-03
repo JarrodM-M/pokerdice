@@ -224,7 +224,9 @@ export default function Tile({
   dispatch,
   playerState,
   setPlayerState,
-  setRollCount
+  setRollCount,
+  owner,
+  setOwner
 }) {
   let a = [...dice];
   const { imgSrc, tile } = tileFunction(x, y, a);
@@ -241,6 +243,7 @@ export default function Tile({
         if (tile) {
           resetAll();
           setRollCount(0);
+          setOwner(playerState);
           if (playerState === "red") {
             setPlayerState("blue");
           } else {

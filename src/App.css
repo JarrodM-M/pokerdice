@@ -16,8 +16,8 @@
   aspect-ratio: 1;
   height: 100%;
   width: auto;
-  gap: 0px 0px; 
-  background-image: url('./assets/images/board/space/grid-background-space.png');
+  gap: 0px 0px;
+  background-color: aliceblue; 
   background-size: contain;
   background-repeat: no-repeat;
 }
