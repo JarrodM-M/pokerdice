@@ -18,3 +18,23 @@
   height: 100%;
   width: 100%;
 }
+
+.tileContainerRed {
+  pointer-events: auto;
+  min-width: 0;
+  min-height: 0;
+  transition: all 1s ease-in-out ;
+  background-color: rgba(255, 29, 29, 0.432);
+  height: 100%;
+  width: 100%;
+}
+
+.tileContainerBlue {
+  pointer-events: auto;
+  min-width: 0;
+  min-height: 0;
+  transition: all 1s ease-in-out ;
+  background-color: rgba(73, 91, 250, 0.349);
+  height: 100%;
+  width: 100%;
+}

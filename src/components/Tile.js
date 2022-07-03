@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classNames from "classnames/bind";
 import "./Tile.css";
 import styles from "./Tile.css";
@@ -228,11 +228,14 @@ export default function Tile({
   owner,
   setOwner
 }) {
+  const [tileOwner, setTileOwner] = useState(null);
   let a = [...dice];
   const { imgSrc, tile } = tileFunction(x, y, a);
   let className = cx({
     tileContainer: true,
-    tileContainerSel: tile
+    tileContainerSel: tile,
+    tileContainerBlue: tileOwner === "blue",
+    tileContainerRed: tileOwner === "red"
   });
   const resetAll = () => dispatch({ type: "resetAll" });
   return (
@@ -243,7 +246,7 @@ export default function Tile({
         if (tile) {
           resetAll();
           setRollCount(0);
-          setOwner(playerState);
+          setTileOwner(playerState);
           if (playerState === "red") {
             setPlayerState("blue");
           } else {
