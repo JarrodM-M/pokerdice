@@ -18,7 +18,6 @@ export default function Gameboard({
   setRollCount,
   dispatch
 }) {
-  console.log(numberArray);
   const [boardState, setBoardState] = useState(numberArray);
   const resetAll = () => dispatch({ type: "resetAll" });
   const setOwner = (x, y) => {
@@ -30,6 +29,9 @@ export default function Gameboard({
       setPlayerState("red");
     }
     console.log(x, y, playerState);
+    setBoardState(state => {
+      state: boardState;
+    });
   };
 
   return (
@@ -43,7 +45,6 @@ export default function Gameboard({
             owner={owner}
             setOwner={() => setOwner(x, y)}
             dice={dice}
-            playerState={playerState}
           ></Tile>
         ))
       )}

@@ -217,7 +217,7 @@ const tileFunction = (xValue, yValue, dice) => {
   return { imgSrc: eightFour, tile: tileBoolean };
 };
 
-export default function Tile({ x, y, dice, playerState, setOwner }) {
+export default function Tile({ x, y, dice, setOwner }) {
   let a = [...dice];
   const { imgSrc, tile } = tileFunction(x, y, a);
   let className = cx({
@@ -228,7 +228,6 @@ export default function Tile({ x, y, dice, playerState, setOwner }) {
     <div
       className={className}
       onClick={() => {
-        console.log(tile);
         if (tile) {
           setOwner();
         }
