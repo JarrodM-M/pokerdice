@@ -222,9 +222,7 @@ export default function Tile({ x, y, dice, playerState, setOwner }) {
   const { imgSrc, tile } = tileFunction(x, y, a);
   let className = cx({
     tileContainer: true,
-    tileContainerSel: tile,
-    tileContainerBlue: tileOwner === "blue",
-    tileContainerRed: tileOwner === "red"
+    tileContainerSel: tile
   });
   return (
     <div
@@ -232,7 +230,6 @@ export default function Tile({ x, y, dice, playerState, setOwner }) {
       onClick={() => {
         console.log(tile);
         if (tile) {
-          setTileOwner(playerState);
           setOwner();
         }
       }}

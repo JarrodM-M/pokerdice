@@ -15,7 +15,6 @@ export default function Gameboard({
   dice,
   playerState,
   setPlayerState,
-  handleSelection,
   setRollCount,
   dispatch
 }) {
@@ -45,10 +44,6 @@ export default function Gameboard({
             setOwner={() => setOwner(x, y)}
             dice={dice}
             playerState={playerState}
-            setPlayerState={setPlayerState}
-            handleSelection={handleSelection}
-            dispatch={dispatch}
-            setRollCount={setRollCount}
           ></Tile>
         ))
       )}

@@ -1,6 +1,6 @@
 import "./Dice.css";
 import "../App.css";
-import React, { useState } from "react";
+import React from "react";
 import DiceModel from "./DiceModel";
 
 // reducer function for controlling the number of times the roll button is clicked and reseting it back to 0
