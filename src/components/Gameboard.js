@@ -29,9 +29,9 @@ export default function Gameboard({
       setPlayerState("red");
     }
     console.log(x, y, playerState);
-    setBoardState(state => {
-      state: boardState;
-    });
+    console.log(boardState[x][y].owner);
+    boardState[x][y].owner = playerState;
+    setBoardState([...boardState]);
   };
 
   return (
