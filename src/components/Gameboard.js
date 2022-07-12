@@ -28,8 +28,6 @@ export default function Gameboard({
     } else {
       setPlayerState("red");
     }
-    console.log(x, y, playerState);
-    console.log(boardState[x][y].owner);
     boardState[x][y].owner = playerState;
     setBoardState([...boardState]);
   };

@@ -87,8 +87,8 @@ const luckyEleven = a => {
 
 const tileFunction = (xValue, yValue, dice, owner) => {
   let a = dice;
-  if (owner === "red") return { imgSrc: redToken, tile: true };
-  else if (owner === "blue") return { imgSrc: blueToken, tile: true };
+  if (owner === "green") return { imgSrc: redToken, tile: false };
+  else if (owner === "blue") return { imgSrc: blueToken, tile: false };
   else if (xValue + yValue === "00" || xValue + yValue === "88") {
     const tileBoolean = sortStraight(a);
     return { imgSrc: zeroZero, tile: tileBoolean };
@@ -237,6 +237,11 @@ export default function Tile({ x, y, dice, setOwner, owner }) {
       }}
     >
       <img src={imgSrc} alt="" className="tile" />
+      {owner === "red" && (
+        <div className="tileContainerRed">
+          <img src={redToken} className="tileTwo" />
+        </div>
+      )}
     </div>
   );
 }
