@@ -112,11 +112,7 @@ const Box = ({ number: outerNumber, toggleFunc, toggleState, delay }) => {
 
 export default function DiceModel(props) {
   return (
-    <Canvas
-      camera={{ zoom: 15 }}
-      orthographic
-      style={{ width: "100%", height: "100%" }}
-    >
+    <Canvas camera={{ zoom: 15 }} orthographic>
       <ambientLight intensity={0.5} />
       <spotLight position={[10, 10, 10]} angle={0.25} penumbra={1} />
       <pointLight position={[-10, -10, -10]} />

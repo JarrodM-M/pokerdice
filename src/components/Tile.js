@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classNames from "classnames/bind";
 import "./Tile.css";
 import styles from "./Tile.css";
@@ -42,6 +42,8 @@ import fourFour from "../assets/images/board/44.png";
 import sevenZero from "../assets/images/board/70.png";
 import sevenEight from "../assets/images/board/78.png";
 import eightFour from "../assets/images/board/84.png";
+import redToken from "../assets/images/redcoin.png";
+import blueToken from "../assets/images/bluecoin.png";
 
 /*<img src="G:\Coding\pokerdice\src\assets\images\board\00.png"></img>*/
 let cx = classNames.bind(styles);
@@ -83,9 +85,11 @@ const luckyEleven = a => {
   return i === 11;
 };
 
-const tileFunction = (xValue, yValue, dice) => {
+const tileFunction = (xValue, yValue, dice, owner) => {
   let a = dice;
-  if (xValue + yValue === "00" || xValue + yValue === "88") {
+  if (owner === "red") return { imgSrc: redToken, tile: true };
+  else if (owner === "blue") return { imgSrc: blueToken, tile: true };
+  else if (xValue + yValue === "00" || xValue + yValue === "88") {
     const tileBoolean = sortStraight(a);
     return { imgSrc: zeroZero, tile: tileBoolean };
   } else if (xValue + yValue === "01" || xValue + yValue === "87") {
@@ -216,15 +220,22 @@ const tileFunction = (xValue, yValue, dice) => {
   const tileBoolean = isSubset([1, 1], a);
   return { imgSrc: eightFour, tile: tileBoolean };
 };
-
-export default function Tile({ x, y, dice }) {
+export default function Tile({ x, y, dice, setOwner, owner }) {
   let a = [...dice];
-  const { imgSrc, tile } = tileFunction(x, y, a);
-  let className = cx(styles.tileContainer, {
+  const { imgSrc, tile } = tileFunction(x, y, a, owner);
+  let className = cx({
+    tileContainer: true,
     tileContainerSel: tile
   });
   return (
-    <div className={className} onClick={console.log}>
+    <div
+      className={className}
+      onClick={() => {
+        if (tile) {
+          setOwner();
+        }
+      }}
+    >
       <img src={imgSrc} alt="" className="tile" />
     </div>
   );

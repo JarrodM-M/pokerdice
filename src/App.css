@@ -1,11 +1,47 @@
 .app {
-  height: 100vh;
+  display: grid; 
+  grid-template-columns: 1.6fr 0.4fr; 
+  grid-template-rows: 0.2fr 2.4fr 0.4fr; 
+  gap: 0px 0px; 
   width: 100vw;
-  background-color: #333333;
-  padding: 0px;
-  margin: 0px;
+  height: 100vh;
+
 }
 
-.gamesize {
-  max-width: 40%;
+.board-grid {
+  display: grid; 
+  grid-template-columns: repeat(9, 1fr); 
+  grid-template-rows: repeat(9, 1fr); 
+  margin: auto;
+  aspect-ratio: 1;
+  height: 100%;
+  width: auto;
+  gap: 0px 0px;
+  background-color: aliceblue; 
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.tokens {
+
+}
+
+.player-token {
+  display: grid; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: repeat(2, 1fr); 
+  gap: 0px 0px; 
+}
+
+.player-icon { grid-area: 1 / 1 / 2 / 2; }
+
+.roll-button { grid-area: 3 / 2 / 4 / 3; }
+
+.dice {
+  display: flex;
+}
+
+.gameboard-container { 
+  display: flex;
+  overflow: hidden;
 }

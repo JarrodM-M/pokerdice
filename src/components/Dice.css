@@ -1,20 +1,10 @@
-.buttonDiv {
-  width: 250px;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-}
 .diceButton {
   display: flex;
   width: 100px;
   height: 25px;
   justify-content: center;
 }
-.dice-container {
-  display: flex;
-}
 
-.dice-block {
-  max-width: 100px;
-  max-height: 100px;
+.diceModel {
+  width: 100px;
 }

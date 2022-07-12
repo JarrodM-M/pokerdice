@@ -1,7 +1,7 @@
 import "./Dice.css";
-import React, { useState } from "react";
+import "../App.css";
+import React from "react";
 import DiceModel from "./DiceModel";
-import PlayerModel from "./PlayerModel";
 
 // reducer function for controlling the number of times the roll button is clicked and reseting it back to 0
 const showRollCount = number => {
@@ -23,19 +23,17 @@ const handlePlayerStateChange = (state, setState) => {
 
 export default function DiceFunction({
   diceRoll: { diceOne, diceTwo, diceThree, diceFour, diceFive, toggled },
-  dispatch
+  dispatch,
+  playerState,
+  setPlayerState,
+  rollCount,
+  setRollCount
 }) {
   const toggle = index => {
     const newToggle = [...toggled];
     newToggle[index] = !newToggle[index];
     dispatch({ type: "toggle", toggled: newToggle });
   };
-
-  // for the Use Reducer state
-  const [rollCount, setRollCount] = useState(0);
-
-  // sets the initial player state as red-player, for now
-  const [playerState, setPlayerState] = useState("red");
 
   //setting up object to map into the <DiceModel />
   const diceModelProps = [
@@ -87,20 +85,21 @@ export default function DiceFunction({
 
   return (
     <>
-      <div className="dice-container">
+      <div className="dice">
         {diceModelProps.map(props => {
           return (
-            <div className="dice-block">
+            <div className="diceModel">
               <DiceModel {...props} key={props.key} />
             </div>
           );
         })}
       </div>
-      <div className="buttonDiv">
+
+      <div className="roll-button">
         <button
           className="diceButton"
           onClick={handleRoll}
-          // disabled={rollCount >= 3}
+          disabled={rollCount >= 3}
         >
           {showRollCount(rollCount)}
         </button>
@@ -112,11 +111,8 @@ export default function DiceFunction({
             handlePlayerStateChange(playerState, setPlayerState);
           }}
         >
-          reset
+          Pass Turn
         </button>
-      </div>
-      <div>
-        <PlayerModel classColor={playerState} />
       </div>
     </>
   );

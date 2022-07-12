@@ -1,7 +1,8 @@
 import "./App.css";
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import Gameboard from "./components/Gameboard";
 import DiceFunction from "./components/Dice";
+import PlayerModel from "./components/PlayerModel";
 
 const roll = () => Math.floor(Math.random() * 6) + 1;
 
@@ -40,9 +41,16 @@ const diceReducer = (state, action) => {
 function App() {
   const [diceRoll, dispatch] = useReducer(diceReducer, initialDiceValue);
 
+  // sets the initial player state as red-player, for now
+  const [playerState, setPlayerState] = useState("red");
+
+  const [rollCount, setRollCount] = useState(0);
+
   return (
     <div className="app">
-      <div className="gamesize">
+      <div className="title">Poker Dice</div>
+      <div className="settings-rules">S R</div>
+      <div className="gameboard-container">
         <Gameboard
           dice={[
             diceRoll.diceOne,
@@ -51,12 +59,26 @@ function App() {
             diceRoll.diceFour,
             diceRoll.diceFive
           ]}
+          playerState={playerState}
+          setPlayerState={setPlayerState}
+          dispatch={dispatch}
+          setRollCount={setRollCount}
         />
       </div>
-      <div className="dice">
-        <DiceFunction diceRoll={diceRoll} dispatch={dispatch} />
+      <div className="player-token">
+        <div className="player-icon">
+          <PlayerModel classColor={playerState} />
+        </div>
+        <div className="tokens"></div>
       </div>
-      <div className="tokens"></div>
+      <DiceFunction
+        setPlayerState={setPlayerState}
+        playerState={playerState}
+        diceRoll={diceRoll}
+        dispatch={dispatch}
+        rollCount={rollCount}
+        setRollCount={setRollCount}
+      />
     </div>
   );
 }
