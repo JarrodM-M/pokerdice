@@ -46,6 +46,7 @@ export default function Gameboard({
           ></Tile>
         ))
       )}
+      {console.log(boardState)}
     </div>
   );
 }
