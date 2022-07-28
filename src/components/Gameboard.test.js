@@ -21,27 +21,27 @@ const testBoard = [
       {
           "x": "0",
           "y": "0",
-          "owner": red
+          "owner": "red"
       },
       {
           "x": "0",
           "y": "1",
-          "owner": red
+          "owner": "red"
       },
       {
           "x": "0",
           "y": "2",
-          "owner": red
+          "owner": "red"
       },
       {
           "x": "0",
           "y": "3",
-          "owner": red
+          "owner": "red"
       },
       {
           "x": "0",
           "y": "4",
-          "owner": red
+          "owner": "red"
       },
       {
           "x": "0",
@@ -442,13 +442,15 @@ const testBoard = [
   ]
 ]
 
+const testSlice = () => {
+    let amITrue = false;
+    testBoard[0].forEach(element => {if(element.owner == 'red'){if ([element.y] = [0,1,2,3,4]){let amITrue = true}}});
+    if( amITrue == true ){return testBoard[0].slice(5);}
+  };
+
 it("checks for win on x", () => {
-  let i = 0;
-  expect(
-   testBoard.forEach(element => {
-   if(element[0].y == 0 )
-   }))
-  .toEqual(true);
-})
+  expect(testSlice)
+  .toEqual(testBoard[0].slice(5));
+});
 
 
