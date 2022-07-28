@@ -13,8 +13,13 @@
   pointer-events: none;
   height: 100%;
   width: 100%;
+  position: relative;
 }
-.tileContainerSel {
+.tileContainer > img {
+  position: absolute;
+}
+
+.tileContainerSel{
   pointer-events: auto;
   min-width: 0;
   min-height: 0;
@@ -23,6 +28,7 @@
   height: 100%;
   width: 100%;
 }
+
 
 .tileContainerRed {
   pointer-events: none;
