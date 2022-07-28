@@ -11,7 +11,6 @@ const numberArray = horizontalAxis.map(i =>
   verticalAxis.map(j => ({ x: i, y: j, owner: null }))
 );
 
-const winner = []
 
 const testBoard = [
   [
@@ -475,7 +474,8 @@ export default function Gameboard({
           ></Tile>
         ))
       )}
-      {testBoard[0].forEach(element => {if(element.owner == 'red'){if ([element.y] = [0,1,2,3,4]){console.log([element.y]); } }})}
+       {console.log(testBoard[0])}
+      {testBoard[0].forEach(element => {if(element.owner == 'red'){if ([element.y] = [0,1,2,3,4]){testBoard[0].splice(0,1); console.log(testBoard)} }})}
         
     </div>
   );
