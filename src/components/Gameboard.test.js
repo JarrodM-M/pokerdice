@@ -31,27 +31,27 @@ const testBoard = [
     {
       x: "0",
       y: "2",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "0",
       y: "3",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "0",
       y: "4",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "0",
       y: "5",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "0",
       y: "6",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "0",
@@ -412,27 +412,27 @@ const testBoard = [
     {
       x: "8",
       y: "3",
-      owner: null
+      owner: "red"
     },
     {
       x: "8",
       y: "4",
-      owner: null
+      owner: "red"
     },
     {
       x: "8",
       y: "5",
-      owner: null
+      owner: "red"
     },
     {
       x: "8",
       y: "6",
-      owner: null
+      owner: "red"
     },
     {
       x: "8",
       y: "7",
-      owner: null
+      owner: "red"
     },
     {
       x: "8",
@@ -441,7 +441,9 @@ const testBoard = [
     }
   ]
 ];
-
+ // create a 'winning array' that logs the element.y location when element.owner is 'red' 5 times for slicing from board. 
+ // maybe add the 'winning array' of element.y when if (element.owner === 'red') 
+ // but add else if (last0 !== 'red') { destroy winning array becuase it is no longer winning}
 const testSlice = () => {
   let lastO = null;
   let inARow = 1;
@@ -454,6 +456,7 @@ const testSlice = () => {
     lastO = element.owner
   })
   return inARow >= 5;
+  
 };
 
 it("checks for win on x", () => {
