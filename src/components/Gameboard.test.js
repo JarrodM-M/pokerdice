@@ -61,34 +61,34 @@ const testBoard = [
     {
       x: "0",
       y: "8",
-      owner: "red"
+      owner: null
     }
   ],
   [
     {
       x: "1",
       y: "0",
-      owner: null
+      owner: 'red'
     },
     {
       x: "1",
       y: "1",
-      owner: null
+      owner: 'red'
     },
     {
       x: "1",
       y: "2",
-      owner: null
+      owner: 'red'
     },
     {
       x: "1",
       y: "3",
-      owner: null
+      owner: 'red'
     },
     {
       x: "1",
       y: "4",
-      owner: null
+      owner: 'red'
     },
     {
       x: "1",
@@ -412,27 +412,27 @@ const testBoard = [
     {
       x: "8",
       y: "3",
-      owner: "red"
+      owner: null
     },
     {
       x: "8",
       y: "4",
-      owner: "red"
+      owner: null
     },
     {
       x: "8",
       y: "5",
-      owner: "red"
+      owner: null
     },
     {
       x: "8",
       y: "6",
-      owner: "red"
+      owner: null
     },
     {
       x: "8",
       y: "7",
-      owner: "red"
+      owner: null
     },
     {
       x: "8",
@@ -445,17 +445,35 @@ const testBoard = [
  // maybe add the 'winning array' of element.y when if (element.owner === 'red') 
  // but add else if (last0 !== 'red') { destroy winning array becuase it is no longer winning}
 const testSlice = () => {
-  let lastO = null;
+let inARow = 1
+let lastO = null
+let lastX = null
+let winning = testBoard.some(element => {
+  element.forEach(subElement => {
+    console.log(subElement)
+    if (subElement.owner === "red") {
+      if (lastO === 'red' && lastX === subElement.x) {
+        inARow += 1;
+      }
+    }
+    lastO = subElement.owner
+    lastX = subElement.x
+  })
+})
+return inARow >= 5
+
+  /* let lastO = null;
   let inARow = 1;
   let winning = testBoard[0].some(element => {
-    if (element.owner === "red") {
-      if (lastO === 'red') {
+    console.log(element)
+    if (element.owner === "blue") {
+      if (lastO === 'blue') {
         inARow += 1;
       }
     }
     lastO = element.owner
   })
-  return inARow >= 5;
+  return inARow >= 5; */
   
 };
 
