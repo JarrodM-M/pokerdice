@@ -443,16 +443,16 @@ const testBoard = [
 ];
 
 const testSlice = () => {
-  let lastY = -1;
-  let inARow = 0;
+  let lastO = null;
+  let inARow = 1;
   let winning = testBoard[0].some(element => {
     if (element.owner === "red") {
-      if (element.y - lastY === 1) {
+      if (lastO === 'red') {
         inARow += 1;
       }
     }
-    lastY = element.y;
-  });
+    lastO = element.owner
+  })
   return inARow >= 5;
 };
 
