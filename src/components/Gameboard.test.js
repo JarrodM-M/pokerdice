@@ -224,12 +224,12 @@ const testBoard = [
     {
       x: "4",
       y: "3",
-      owner: null
+      owner: "bluea"
     },
     {
       x: "4",
       y: "4",
-      owner: null
+      owner: "red"
     },
     {
       x: "4",
@@ -276,17 +276,17 @@ const testBoard = [
     {
       x: "5",
       y: "4",
-      owner: null
+      owner: "red"
     },
     {
       x: "5",
       y: "5",
-      owner: null
+      owner: "red"
     },
     {
       x: "5",
       y: "6",
-      owner: null
+      owner: "null"
     },
     {
       x: "5",
@@ -318,32 +318,32 @@ const testBoard = [
     {
       x: "6",
       y: "3",
+      owner: "red"
+    },
+    {
+      x: "6",
+      y: "4",
       owner: "blue"
     },
     {
       x: "6",
-      y: "4",
-      owner: null
-    },
-    {
-      x: "6",
       y: "5",
-      owner: null
+      owner: "blue"
     },
     {
       x: "6",
       y: "6",
-      owner: null
+      owner: "blue"
     },
     {
       x: "6",
       y: "7",
-      owner: null
+      owner: "blue"
     },
     {
       x: "6",
       y: "8",
-      owner: null
+      owner: "red"
     }
   ],
   [
@@ -360,7 +360,7 @@ const testBoard = [
     {
       x: "7",
       y: "2",
-      owner: null
+      owner: "red"
     },
     {
       x: "7",
@@ -370,7 +370,7 @@ const testBoard = [
     {
       x: "7",
       y: "4",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "7",
@@ -385,7 +385,7 @@ const testBoard = [
     {
       x: "7",
       y: "7",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "7",
@@ -397,47 +397,47 @@ const testBoard = [
     {
       x: "8",
       y: "0",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "8",
       y: "1",
-      owner: null
+      owner: "red"
     },
     {
       x: "8",
       y: "2",
-      owner: null
+      owner: "red"
     },
     {
       x: "8",
       y: "3",
-      owner: null
+      owner: "red"
     },
     {
       x: "8",
       y: "4",
-      owner: null
+      owner: "red"
     },
     {
       x: "8",
       y: "5",
-      owner: null
+      owner: "red"
     },
     {
       x: "8",
       y: "6",
-      owner: null
+      owner: "blue"
     },
     {
       x: "8",
       y: "7",
-      owner: null
+      owner: "red"
     },
     {
       x: "8",
       y: "8",
-      owner: null
+      owner: "blue"
     }
   ]
 ];
@@ -446,32 +446,38 @@ const testBoard = [
 // but add else if (last0 !== 'red') { destroy winning array becuase it is no longer winning}
 let winningArray = [];
 let winningX = null;
+let winningY = null;
 
 const testSlice = () => {
   let inARow = 1;
-  let lastO = null;
+  let lastOwner = null;
   let lastX = null;
+  let fiveinARow = false;
   let winning = testBoard.some(element => {
     element.forEach(subElement => {
+      console.log(inARow);
       if (subElement.owner === "red") {
         winningArray.push(subElement.y);
         winningX = subElement.x;
-        if (lastO === "red" && lastX === subElement.x) {
+        if (lastOwner === "red" && lastX === subElement.x) {
           inARow += 1;
+          if (inARow >= 5) {
+            winningY = winningArray[0] - 1;
+            fiveinARow = true;
+          }
         } else {
+          inARow = 1;
           winningArray.splice(0, winningArray.length);
           winningX = null;
-          inARow = 1;
         }
       }
-      lastO = subElement.owner;
+      lastOwner = subElement.owner;
       lastX = subElement.x;
     });
-    return inARow >= 5;
+    return fiveinARow;
   });
-  console.log(winningArray[0] - 1);
-  console.log(winningX);
-  return inARow >= 5;
+  console.log(winningX, winningY);
+  return fiveinARow;
 
   /* let lastO = null;
   let inARow = 1;
