@@ -452,7 +452,7 @@ const testBoardY = [
     {
       x: "0",
       y: "1",
-      owner: null
+      owner: "red"
     },
     {
       x: "0",
@@ -546,7 +546,7 @@ const testBoardY = [
     {
       x: "2",
       y: "1",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "2",
@@ -593,7 +593,7 @@ const testBoardY = [
     {
       x: "3",
       y: "1",
-      owner: null
+      owner: "blue"
     },
     {
       x: "3",
@@ -640,7 +640,7 @@ const testBoardY = [
     {
       x: "4",
       y: "1",
-      owner: null
+      owner: "blue"
     },
     {
       x: "4",
@@ -687,7 +687,7 @@ const testBoardY = [
     {
       x: "5",
       y: "1",
-      owner: null
+      owner: "blue"
     },
     {
       x: "5",
@@ -734,7 +734,7 @@ const testBoardY = [
     {
       x: "6",
       y: "1",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "6",
@@ -871,13 +871,13 @@ const testBoardY = [
 // create a 'winning array' that logs the element.y location when element.owner is 'red' 5 times for slicing from board.
 // maybe add the 'winning array' of element.y when if (element.owner === 'red')
 // but add else if (last0 !== 'red') { destroy winning array becuase it is no longer winning}
-let winningX = null;
-let winningArray = [];
-let winningY = null;
-let winningColor = null;
-let setWinner = null;
 
 const testSliceX = () => {
+  let winningX = null;
+  let winningArray = [];
+  let winningY = null;
+  let winningColor = null;
+  let setWinner = null;
   let inARow = 1;
   let lastOwner = null;
   let lastY = null;
@@ -905,11 +905,10 @@ const testSliceX = () => {
     });
     return inARow >= 5;
   });
-  console.log(
-    "Winning X:" + winningX,
-    "Winning Y:" + winningY,
-    "Winning Color:" + winningColor
-  );
+  console.log(`
+  Winning X: ${winningX}
+  Winning Ys: ${winningArray[0] - 1},${winningArray}
+  Winning Color: ${winningColor}`);
 
   if (winning) {
     setWinner = "Winner: " + winningColor;
@@ -919,12 +918,61 @@ const testSliceX = () => {
   }
 };
 const testSliceY = () => {
+  let winningX = null;
+  let winningArray = [];
+  let winningY = null;
+  let winningColor = null;
+  let setWinner = null;
   let newTestBoardY = [];
   testBoardY.forEach((x, index) => {
     newTestBoardY.push(testBoardY.map(row => row[index]));
   });
-  console.log(newTestBoardY);
+  let inARow = 1;
+  let lastOwner = null;
+  let lastX = null;
+  let winning = newTestBoardY.some(element => {
+    element.some(subElement => {
+      if (
+        subElement.owner !== null &&
+        lastOwner === subElement.owner &&
+        subElement.x - lastX == 1
+      ) {
+        inARow += 1;
+        winningArray.push(subElement.x);
+        winningColor = subElement.owner;
+        winningY = subElement.y;
+        winningX = winningArray[0] - 1;
+      } else {
+        inARow = 1;
+        winningArray.splice(0, winningArray.length);
+      }
+
+      lastOwner = subElement.owner;
+      lastX = subElement.x;
+      return inARow >= 5;
+    });
+    return inARow >= 5;
+  });
+  console.log(`
+    Winning Xs: ${winningArray[0] - 1},${winningArray}
+    Winning Y: ${winningY}
+    Winning Color: ${winningColor}`);
+
+  if (winning) {
+    let consoleSplice = [];
+    winningArray.unshift(winningArray[0] - 1);
+    setWinner = "Winner: " + winningColor;
+    winningArray.forEach(x => {
+      consoleSplice.push(testBoardY[x].splice(winningY, 1));
+    });
+    console.log(consoleSplice);
+    return true;
+  }
 };
+
+it("checks for win on x", () => {
+  expect(testSliceX()).toEqual(true);
+});
 
 it("checks for win on y", () => {
   expect(testSliceY()).toEqual(true);
