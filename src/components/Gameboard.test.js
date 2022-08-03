@@ -16,7 +16,7 @@ const tableY = numberArray;
 const tableD = numberArray;
 const tableF = numberArray;
 
-const testBoard = [
+const testBoardX = [
   [
     {
       x: "0",
@@ -224,7 +224,7 @@ const testBoard = [
     {
       x: "4",
       y: "3",
-      owner: "blue"
+      owner: "red"
     },
     {
       x: "4",
@@ -291,7 +291,7 @@ const testBoard = [
     {
       x: "5",
       y: "7",
-      owner: null
+      owner: "blue"
     },
     {
       x: "5",
@@ -323,7 +323,7 @@ const testBoard = [
     {
       x: "6",
       y: "4",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "6",
@@ -333,7 +333,7 @@ const testBoard = [
     {
       x: "6",
       y: "6",
-      owner: "blue"
+      owner: "red"
     },
     {
       x: "6",
@@ -343,7 +343,7 @@ const testBoard = [
     {
       x: "6",
       y: "8",
-      owner: "red"
+      owner: "blue"
     }
   ],
   [
@@ -417,7 +417,7 @@ const testBoard = [
     {
       x: "8",
       y: "4",
-      owner: "blue"
+      owner: "red"
     },
     {
       x: "8",
@@ -427,12 +427,12 @@ const testBoard = [
     {
       x: "8",
       y: "6",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "8",
       y: "7",
-      owner: "blue"
+      owner: "red"
     },
     {
       x: "8",
@@ -441,6 +441,433 @@ const testBoard = [
     }
   ]
 ];
+
+const testBoardY = [
+  [
+    {
+      x: "0",
+      y: "0",
+      owner: null
+    },
+    {
+      x: "0",
+      y: "1",
+      owner: null
+    },
+    {
+      x: "0",
+      y: "2",
+      owner: "red"
+    },
+    {
+      x: "0",
+      y: "3",
+      owner: "blue"
+    },
+    {
+      x: "0",
+      y: "4",
+      owner: "red"
+    },
+    {
+      x: "0",
+      y: "5",
+      owner: "blue"
+    },
+    {
+      x: "0",
+      y: "6",
+      owner: "blue"
+    },
+    {
+      x: "0",
+      y: "7",
+      owner: "red"
+    },
+    {
+      x: "0",
+      y: "8",
+      owner: null
+    }
+  ],
+  [
+    {
+      x: "1",
+      y: "0",
+      owner: null
+    },
+    {
+      x: "1",
+      y: "1",
+      owner: "red"
+    },
+    {
+      x: "1",
+      y: "2",
+      owner: null
+    },
+    {
+      x: "1",
+      y: "3",
+      owner: "red"
+    },
+    {
+      x: "1",
+      y: "4",
+      owner: "red"
+    },
+    {
+      x: "1",
+      y: "5",
+      owner: null
+    },
+    {
+      x: "1",
+      y: "6",
+      owner: "red"
+    },
+    {
+      x: "1",
+      y: "7",
+      owner: "red"
+    },
+    {
+      x: "1",
+      y: "8",
+      owner: "red"
+    }
+  ],
+  [
+    {
+      x: "2",
+      y: "0",
+      owner: "red"
+    },
+    {
+      x: "2",
+      y: "1",
+      owner: "red"
+    },
+    {
+      x: "2",
+      y: "2",
+      owner: null
+    },
+    {
+      x: "2",
+      y: "3",
+      owner: null
+    },
+    {
+      x: "2",
+      y: "4",
+      owner: null
+    },
+    {
+      x: "2",
+      y: "5",
+      owner: null
+    },
+    {
+      x: "2",
+      y: "6",
+      owner: null
+    },
+    {
+      x: "2",
+      y: "7",
+      owner: null
+    },
+    {
+      x: "2",
+      y: "8",
+      owner: null
+    }
+  ],
+  [
+    {
+      x: "3",
+      y: "0",
+      owner: null
+    },
+    {
+      x: "3",
+      y: "1",
+      owner: null
+    },
+    {
+      x: "3",
+      y: "2",
+      owner: null
+    },
+    {
+      x: "3",
+      y: "3",
+      owner: null
+    },
+    {
+      x: "3",
+      y: "4",
+      owner: null
+    },
+    {
+      x: "3",
+      y: "5",
+      owner: null
+    },
+    {
+      x: "3",
+      y: "6",
+      owner: null
+    },
+    {
+      x: "3",
+      y: "7",
+      owner: null
+    },
+    {
+      x: "3",
+      y: "8",
+      owner: null
+    }
+  ],
+  [
+    {
+      x: "4",
+      y: "0",
+      owner: null
+    },
+    {
+      x: "4",
+      y: "1",
+      owner: null
+    },
+    {
+      x: "4",
+      y: "2",
+      owner: null
+    },
+    {
+      x: "4",
+      y: "3",
+      owner: "red"
+    },
+    {
+      x: "4",
+      y: "4",
+      owner: "red"
+    },
+    {
+      x: "4",
+      y: "5",
+      owner: "red"
+    },
+    {
+      x: "4",
+      y: "6",
+      owner: "red"
+    },
+    {
+      x: "4",
+      y: "7",
+      owner: "red"
+    },
+    {
+      x: "4",
+      y: "8",
+      owner: null
+    }
+  ],
+  [
+    {
+      x: "5",
+      y: "0",
+      owner: null
+    },
+    {
+      x: "5",
+      y: "1",
+      owner: null
+    },
+    {
+      x: "5",
+      y: "2",
+      owner: null
+    },
+    {
+      x: "5",
+      y: "3",
+      owner: null
+    },
+    {
+      x: "5",
+      y: "4",
+      owner: "red"
+    },
+    {
+      x: "5",
+      y: "5",
+      owner: "red"
+    },
+    {
+      x: "5",
+      y: "6",
+      owner: "red"
+    },
+    {
+      x: "5",
+      y: "7",
+      owner: "blue"
+    },
+    {
+      x: "5",
+      y: "8",
+      owner: "red"
+    }
+  ],
+  [
+    {
+      x: "6",
+      y: "0",
+      owner: "red"
+    },
+    {
+      x: "6",
+      y: "1",
+      owner: "red"
+    },
+    {
+      x: "6",
+      y: "2",
+      owner: "red"
+    },
+    {
+      x: "6",
+      y: "3",
+      owner: "blue"
+    },
+    {
+      x: "6",
+      y: "4",
+      owner: "blue"
+    },
+    {
+      x: "6",
+      y: "5",
+      owner: "blue"
+    },
+    {
+      x: "6",
+      y: "6",
+      owner: "red"
+    },
+    {
+      x: "6",
+      y: "7",
+      owner: "blue"
+    },
+    {
+      x: "6",
+      y: "8",
+      owner: "blue"
+    }
+  ],
+  [
+    {
+      x: "7",
+      y: "0",
+      owner: null
+    },
+    {
+      x: "7",
+      y: "1",
+      owner: null
+    },
+    {
+      x: "7",
+      y: "2",
+      owner: "red"
+    },
+    {
+      x: "7",
+      y: "3",
+      owner: "red"
+    },
+    {
+      x: "7",
+      y: "4",
+      owner: "blue"
+    },
+    {
+      x: "7",
+      y: "5",
+      owner: "red"
+    },
+    {
+      x: "7",
+      y: "6",
+      owner: "blue"
+    },
+    {
+      x: "7",
+      y: "7",
+      owner: "blue"
+    },
+    {
+      x: "7",
+      y: "8",
+      owner: "blue"
+    }
+  ],
+  [
+    {
+      x: "8",
+      y: "0",
+      owner: "blue"
+    },
+    {
+      x: "8",
+      y: "1",
+      owner: "blue"
+    },
+    {
+      x: "8",
+      y: "2",
+      owner: "blue"
+    },
+    {
+      x: "8",
+      y: "3",
+      owner: "blue"
+    },
+    {
+      x: "8",
+      y: "4",
+      owner: "red"
+    },
+    {
+      x: "8",
+      y: "5",
+      owner: "red"
+    },
+    {
+      x: "8",
+      y: "6",
+      owner: "blue"
+    },
+    {
+      x: "8",
+      y: "7",
+      owner: "red"
+    },
+    {
+      x: "8",
+      y: "8",
+      owner: "red"
+    }
+  ]
+];
+
 // create a 'winning array' that logs the element.y location when element.owner is 'red' 5 times for slicing from board.
 // maybe add the 'winning array' of element.y when if (element.owner === 'red')
 // but add else if (last0 !== 'red') { destroy winning array becuase it is no longer winning}
@@ -449,13 +876,12 @@ let winningArray = [];
 let winningY = null;
 let winningColor = null;
 let setWinner = null;
-let checkSplice = [];
 
-const testSlice = () => {
+const testSliceX = () => {
   let inARow = 1;
   let lastOwner = null;
   let lastY = null;
-  let winning = testBoard.some(element => {
+  let winning = testBoardX.some(element => {
     element.some(subElement => {
       if (
         subElement.owner !== null &&
@@ -487,12 +913,20 @@ const testSlice = () => {
 
   if (winning) {
     setWinner = "Winner: " + winningColor;
-    console.log(setWinner, testBoard[winningX].splice(winningY, 5));
-    testBoard[winningX].splice(winningY, 5);
+    console.log(setWinner, testBoardX[winningX].splice(winningY, 5));
+    testBoardX[winningX].splice(winningY, 5);
     return true;
   }
 };
+const testSliceY = () => {
+  let newTestBoardY = [];
+  testBoardY.forEach((x, index) => {
+    newTestBoardY.push(testBoardY.map(row => row[index]));
+  });
+  console.log(newTestBoardY);
+  console.log(testBoardY);
+};
 
-it("checks for win on x", () => {
-  expect(testSlice()).toEqual(true);
+it("checks for win on y", () => {
+  expect(testSliceY()).toEqual(true);
 });
