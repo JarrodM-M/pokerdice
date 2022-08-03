@@ -224,7 +224,7 @@ const testBoard = [
     {
       x: "4",
       y: "3",
-      owner: "bluea"
+      owner: "blue"
     },
     {
       x: "4",
@@ -286,12 +286,12 @@ const testBoard = [
     {
       x: "5",
       y: "6",
-      owner: "null"
+      owner: "red"
     },
     {
       x: "5",
       y: "7",
-      owner: "red"
+      owner: null
     },
     {
       x: "5",
@@ -444,53 +444,50 @@ const testBoard = [
 // create a 'winning array' that logs the element.y location when element.owner is 'red' 5 times for slicing from board.
 // maybe add the 'winning array' of element.y when if (element.owner === 'red')
 // but add else if (last0 !== 'red') { destroy winning array becuase it is no longer winning}
-let winningArray = [];
 let winningX = null;
+let winningArray = [];
 let winningY = null;
-
 const testSlice = () => {
   let inARow = 1;
   let lastOwner = null;
   let lastX = null;
-  let fiveinARow = false;
+  let lastY = null;
+  let fiveRow = false;
   let winning = testBoard.some(element => {
     element.forEach(subElement => {
-      console.log(inARow);
-      if (subElement.owner === "red") {
-        winningArray.push(subElement.y);
+      if (inARow >= 5) {
+        fiveRow = true;
         winningX = subElement.x;
-        if (lastOwner === "red" && lastX === subElement.x) {
-          inARow += 1;
-          if (inARow >= 5) {
-            winningY = winningArray[0] - 1;
-            fiveinARow = true;
-          }
-        } else {
-          inARow = 1;
-          winningArray.splice(0, winningArray.length);
-          winningX = null;
-        }
+        winningY = winningArray[0] - 1;
       }
+      if (
+        subElement.owner === "red" &&
+        lastOwner === subElement.owner &&
+        lastX === subElement.x && // this is rendundant since y - lastY !== 1 in this case
+        subElement.y - lastY == 1
+      ) {
+        inARow += 1;
+        winningArray.push(subElement.y);
+      } else {
+        inARow = 1;
+        winningArray.splice(0, winningArray.length);
+      }
+
       lastOwner = subElement.owner;
       lastX = subElement.x;
+      lastY = subElement.y;
+      /*       console.log("inARow:" + inARow, "X:" + subElement.x, "Y:" + subElement.y);
+       */
     });
-    return fiveinARow;
+    return fiveRow;
   });
-  console.log(winningX, winningY);
-  return fiveinARow;
+  console.log("Winning X:" + winningX, "Winning Y:" + winningY);
 
-  /* let lastO = null;
-  let inARow = 1;
-  let winning = testBoard[0].some(element => {
-    console.log(element)
-    if (element.owner === "blue") {
-      if (lastO === 'blue') {
-        inARow += 1;
-      }
-    }
-    lastO = element.owner
-  })
-  return inARow >= 5; */
+  if (winning === true) {
+    testBoard[winningX].splice(winningY, 5);
+  }
+  console.log(testBoard);
+  return true;
 };
 
 it("checks for win on x", () => {
