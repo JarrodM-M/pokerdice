@@ -924,7 +924,6 @@ const testSliceY = () => {
     newTestBoardY.push(testBoardY.map(row => row[index]));
   });
   console.log(newTestBoardY);
-  console.log(testBoardY);
 };
 
 it("checks for win on y", () => {
