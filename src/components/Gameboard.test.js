@@ -457,7 +457,7 @@ const testBoardY = [
     {
       x: "0",
       y: "2",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "0",
@@ -504,7 +504,7 @@ const testBoardY = [
     {
       x: "1",
       y: "2",
-      owner: null
+      owner: "blue"
     },
     {
       x: "1",
@@ -546,12 +546,12 @@ const testBoardY = [
     {
       x: "2",
       y: "1",
-      owner: "blue"
+      owner: "red"
     },
     {
       x: "2",
       y: "2",
-      owner: null
+      owner: "blue"
     },
     {
       x: "2",
@@ -593,12 +593,12 @@ const testBoardY = [
     {
       x: "3",
       y: "1",
-      owner: "blue"
+      owner: "red"
     },
     {
       x: "3",
       y: "2",
-      owner: null
+      owner: "blue"
     },
     {
       x: "3",
@@ -640,12 +640,12 @@ const testBoardY = [
     {
       x: "4",
       y: "1",
-      owner: "blue"
+      owner: "red"
     },
     {
       x: "4",
       y: "2",
-      owner: null
+      owner: "blue"
     },
     {
       x: "4",
@@ -692,7 +692,7 @@ const testBoardY = [
     {
       x: "5",
       y: "2",
-      owner: null
+      owner: "blue"
     },
     {
       x: "5",
@@ -739,7 +739,7 @@ const testBoardY = [
     {
       x: "6",
       y: "2",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "6",
@@ -786,7 +786,7 @@ const testBoardY = [
     {
       x: "7",
       y: "2",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "7",
@@ -868,10 +868,6 @@ const testBoardY = [
   ]
 ];
 
-// create a 'winning array' that logs the element.y location when element.owner is 'red' 5 times for slicing from board.
-// maybe add the 'winning array' of element.y when if (element.owner === 'red')
-// but add else if (last0 !== 'red') { destroy winning array becuase it is no longer winning}
-
 const testSliceX = () => {
   let winningX = null;
   let winningArray = [];
@@ -949,11 +945,13 @@ const testSliceX = () => {
 };
 
 const testSliceY = () => {
-  let winningX = null;
   let winningArray = [];
+  let gameWinningArray = [];
   let winningY = null;
   let winningColor = null;
+  let gameWinningColor = null;
   let setWinner = null;
+  let setGameWinner = null;
   let newTestBoardY = [];
   testBoardY.forEach((x, index) => {
     newTestBoardY.push(testBoardY.map(row => row[index]));
@@ -972,7 +970,6 @@ const testSliceY = () => {
         winningArray.push(subElement.x);
         winningColor = subElement.owner;
         winningY = subElement.y;
-        winningX = winningArray[0] - 1;
       } else {
         inARow = 1;
         winningArray.splice(0, winningArray.length);
@@ -984,20 +981,49 @@ const testSliceY = () => {
     });
     return inARow >= 5;
   });
-  console.log(`
+  /* console.log(`
     Winning Xs: ${winningArray[0] - 1},${winningArray}
     Winning Y: ${winningY}
-    Winning Color: ${winningColor}`);
+    Winning Color: ${winningColor}`); */
 
   if (winning) {
-    let consoleSplice = []; // just for logging test
-    winningArray.unshift(winningArray[0] - 1);
-    setWinner = "Winner: " + winningColor;
-    winningArray.forEach(x => {
-      consoleSplice.push(testBoardY[x].splice(winningY, 1)); // get rid of the push in order to work
+    let fullWinning = newTestBoardY.some(element => {
+      element.some(subElement => {
+        if (
+          subElement.owner !== null &&
+          lastOwner === subElement.owner &&
+          subElement.x - lastX == 1
+        ) {
+          inARow += 1;
+          gameWinningArray.push(subElement.x); // just for log
+          gameWinningColor = subElement.owner;
+        } else {
+          inARow = 1;
+          gameWinningArray.splice(0, winningArray.length); // don't think I need
+        }
+
+        lastOwner = subElement.owner;
+        lastX = subElement.x;
+        return inARow >= 9;
+      });
+      return inARow >= 9;
     });
-    console.log(setWinner, consoleSplice);
-    return true;
+    if (fullWinning) {
+      setGameWinner = `Game Winner: ${gameWinningColor}`;
+      gameWinningArray.unshift(gameWinningArray[0] - 1); // console log only
+      console.log(gameWinningArray); // just for console log
+      console.log(setGameWinner);
+      return true;
+    } else {
+      let consoleSplice = []; // just for logging test
+      winningArray.unshift(winningArray[0] - 1);
+      setWinner = "Winner: " + winningColor;
+      winningArray.forEach(x => {
+        consoleSplice.push(testBoardY[x].splice(winningY, 1)); // get rid of the push in order to work
+      });
+      console.log(setWinner, consoleSplice);
+      return true;
+    }
   }
 };
 
@@ -1005,6 +1031,6 @@ it("checks for win on x", () => {
   expect(testSliceX()).toEqual(true);
 });
 
-/* it("checks for win on y", () => {
+it("checks for win on y", () => {
   expect(testSliceY()).toEqual(true);
-}); */
+});
