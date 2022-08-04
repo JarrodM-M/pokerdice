@@ -209,22 +209,22 @@ const testBoardX = [
     {
       x: "4",
       y: "0",
-      owner: null
+      owner: "red"
     },
     {
       x: "4",
       y: "1",
-      owner: null
+      owner: "red"
     },
     {
       x: "4",
       y: "2",
-      owner: null
+      owner: "red"
     },
     {
       x: "4",
       y: "3",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "4",
@@ -234,7 +234,7 @@ const testBoardX = [
     {
       x: "4",
       y: "5",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "4",
@@ -249,7 +249,7 @@ const testBoardX = [
     {
       x: "4",
       y: "8",
-      owner: null
+      owner: "red"
     }
   ],
   [
@@ -412,17 +412,17 @@ const testBoardX = [
     {
       x: "8",
       y: "3",
-      owner: "blue"
+      owner: "red"
     },
     {
       x: "8",
       y: "4",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "8",
       y: "5",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "8",
@@ -432,12 +432,12 @@ const testBoardX = [
     {
       x: "8",
       y: "7",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "8",
       y: "8",
-      owner: "red"
+      owner: "blue"
     }
   ]
 ];
@@ -875,9 +875,12 @@ const testBoardY = [
 const testSliceX = () => {
   let winningX = null;
   let winningArray = [];
+  let gameWinningArray = []; // just for logging
   let winningY = null;
   let winningColor = null;
+  let gameWinningColor = null;
   let setWinner = null;
+  let setGameWinner = null;
   let inARow = 1;
   let lastOwner = null;
   let lastY = null;
@@ -905,18 +908,46 @@ const testSliceX = () => {
     });
     return inARow >= 5;
   });
-  console.log(`
+  /* console.log(`
   Winning X: ${winningX}
   Winning Ys: ${winningArray[0] - 1},${winningArray}
-  Winning Color: ${winningColor}`);
+  Winning Color: ${winningColor}`); */
 
   if (winning) {
-    setWinner = "Winner: " + winningColor;
-    console.log(setWinner, testBoardX[winningX].splice(winningY, 5));
-    testBoardX[winningX].splice(winningY, 5);
-    return true;
+    let fullWinning = testBoardX.some(element => {
+      element.some(subElement => {
+        if (
+          subElement.owner !== null &&
+          lastOwner === subElement.owner &&
+          subElement.y - lastY == 1
+        ) {
+          inARow += 1;
+          gameWinningArray.push(subElement.y); // for console logging
+          gameWinningColor = subElement.owner;
+        } else {
+          inARow = 1;
+          gameWinningArray.splice(0, gameWinningArray.length); // for console logging
+        }
+        lastOwner = subElement.owner;
+        lastY = subElement.y;
+        return inARow >= 9;
+      });
+      return inARow >= 9;
+    });
+    if (fullWinning) {
+      setGameWinner = `Game Winner: ${gameWinningColor}`;
+      console.log(setGameWinner);
+      console.log(`${gameWinningArray[0] - 1},${gameWinningArray}`);
+      return true;
+    } else {
+      setWinner = "Winner: " + winningColor;
+      console.log(setWinner, testBoardX[winningX].splice(winningY, 5));
+      testBoardX[winningX].splice(winningY, 5);
+      return true;
+    }
   }
 };
+
 const testSliceY = () => {
   let winningX = null;
   let winningArray = [];
@@ -959,13 +990,13 @@ const testSliceY = () => {
     Winning Color: ${winningColor}`);
 
   if (winning) {
-    let consoleSplice = [];
+    let consoleSplice = []; // just for logging test
     winningArray.unshift(winningArray[0] - 1);
     setWinner = "Winner: " + winningColor;
     winningArray.forEach(x => {
-      consoleSplice.push(testBoardY[x].splice(winningY, 1));
+      consoleSplice.push(testBoardY[x].splice(winningY, 1)); // get rid of the push in order to work
     });
-    console.log(consoleSplice);
+    console.log(setWinner, consoleSplice);
     return true;
   }
 };
@@ -974,6 +1005,6 @@ it("checks for win on x", () => {
   expect(testSliceX()).toEqual(true);
 });
 
-it("checks for win on y", () => {
+/* it("checks for win on y", () => {
   expect(testSliceY()).toEqual(true);
-});
+}); */
