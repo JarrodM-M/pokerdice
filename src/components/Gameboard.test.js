@@ -873,42 +873,42 @@ const testBoardD = [
     {
       x: "0",
       y: "0",
-      owner: "blue"
+      owner: "red"
     },
     {
       x: "0",
       y: "1",
-      owner: "red"
+      owner: null
     },
     {
       x: "0",
       y: "2",
-      owner: "blue"
+      owner: null
     },
     {
       x: "0",
       y: "3",
-      owner: "blue"
+      owner: null
     },
     {
       x: "0",
       y: "4",
-      owner: "red"
+      owner: null
     },
     {
       x: "0",
       y: "5",
-      owner: "blue"
+      owner: null
     },
     {
       x: "0",
       y: "6",
-      owner: "blue"
+      owner: null
     },
     {
       x: "0",
       y: "7",
-      owner: "red"
+      owner: null
     },
     {
       x: "0",
@@ -925,22 +925,22 @@ const testBoardD = [
     {
       x: "1",
       y: "1",
-      owner: "blue"
+      owner: null
     },
     {
       x: "1",
       y: "2",
-      owner: "blue"
+      owner: null
     },
     {
       x: "1",
       y: "3",
-      owner: "red"
+      owner: null
     },
     {
       x: "1",
       y: "4",
-      owner: "red"
+      owner: null
     },
     {
       x: "1",
@@ -950,34 +950,34 @@ const testBoardD = [
     {
       x: "1",
       y: "6",
-      owner: "red"
+      owner: null
     },
     {
       x: "1",
       y: "7",
-      owner: "red"
+      owner: null
     },
     {
       x: "1",
       y: "8",
-      owner: "red"
+      owner: null
     }
   ],
   [
     {
       x: "2",
       y: "0",
-      owner: "red"
+      owner: null
     },
     {
       x: "2",
       y: "1",
-      owner: "red"
+      owner: null
     },
     {
       x: "2",
       y: "2",
-      owner: "blue"
+      owner: null
     },
     {
       x: "2",
@@ -1019,17 +1019,17 @@ const testBoardD = [
     {
       x: "3",
       y: "1",
-      owner: "red"
+      owner: null
     },
     {
       x: "3",
       y: "2",
-      owner: "blue"
+      owner: null
     },
     {
       x: "3",
       y: "3",
-      owner: "blue"
+      owner: null
     },
     {
       x: "3",
@@ -1066,37 +1066,37 @@ const testBoardD = [
     {
       x: "4",
       y: "1",
-      owner: "red"
+      owner: null
     },
     {
       x: "4",
       y: "2",
-      owner: "blue"
+      owner: null
     },
     {
       x: "4",
       y: "3",
-      owner: "red"
+      owner: null
     },
     {
       x: "4",
       y: "4",
-      owner: "blue"
+      owner: null
     },
     {
       x: "4",
       y: "5",
-      owner: "blue"
+      owner: null
     },
     {
       x: "4",
       y: "6",
-      owner: "red"
+      owner: null
     },
     {
       x: "4",
       y: "7",
-      owner: "red"
+      owner: null
     },
     {
       x: "4",
@@ -1113,12 +1113,12 @@ const testBoardD = [
     {
       x: "5",
       y: "1",
-      owner: "blue"
+      owner: null
     },
     {
       x: "5",
       y: "2",
-      owner: "blue"
+      owner: null
     },
     {
       x: "5",
@@ -1128,74 +1128,74 @@ const testBoardD = [
     {
       x: "5",
       y: "4",
-      owner: "red"
+      owner: null
     },
     {
       x: "5",
       y: "5",
-      owner: "red"
+      owner: null
     },
     {
       x: "5",
       y: "6",
-      owner: "red"
+      owner: null
     },
     {
       x: "5",
       y: "7",
-      owner: "blue"
+      owner: null
     },
     {
       x: "5",
       y: "8",
-      owner: "red"
+      owner: null
     }
   ],
   [
     {
       x: "6",
       y: "0",
-      owner: "red"
+      owner: null
     },
     {
       x: "6",
       y: "1",
-      owner: "blue"
+      owner: null
     },
     {
       x: "6",
       y: "2",
-      owner: "blue"
+      owner: null
     },
     {
       x: "6",
       y: "3",
-      owner: "blue"
+      owner: null
     },
     {
       x: "6",
       y: "4",
-      owner: "red"
+      owner: null
     },
     {
       x: "6",
       y: "5",
-      owner: "blue"
+      owner: null
     },
     {
       x: "6",
       y: "6",
-      owner: "red"
+      owner: null
     },
     {
       x: "6",
       y: "7",
-      owner: "blue"
+      owner: null
     },
     {
       x: "6",
       y: "8",
-      owner: "blue"
+      owner: null
     }
   ],
   [
@@ -1212,84 +1212,84 @@ const testBoardD = [
     {
       x: "7",
       y: "2",
-      owner: "blue"
+      owner: null
     },
     {
       x: "7",
       y: "3",
-      owner: "red"
+      owner: null
     },
     {
       x: "7",
       y: "4",
-      owner: "blue"
+      owner: null
     },
     {
       x: "7",
       y: "5",
-      owner: "red"
+      owner: null
     },
     {
       x: "7",
       y: "6",
-      owner: "blue"
+      owner: null
     },
     {
       x: "7",
       y: "7",
-      owner: "blue"
+      owner: null
     },
     {
       x: "7",
       y: "8",
-      owner: "blue"
+      owner: null
     }
   ],
   [
     {
       x: "8",
       y: "0",
-      owner: "blue"
+      owner: null
     },
     {
       x: "8",
       y: "1",
-      owner: "blue"
+      owner: null
     },
     {
       x: "8",
       y: "2",
-      owner: "blue"
+      owner: null
     },
     {
       x: "8",
       y: "3",
-      owner: "blue"
+      owner: null
     },
     {
       x: "8",
       y: "4",
-      owner: "red"
+      owner: null
     },
     {
       x: "8",
       y: "5",
-      owner: "red"
+      owner: null
     },
     {
       x: "8",
       y: "6",
-      owner: "blue"
+      owner: null
     },
     {
       x: "8",
       y: "7",
-      owner: "red"
+      owner: null
     },
     {
       x: "8",
       y: "8",
-      owner: "red"
+      owner: null
     }
   ]
 ];
@@ -1462,15 +1462,28 @@ const testSliceD = () => {
       if (subElement.owner !== null) {
         currentColor = subElement.owner;
         for (let i = 0; i < 5; i++) {
+          // maybe creat an array of 5 and use foreach instead
+          /*           console.log(testBoardD[+subElement.x + i][+subElement.y + i].owner);
+           */
+
+          let d1Array = [];
+          d1Array = testBoardD[+subElement.x + i][+subElement.y + i].owner;
           if (
-            testBoardD[+subElement.x + i][+subElement.y + i].owner ===
-            currentColor
+            (subElement.x <= 4 &&
+              subElement.y <= 4 &&
+              testBoardD[+subElement.x + i][+subElement.y + i].owner ===
+                currentColor) ||
+            (subElement.x >= 4 &&
+              subElement.y >= 4 &&
+              testBoardD[+subElement.x + i][+subElement.y - i].owner ===
+                currentColor)
           ) {
+            console.log(d1Array);
             winningColor = currentColor;
             inARow = 5;
           }
         }
-      }
+      } else inARow = 1;
       return inARow >= 5;
     });
     return inARow >= 5;
