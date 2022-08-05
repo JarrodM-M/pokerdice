@@ -873,47 +873,47 @@ const testBoardD = [
     {
       x: "0",
       y: "0",
-      owner: null
-    },
-    {
-      x: "0",
-      y: "1",
-      owner: null
-    },
-    {
-      x: "0",
-      y: "2",
-      owner: null
-    },
-    {
-      x: "0",
-      y: "3",
-      owner: null
-    },
-    {
-      x: "0",
-      y: "4",
-      owner: null
-    },
-    {
-      x: "0",
-      y: "5",
-      owner: null
-    },
-    {
-      x: "0",
-      y: "6",
-      owner: null
-    },
-    {
-      x: "0",
-      y: "7",
-      owner: null
-    },
-    {
-      x: "0",
-      y: "8",
       owner: "red"
+    },
+    {
+      x: "0",
+      y: "1",
+      owner: null
+    },
+    {
+      x: "0",
+      y: "2",
+      owner: null
+    },
+    {
+      x: "0",
+      y: "3",
+      owner: null
+    },
+    {
+      x: "0",
+      y: "4",
+      owner: null
+    },
+    {
+      x: "0",
+      y: "5",
+      owner: null
+    },
+    {
+      x: "0",
+      y: "6",
+      owner: null
+    },
+    {
+      x: "0",
+      y: "7",
+      owner: null
+    },
+    {
+      x: "0",
+      y: "8",
+      owner: null
     }
   ],
   [
@@ -925,7 +925,7 @@ const testBoardD = [
     {
       x: "1",
       y: "1",
-      owner: null
+      owner: "red"
     },
     {
       x: "1",
@@ -977,7 +977,7 @@ const testBoardD = [
     {
       x: "2",
       y: "2",
-      owner: null
+      owner: "red"
     },
     {
       x: "2",
@@ -1029,7 +1029,7 @@ const testBoardD = [
     {
       x: "3",
       y: "3",
-      owner: null
+      owner: "red"
     },
     {
       x: "3",
@@ -1081,7 +1081,7 @@ const testBoardD = [
     {
       x: "4",
       y: "4",
-      owner: null
+      owner: "red"
     },
     {
       x: "4",
@@ -1462,32 +1462,49 @@ const testSliceD = () => {
   let winningColor = null;
   let winning = testBoardD.some(element => {
     element.some(subElement => {
-      if (subElement.owner !== null && subElement.x <= 4 && subElement.y <= 4) {
+      if (subElement.owner !== null && subElement.x <= 4) {
         currentColor = subElement.owner;
-        check.forEach(i => {
-          valueArray.push(
-            testBoardD[+subElement.x + i][+subElement.y + i].owner
-          );
-        });
-        console.log(valueArray);
-      } else if (
-        subElement.owner !== null &&
-        subElement.x <= 4 &&
-        subElement.y >= 4
-      ) {
-        currentColor = subElement.owner;
-        check.forEach(i => {
-          valueArray2.push(
-            testBoardD[+subElement.x + i][+subElement.y - i].owner
-          );
-        });
-        console.log(valueArray);
-        inARow = 5;
+        if (subElement.y <= 4) {
+          console.log("y is less than 4");
+          check.forEach(i => {
+            valueArray.push(
+              testBoardD[+subElement.x + i][+subElement.y + i].owner
+            );
+          });
+          if (
+            valueArray.every(x => {
+              x === currentColor;
+            })
+          ) {
+            winningColor = currentColor;
+            inARow = 5;
+          }
+        } else if (subElement.y >= 4) {
+          console.log("y is more than 4");
+
+          check.forEach(i => {
+            valueArray2.push(
+              testBoardD[+subElement.x + i][+subElement.y - i].owner
+            );
+          });
+          if (
+            valueArray2.every(x => {
+              x === currentColor;
+            })
+          ) {
+            winningColor = currentColor;
+
+            inARow = 5;
+          }
+        }
       }
       return inARow >= 5;
     });
     return inARow >= 5;
   });
+  if (winning) {
+    console.log(winningColor);
+  }
 };
 /* for (let i = 0; i < 5; i++) {
           // maybe creat an array of 5 and use foreach instead
