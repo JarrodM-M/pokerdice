@@ -873,7 +873,7 @@ const testBoardD = [
     {
       x: "0",
       y: "0",
-      owner: "red"
+      owner: null
     },
     {
       x: "0",
@@ -913,7 +913,7 @@ const testBoardD = [
     {
       x: "0",
       y: "8",
-      owner: null
+      owner: "red"
     }
   ],
   [
@@ -1455,16 +1455,44 @@ const testSliceY = () => {
 
 const testSliceD = () => {
   let inARow = 1;
+  let check = [0, 1, 2, 3, 4];
+  let valueArray = [];
+  let valueArray2 = [];
   let currentColor = null;
   let winningColor = null;
   let winning = testBoardD.some(element => {
     element.some(subElement => {
-      if (subElement.owner !== null) {
+      if (subElement.owner !== null && subElement.x <= 4 && subElement.y <= 4) {
         currentColor = subElement.owner;
-        for (let i = 0; i < 5; i++) {
+        check.forEach(i => {
+          valueArray.push(
+            testBoardD[+subElement.x + i][+subElement.y + i].owner
+          );
+        });
+        console.log(valueArray);
+      } else if (
+        subElement.owner !== null &&
+        subElement.x <= 4 &&
+        subElement.y >= 4
+      ) {
+        currentColor = subElement.owner;
+        check.forEach(i => {
+          valueArray2.push(
+            testBoardD[+subElement.x + i][+subElement.y - i].owner
+          );
+        });
+        console.log(valueArray);
+        inARow = 5;
+      }
+      return inARow >= 5;
+    });
+    return inARow >= 5;
+  });
+};
+/* for (let i = 0; i < 5; i++) {
           // maybe creat an array of 5 and use foreach instead
-          /*           console.log(testBoardD[+subElement.x + i][+subElement.y + i].owner);
-           */
+                     console.log(testBoardD[+subElement.x + i][+subElement.y + i].owner);
+           
 
           let d1Array = [];
           d1Array = testBoardD[+subElement.x + i][+subElement.y + i].owner;
@@ -1482,17 +1510,7 @@ const testSliceD = () => {
             winningColor = currentColor;
             inARow = 5;
           }
-        }
-      } else inARow = 1;
-      return inARow >= 5;
-    });
-    return inARow >= 5;
-  });
-  if (winning) {
-    console.log(`Winner: ${winningColor}`);
-    return true;
-  }
-};
+        } */
 
 [0, 0], [1, 1], [2, 2], [3, 3], [4, 4];
 
