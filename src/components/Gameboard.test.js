@@ -873,7 +873,7 @@ const testBoardD = [
     {
       x: "0",
       y: "0",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "0",
@@ -1455,8 +1455,9 @@ const testSliceY = () => {
 
 const testSliceD = () => {
   let inARow = 1;
-  let check = [0, 1, 2, 3, 4];
-  let valueArray = [];
+  let checkColor = [0, 1, 2, 3, 4];
+  let colorArray = [];
+  let isTrue = false;
   let valueArray2 = [];
   let currentColor = null;
   let winningColor = null;
@@ -1465,17 +1466,18 @@ const testSliceD = () => {
       if (subElement.owner !== null && subElement.x <= 4) {
         currentColor = subElement.owner;
         if (subElement.y <= 4) {
-          console.log("y is less than 4");
-          check.forEach(i => {
-            valueArray.push(
+          checkColor.forEach(i => {
+            colorArray.push(
               testBoardD[+subElement.x + i][+subElement.y + i].owner
             );
           });
-          if (
-            valueArray.every(x => {
-              x === currentColor;
-            })
-          ) {
+          console.log(colorArray);
+
+          colorArray.every(x => {
+            x === currentColor;
+          });
+
+          if (isTrue) {
             winningColor = currentColor;
             inARow = 5;
           }
@@ -1487,15 +1489,6 @@ const testSliceD = () => {
               testBoardD[+subElement.x + i][+subElement.y - i].owner
             );
           });
-          if (
-            valueArray2.every(x => {
-              x === currentColor;
-            })
-          ) {
-            winningColor = currentColor;
-
-            inARow = 5;
-          }
         }
       }
       return inARow >= 5;
@@ -1504,6 +1497,7 @@ const testSliceD = () => {
   });
   if (winning) {
     console.log(winningColor);
+    return true;
   }
 };
 /* for (let i = 0; i < 5; i++) {
@@ -1539,6 +1533,20 @@ it("checks for win on y", () => {
   expect(testSliceY()).toEqual(true);
 }); */
 
+const testSliceE = () => {
+  let testArray = ["red", "red", "red", "red", "red"];
+  let winning = testArray.every(x => {
+    x === "red";
+  });
+  let result = testArray.every(x => {
+    x === "red";
+  });
+  console.log(result);
+  if (winning) {
+    return true;
+  }
+};
+
 it("checks for win on diagonal", () => {
-  expect(testSliceD()).toEqual(true);
+  expect(testSliceE()).toEqual(true);
 });
