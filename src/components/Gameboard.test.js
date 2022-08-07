@@ -1437,8 +1437,8 @@ const testSliceY = () => {
     if (fullWinning) {
       setGameWinner = `Game Winner: ${gameWinningColor}`;
       gameWinningArray.unshift(gameWinningArray[0] - 1); // console log only
-      /*       console.log(gameWinningArray); // just for console log
-       */ console.log(setGameWinner);
+      console.log(gameWinningArray); // just for console log
+      console.log(setGameWinner);
       return true;
     } else {
       let consoleSplice = []; // just for logging test
@@ -1464,17 +1464,14 @@ const testSliceD = () => {
       if (subElement.owner !== null && subElement.x <= 4 && subElement.y <= 4) {
         currentColor = subElement.owner;
         checkColor.forEach(i => {
-          colorArray.push(
-            testBoardD[+subElement.x + i][+subElement.y + i].owner
-          );
+          colorArray.push(testBoardD[+subElement.x + i][+subElement.y + i]);
         });
-
         if (
-          colorArray[0] === currentColor &&
-          colorArray[1] === currentColor &&
-          colorArray[2] === currentColor &&
-          colorArray[3] === currentColor &&
-          colorArray[4] === currentColor
+          colorArray[0].owner === currentColor &&
+          colorArray[1].owner === currentColor &&
+          colorArray[2].owner === currentColor &&
+          colorArray[3].owner === currentColor &&
+          colorArray[4].owner === currentColor
         ) {
           winningColor = currentColor;
           inARow = 5;
@@ -1488,18 +1485,15 @@ const testSliceD = () => {
       ) {
         currentColor = subElement.owner;
         checkColor.forEach(i => {
-          colorArray.push(
-            testBoardD[+subElement.x + i][+subElement.y - i].owner
-          );
+          colorArray.push(testBoardD[+subElement.x + i][+subElement.y - i]);
         });
-        console.log(colorArray);
 
         if (
-          colorArray[0] === currentColor &&
-          colorArray[1] === currentColor &&
-          colorArray[2] === currentColor &&
-          colorArray[3] === currentColor &&
-          colorArray[4] === currentColor
+          colorArray[0].owner === currentColor &&
+          colorArray[1].owner === currentColor &&
+          colorArray[2].owner === currentColor &&
+          colorArray[3].owner === currentColor &&
+          colorArray[4].owner === currentColor
         ) {
           winningColor = currentColor;
           inARow = 5;
@@ -1513,6 +1507,12 @@ const testSliceD = () => {
     return inARow >= 5;
   });
   if (winning) {
+    console.log(colorArray);
+    console.log(winningColor);
+    colorArray.forEach(cA => {
+      testBoardD[cA.x].splice(cA.y, 1);
+    });
+    console.log(testBoardD);
     return true;
   }
 };
