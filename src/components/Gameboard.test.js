@@ -913,7 +913,7 @@ const testBoardD = [
     {
       x: "0",
       y: "8",
-      owner: null
+      owner: "blue"
     }
   ],
   [
@@ -925,7 +925,7 @@ const testBoardD = [
     {
       x: "1",
       y: "1",
-      owner: "red"
+      owner: "blue"
     },
     {
       x: "1",
@@ -955,7 +955,7 @@ const testBoardD = [
     {
       x: "1",
       y: "7",
-      owner: null
+      owner: "blue"
     },
     {
       x: "1",
@@ -997,7 +997,7 @@ const testBoardD = [
     {
       x: "2",
       y: "6",
-      owner: null
+      owner: "blue"
     },
     {
       x: "2",
@@ -1039,7 +1039,7 @@ const testBoardD = [
     {
       x: "3",
       y: "5",
-      owner: null
+      owner: "blue"
     },
     {
       x: "3",
@@ -1081,59 +1081,59 @@ const testBoardD = [
     {
       x: "4",
       y: "4",
+      owner: "blue"
+    },
+    {
+      x: "4",
+      y: "5",
+      owner: null
+    },
+    {
+      x: "4",
+      y: "6",
+      owner: null
+    },
+    {
+      x: "4",
+      y: "7",
+      owner: null
+    },
+    {
+      x: "4",
+      y: "8",
+      owner: null
+    }
+  ],
+  [
+    {
+      x: "5",
+      y: "0",
+      owner: null
+    },
+    {
+      x: "5",
+      y: "1",
+      owner: null
+    },
+    {
+      x: "5",
+      y: "2",
+      owner: null
+    },
+    {
+      x: "5",
+      y: "3",
+      owner: null
+    },
+    {
+      x: "5",
+      y: "4",
+      owner: null
+    },
+    {
+      x: "5",
+      y: "5",
       owner: "red"
-    },
-    {
-      x: "4",
-      y: "5",
-      owner: null
-    },
-    {
-      x: "4",
-      y: "6",
-      owner: null
-    },
-    {
-      x: "4",
-      y: "7",
-      owner: null
-    },
-    {
-      x: "4",
-      y: "8",
-      owner: null
-    }
-  ],
-  [
-    {
-      x: "5",
-      y: "0",
-      owner: null
-    },
-    {
-      x: "5",
-      y: "1",
-      owner: null
-    },
-    {
-      x: "5",
-      y: "2",
-      owner: null
-    },
-    {
-      x: "5",
-      y: "3",
-      owner: null
-    },
-    {
-      x: "5",
-      y: "4",
-      owner: null
-    },
-    {
-      x: "5",
-      y: "5",
-      owner: null
     },
     {
       x: "5",
@@ -1457,46 +1457,62 @@ const testSliceD = () => {
   let inARow = 1;
   let checkColor = [0, 1, 2, 3, 4];
   let colorArray = [];
-  let isTrue = false;
-  let valueArray2 = [];
   let currentColor = null;
   let winningColor = null;
   let winning = testBoardD.some(element => {
     element.some(subElement => {
-      if (subElement.owner !== null && subElement.x <= 4) {
+      if (subElement.owner !== null && subElement.x <= 4 && subElement.y <= 4) {
         currentColor = subElement.owner;
-        if (subElement.y <= 4) {
-          checkColor.forEach(i => {
-            colorArray.push(
-              testBoardD[+subElement.x + i][+subElement.y + i].owner
-            );
-          });
-          console.log(colorArray);
+        checkColor.forEach(i => {
+          colorArray.push(
+            testBoardD[+subElement.x + i][+subElement.y + i].owner
+          );
+        });
 
-          colorArray.every(x => {
-            x === currentColor;
-          });
+        if (
+          colorArray[0] === currentColor &&
+          colorArray[1] === currentColor &&
+          colorArray[2] === currentColor &&
+          colorArray[3] === currentColor &&
+          colorArray[4] === currentColor
+        ) {
+          winningColor = currentColor;
+          inARow = 5;
+        } else {
+          colorArray = [];
+        }
+      } else if (
+        subElement.owner !== null &&
+        subElement.x <= 4 &&
+        subElement.y >= 4
+      ) {
+        currentColor = subElement.owner;
+        checkColor.forEach(i => {
+          colorArray.push(
+            testBoardD[+subElement.x + i][+subElement.y - i].owner
+          );
+        });
+        console.log(colorArray);
 
-          if (isTrue) {
-            winningColor = currentColor;
-            inARow = 5;
-          }
-        } else if (subElement.y >= 4) {
-          console.log("y is more than 4");
-
-          check.forEach(i => {
-            valueArray2.push(
-              testBoardD[+subElement.x + i][+subElement.y - i].owner
-            );
-          });
+        if (
+          colorArray[0] === currentColor &&
+          colorArray[1] === currentColor &&
+          colorArray[2] === currentColor &&
+          colorArray[3] === currentColor &&
+          colorArray[4] === currentColor
+        ) {
+          winningColor = currentColor;
+          inARow = 5;
+        } else {
+          colorArray = [];
         }
       }
+
       return inARow >= 5;
     });
     return inARow >= 5;
   });
   if (winning) {
-    console.log(winningColor);
     return true;
   }
 };
@@ -1548,5 +1564,5 @@ const testSliceE = () => {
 };
 
 it("checks for win on diagonal", () => {
-  expect(testSliceE()).toEqual(true);
+  expect(testSliceD()).toEqual(true);
 });
