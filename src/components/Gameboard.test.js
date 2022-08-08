@@ -1325,8 +1325,7 @@ const testSliceX = () => {
 
       lastOwner = subElement.owner;
       lastY = subElement.y;
-      /*       console.log("inARow:" + inARow, "X:" + subElement.x, "Y:" + subElement.y);
-       */ return inARow >= 5;
+      return inARow >= 5;
     });
     return inARow >= 5;
   });
@@ -1549,12 +1548,8 @@ it("checks for win on y", () => {
 
 const testSliceE = () => {
   let testArray = ["red", "red", "red", "red", "red"];
-  let winning = testArray.every(x => {
-    x === "red";
-  });
-  let result = testArray.every(x => {
-    x === "red";
-  });
+  let winning = testArray.every(x => x === "red");
+  let result = testArray.every(x => x === "red");
   console.log(result);
   if (winning) {
     return true;
@@ -1562,5 +1557,5 @@ const testSliceE = () => {
 };
 
 it("checks for win on diagonal", () => {
-  expect(testSliceD()).toEqual(true);
+  expect(testSlice()).toEqual(true);
 });
