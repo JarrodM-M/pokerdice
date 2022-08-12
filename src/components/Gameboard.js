@@ -11,6 +11,42 @@ const numberArray = horizontalAxis.map(i =>
   verticalAxis.map(j => ({ x: i, y: j, owner: null, winOn: null }))
 );
 
+const winTest = (
+  board,
+  winningArray,
+  winningColor,
+  winningEl,
+  winningOp,
+  inARow,
+  lastO
+) => {
+  let lastEl = null;
+  board.some(element => {
+    element.some(subElement => {
+      if (
+        subElement.owner !== null &&
+        lastO === subElement.owner &&
+        subElement.y - lastEl == 1
+      ) {
+        inARow += 1;
+        winningArray.push(subElement.y);
+        winningColor = subElement.owner;
+        winningEl = subElement.x;
+        winningOp = winningArray[0] - 1;
+      } else {
+        inARow = 1;
+        winningArray.splice(0, winningArray.length);
+      }
+      lastO = subElement.owner;
+      lastEl = subElement.y;
+      return inARow >= 5;
+    });
+    return inARow >= 5;
+  });
+};
+
+///append the winOn inton the test sets
+
 export default function Gameboard({
   dice,
   playerState,
