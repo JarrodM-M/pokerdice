@@ -43,13 +43,10 @@ const winTest = (
 
 const testSliceX = board => {
   let winningArray = [];
-  let gameWinningArray = []; // just for logging
   let winningX = null;
   let winningY = null;
   let winningColor = null;
-  let gameWinningColor = null;
   let setWinner = null;
-  let setGameWinner = null;
   let inARow = 1;
   let lastOwner = null;
   let lastY;
@@ -79,37 +76,44 @@ const testSliceX = board => {
   });
 
   if (winning) {
-    let fullWinning = board.some(element => {
-      element.some(subElement => {
-        if (
-          subElement.owner !== null &&
-          lastOwner === subElement.owner &&
-          subElement.y - lastY == 1 &&
-          subElement.winOn !== "onX"
-        ) {
-          inARow += 1;
-          gameWinningArray.push(subElement.y); // for console logging
-          gameWinningColor = subElement.owner;
-        } else {
-          inARow = 1;
-          gameWinningArray.splice(0, gameWinningArray.length); // for console logging
-        }
-        lastOwner = subElement.owner;
-        lastY = subElement.y;
-        return inARow >= 9;
-      });
+    setWinner = "Winner: " + winningColor;
+    console.log(setWinner, board[winningX].splice(winningY, 5)); // use the splice from this
+    return true;
+  }
+};
+
+const testFullX = board => {
+  let lastY = null;
+  let lastOwner = null;
+  let inARow = 1;
+  let gameWinningArray = [];
+  let gameWinningColor = null;
+  let setGameWinner = null;
+  let fullWinning = board.some(element => {
+    element.some(subElement => {
+      if (
+        subElement.owner !== null &&
+        lastOwner === subElement.owner &&
+        subElement.y - lastY == 1
+      ) {
+        inARow += 1;
+        gameWinningArray.push(subElement.y); // for console logging
+        gameWinningColor = subElement.owner;
+      } else {
+        inARow = 1;
+        gameWinningArray.splice(0, gameWinningArray.length); // for console logging
+      }
+      lastOwner = subElement.owner;
+      lastY = subElement.y;
       return inARow >= 9;
     });
-    if (fullWinning) {
-      setGameWinner = `Game Winner: ${gameWinningColor}`;
-      console.log(setGameWinner);
-      console.log(`${gameWinningArray[0] - 1},${gameWinningArray}`);
-      return true;
-    } else {
-      setWinner = "Winner: " + winningColor;
-      console.log(setWinner, board[winningX].splice(winningY, 5)); // use the splice from this
-      return true;
-    }
+    return inARow >= 9;
+  });
+  if (fullWinning) {
+    setGameWinner = `Game Winner: ${gameWinningColor}`;
+    console.log(setGameWinner);
+    console.log(`${gameWinningArray[0] - 1},${gameWinningArray}`);
+    return true;
   }
 };
 
@@ -154,43 +158,55 @@ const testSliceY = board => {
   });
 
   if (winning) {
-    let fullWinning = newTestBoard.some(element => {
-      element.some(subElement => {
-        if (
-          subElement.owner !== null &&
-          lastOwner === subElement.owner &&
-          subElement.x - lastX == 1
-        ) {
-          inARow += 1;
-          gameWinningArray.push(subElement.x); // just for log
-          gameWinningColor = subElement.owner;
-        } else {
-          inARow = 1;
-          gameWinningArray.splice(0, gameWinningArray.length); // don't think I need
-        }
+    let consoleSplice = []; // just for logging test
+    winningArray.unshift(winningArray[0] - 1);
+    setWinner = "Winner: " + winningColor;
+    winningArray.forEach(x => {
+      consoleSplice.push(board[x].splice(winningY, 1)); // get rid of the push in order to work
+    });
+    /* console.log(setWinner, consoleSplice); */
+    return true;
+  }
+};
 
-        lastOwner = subElement.owner;
-        lastX = subElement.x;
-        return inARow >= 9;
-      });
+const testFullY = board => {
+  let gameWinningColor = null;
+  let setGameWinner = null;
+  let newTestBoard = [];
+  let gameWinningArray = [];
+  let lastX = null;
+  let lastOwner = null;
+  let inARow = 1;
+  board.forEach((x, index) => {
+    newTestBoard.push(board.map(row => row[index]));
+  });
+  let fullWinning = newTestBoard.some(element => {
+    element.some(subElement => {
+      if (
+        subElement.owner !== null &&
+        lastOwner === subElement.owner &&
+        subElement.x - lastX == 1
+      ) {
+        inARow += 1;
+        gameWinningArray.push(subElement.x); // just for log
+        gameWinningColor = subElement.owner;
+      } else {
+        inARow = 1;
+        gameWinningArray.splice(0, gameWinningArray.length); // don't think I need
+      }
+
+      lastOwner = subElement.owner;
+      lastX = subElement.x;
       return inARow >= 9;
     });
-    if (fullWinning) {
-      setGameWinner = `Game Winner: ${gameWinningColor}`;
-      gameWinningArray.unshift(gameWinningArray[0] - 1); // console log only
-      console.log(gameWinningArray); // just for console log
-      console.log(setGameWinner);
-      return true;
-    } else {
-      let consoleSplice = []; // just for logging test
-      winningArray.unshift(winningArray[0] - 1);
-      setWinner = "Winner: " + winningColor;
-      winningArray.forEach(x => {
-        consoleSplice.push(board[x].splice(winningY, 1)); // get rid of the push in order to work
-      });
-      /* console.log(setWinner, consoleSplice); */
-      return true;
-    }
+    return inARow >= 9;
+  });
+  if (fullWinning) {
+    setGameWinner = `Game Winner: ${gameWinningColor}`;
+    gameWinningArray.unshift(gameWinningArray[0] - 1); // console log only
+    console.log(gameWinningArray); // just for console log
+    console.log(setGameWinner);
+    return true;
   }
 };
 
@@ -251,14 +267,22 @@ const testSliceD = board => {
   }
 };
 
+it("checks for full line on x", () => {
+  expect(testFullX(testBoardMain)).toEqual(true);
+});
+
+it("checks for full line on y", () => {
+  expect(testFully(testBoardMain)).toEqual(true);
+});
+
 it.only("checks for win on x", () => {
   expect(testSliceX(testBoardMain)).toEqual(true);
 });
 
 it("checks for win on y", () => {
-  expect(testSliceY()).toEqual(true);
+  expect(testSliceY(testBoardMain)).toEqual(true);
 });
 
 it("checks for win on diagonal", () => {
-  expect(testSliceD()).toEqual(true);
+  expect(testSliceD(testBoardMain)).toEqual(true);
 });
