@@ -3,6 +3,10 @@ import testBoardY from "./tests/testBoardY.json";
 import testBoardX from "./tests/testBoardX.json";
 import testBoardMain from "./tests/testBoardMain.json";
 
+// Maybe the more efficient way is to not call the check winner funcions on the entire board each time -
+// Instead, everytime a piece is played on gameboard.js and the .owner property is set to 'red or 'blue'
+// that .owners parent object would be added to an empty test board on which you would call the check winner functions
+
 const winTest = (
   board,
   winningArray,
@@ -155,8 +159,7 @@ const testSliceY = board => {
         if (
           subElement.owner !== null &&
           lastOwner === subElement.owner &&
-          subElement.x - lastX == 1 &&
-          subElement.winOn !== "onY"
+          subElement.x - lastX == 1
         ) {
           inARow += 1;
           gameWinningArray.push(subElement.x); // just for log
