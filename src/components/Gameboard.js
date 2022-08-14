@@ -55,6 +55,7 @@ export default function Gameboard({
   dispatch
 }) {
   const [boardState, setBoardState] = useState(numberArray);
+  const [winState, setWinState] = useState(numberArray);
   const resetAll = () => dispatch({ type: "resetAll" });
   const setOwner = (x, y) => {
     resetAll();
@@ -66,6 +67,15 @@ export default function Gameboard({
     }
     boardState[x][y].owner = playerState;
     setBoardState([...boardState]);
+    winState[x][y].owner = playerState;
+    setWinState([...winState]);
+  };
+
+  const setWinOne = (x, y, direction) => {
+    boardState[x][y].winOn = direction;
+    setBoardState([...boardState]);
+    winState[x][y].winOn = playerState;
+    setWinState([...winState]);
   };
 
   return (
