@@ -1,6 +1,7 @@
 import testBoardD from "./tests/testBoardD.json";
 import testBoardY from "./tests/testBoardY.json";
 import testBoardX from "./tests/testBoardX.json";
+import testBoardMain from "./tests/testBoardMain.json";
 
 const winTest = (
   board,
@@ -36,7 +37,7 @@ const winTest = (
   });
 };
 
-const testSliceX = () => {
+const testSliceX = board => {
   let winningArray = [];
   let gameWinningArray = []; // just for logging
   let winningX = null;
@@ -48,12 +49,13 @@ const testSliceX = () => {
   let inARow = 1;
   let lastOwner = null;
   let lastY;
-  let winning = testBoardX.some(element => {
+  let winning = board.some(element => {
     element.some(subElement => {
       if (
         subElement.owner !== null &&
         lastOwner === subElement.owner &&
-        subElement.y - lastY == 1
+        subElement.y - lastY == 1 &&
+        subElement.winOn !== "onX"
       ) {
         inARow += 1;
         winningArray.push(subElement.y);
@@ -73,12 +75,13 @@ const testSliceX = () => {
   });
 
   if (winning) {
-    let fullWinning = testBoardX.some(element => {
+    let fullWinning = board.some(element => {
       element.some(subElement => {
         if (
           subElement.owner !== null &&
           lastOwner === subElement.owner &&
-          subElement.y - lastY == 1
+          subElement.y - lastY == 1 &&
+          subElement.winOn !== "onX"
         ) {
           inARow += 1;
           gameWinningArray.push(subElement.y); // for console logging
@@ -100,13 +103,13 @@ const testSliceX = () => {
       return true;
     } else {
       setWinner = "Winner: " + winningColor;
-      console.log(setWinner, testBoardX[winningX].splice(winningY, 5)); // use the splice from this
+      console.log(setWinner, board[winningX].splice(winningY, 5)); // use the splice from this
       return true;
     }
   }
 };
 
-const testSliceY = () => {
+const testSliceY = board => {
   let winningArray = [];
   let gameWinningArray = [];
   let winningY = null;
@@ -114,19 +117,21 @@ const testSliceY = () => {
   let gameWinningColor = null;
   let setWinner = null;
   let setGameWinner = null;
-  let newTestBoardY = [];
-  testBoardY.forEach((x, index) => {
-    newTestBoardY.push(testBoardY.map(row => row[index]));
-  });
+  let newTestBoard = [];
   let inARow = 1;
   let lastOwner = null;
   let lastX = null;
-  let winning = newTestBoardY.some(element => {
+  board.forEach((x, index) => {
+    newTestBoard.push(board.map(row => row[index]));
+  });
+
+  let winning = newTestBoard.some(element => {
     element.some(subElement => {
       if (
         subElement.owner !== null &&
         lastOwner === subElement.owner &&
-        subElement.x - lastEl == 1
+        subElement.x - lastX == 1 &&
+        subElement.winOn !== "onY"
       ) {
         inARow += 1;
         winningArray.push(subElement.x);
@@ -138,19 +143,20 @@ const testSliceY = () => {
       }
 
       lastOwner = subElement.owner;
-      lastEl = subElement.x;
+      lastX = subElement.x;
       return inARow >= 5;
     });
     return inARow >= 5;
   });
 
   if (winning) {
-    let fullWinning = newTestBoardY.some(element => {
+    let fullWinning = newTestBoard.some(element => {
       element.some(subElement => {
         if (
           subElement.owner !== null &&
           lastOwner === subElement.owner &&
-          subElement.x - lastX == 1
+          subElement.x - lastX == 1 &&
+          subElement.winOn !== "onY"
         ) {
           inARow += 1;
           gameWinningArray.push(subElement.x); // just for log
@@ -177,7 +183,7 @@ const testSliceY = () => {
       winningArray.unshift(winningArray[0] - 1);
       setWinner = "Winner: " + winningColor;
       winningArray.forEach(x => {
-        consoleSplice.push(testBoardY[x].splice(winningY, 1)); // get rid of the push in order to work
+        consoleSplice.push(board[x].splice(winningY, 1)); // get rid of the push in order to work
       });
       /* console.log(setWinner, consoleSplice); */
       return true;
@@ -185,18 +191,23 @@ const testSliceY = () => {
   }
 };
 
-const testSliceD = () => {
+const testSliceD = board => {
   let inARow = 1;
   let checkColor = [0, 1, 2, 3, 4];
   let colorArray = [];
   let currentColor = null;
   let winningColor = null;
-  let winning = testBoardD.some(element => {
+  let winning = board.some(element => {
     element.some(subElement => {
-      if (subElement.owner !== null && subElement.x <= 4 && subElement.y <= 4) {
+      if (
+        subElement.owner !== null &&
+        subElement.x <= 4 &&
+        subElement.y <= 4 &&
+        subElement.winOn !== "onDR"
+      ) {
         currentColor = subElement.owner;
         checkColor.forEach(i => {
-          colorArray.push(testBoardD[+subElement.x + i][+subElement.y + i]);
+          colorArray.push(board[+subElement.x + i][+subElement.y + i]);
         });
         if (colorArray.every(x => x.owner === currentColor)) {
           winningColor = currentColor;
@@ -207,11 +218,12 @@ const testSliceD = () => {
       } else if (
         subElement.owner !== null &&
         subElement.x <= 4 &&
-        subElement.y >= 4
+        subElement.y >= 4 &&
+        subElement.winOn !== "onDL"
       ) {
         currentColor = subElement.owner;
         checkColor.forEach(i => {
-          colorArray.push(testBoardD[+subElement.x + i][+subElement.y - i]);
+          colorArray.push(board[+subElement.x + i][+subElement.y - i]);
         });
 
         if (colorArray.every(x => x.owner === currentColor)) {
@@ -230,14 +242,14 @@ const testSliceD = () => {
     console.log(colorArray);
     console.log(winningColor);
     colorArray.forEach(cA => {
-      testBoardD[cA.x].splice(cA.y, 1);
+      board[cA.x].splice(cA.y, 1);
     });
     return true;
   }
 };
 
 it.only("checks for win on x", () => {
-  expect(testSliceX()).toEqual(true);
+  expect(testSliceX(testBoardMain)).toEqual(true);
 });
 
 it("checks for win on y", () => {
