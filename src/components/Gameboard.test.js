@@ -1,6 +1,3 @@
-import testBoardD from "./tests/testBoardD.json";
-import testBoardY from "./tests/testBoardY.json";
-import testBoardX from "./tests/testBoardX.json";
 import testBoardMain from "./tests/testBoardMain.json";
 
 // Maybe the more efficient way is to not call the check winner funcions on the entire board each time -
