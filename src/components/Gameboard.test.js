@@ -3,7 +3,10 @@ import testBoardMain from "./tests/testBoardMain.json";
 // Maybe the more efficient way is to not call the check winner funcions on the entire board each time -
 // Instead, everytime a piece is played on gameboard.js and the .owner property is set to 'red or 'blue'
 // that .owners parent object would be added to an empty test board on which you would call the check winner functions
-
+const checkFree = arr => {
+  let index = arr.map(i => i.x + i.y).indexOf("44");
+  return index === 1 || index === 2 || index === 3;
+};
 const testSliceX = board => {
   let winningArray = [];
   let winningX = null;
@@ -175,7 +178,10 @@ const testSliceD = board => {
           ...checkColor.map(i => board[+subElement.x + i][+subElement.y + i])
         );
         if (
-          colorArray.every(x => x.owner === currentColor && x.winOn !== "onDR")
+          colorArray.every(
+            x => x.owner === currentColor && x.winOn !== "onDR"
+          ) &&
+          !checkFree(colorArray)
         ) {
           winningColor = currentColor;
           inARow = 5;
@@ -195,7 +201,12 @@ const testSliceD = board => {
         );
 
         if (
-          colorArray.every(x => x.owner === currentColor && x.winOn !== "onDL")
+          colorArray.every(
+            x =>
+              (x.owner === currentColor || x.owner === "both") &&
+              x.winOn !== "onDL"
+          ) &&
+          !checkFree(colorArray)
         ) {
           winningColor = currentColor;
           inARow = 5;
@@ -210,13 +221,14 @@ const testSliceD = board => {
     return inARow >= 5;
   });
   if (winning) {
-    console.log(colorArray);
+    console.log(colorArray.map(i => i.x + i.y).indexOf("44"));
+
+    console.log(checkFree(colorArray));
     console.log(winningColor);
     return true;
   }
 };
 
-131;
 it("checks for full line on x", () => {
   expect(testFullX(testBoardMain)).toEqual(true);
 });
@@ -233,6 +245,6 @@ it("checks for win on y", () => {
   expect(testSliceY(testBoardMain)).toEqual(true);
 });
 
-it("checks for win on diagonal", () => {
+it.only("checks for win on diagonal", () => {
   expect(testSliceD(testBoardMain)).toEqual(true);
 });
