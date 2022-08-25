@@ -1,9 +1,16 @@
 import testBoardMain from "./tests/testBoardMain.json";
+import checkFree from "./Win.js";
+import testSliceX from "./Win.js";
+import testSliceY from "./Win.js";
+import testSliceD from "./Win.js";
+import testFullX from "./Win.js";
+import testFullY from "./Win.js";
 
 // Maybe the more efficient way is to not call the check winner funcions on the entire board each time -
 // Instead, everytime a piece is played on gameboard.js and the .owner property is set to 'red or 'blue'
 // that .owners parent object would be added to an empty test board on which you would call the check winner functions
-const checkFree = arr => {
+
+/* const checkFree = arr => {
   let index = arr.map(i => i.x + i.y).indexOf("44");
   return index === 1 || index === 2 || index === 3;
 };
@@ -227,7 +234,7 @@ const testSliceD = board => {
     console.log(winningColor);
     return true;
   }
-};
+}; */
 
 it("checks for full line on x", () => {
   expect(testFullX(testBoardMain)).toEqual(true);
