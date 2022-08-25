@@ -154,3 +154,73 @@ const testFullY = board => {
     return true;
   }
 };
+
+const testSliceD = board => {
+  let inARow = 1;
+  let checkColor = [0, 1, 2, 3, 4];
+  let colorArray = [];
+  let currentColor = null;
+  let winningColor = null;
+  let winning = board.some(element => {
+    element.some(subElement => {
+      if (
+        subElement.owner !== null &&
+        subElement.x <= 4 &&
+        subElement.y <= 4 &&
+        subElement.winOn !== "onDR"
+      ) {
+        currentColor = subElement.owner;
+        colorArray.push(
+          ...checkColor.map(i => board[+subElement.x + i][+subElement.y + i])
+        );
+        if (
+          colorArray.every(
+            x => x.owner === currentColor && x.winOn !== "onDR"
+          ) &&
+          !checkFree(colorArray)
+        ) {
+          winningColor = currentColor;
+          inARow = 5;
+          colorArray.map(cA => (board[cA.x][cA.y].winON = "onDR"));
+        } else {
+          colorArray = [];
+        }
+      } else if (
+        subElement.owner !== null &&
+        subElement.x <= 4 &&
+        subElement.y >= 4 &&
+        subElement.winOn !== "onDL"
+      ) {
+        currentColor = subElement.owner;
+        colorArray.push(
+          ...checkColor.map(i => board[+subElement.x + i][+subElement.y - i])
+        );
+
+        if (
+          colorArray.every(
+            x =>
+              (x.owner === currentColor || x.owner === "both") &&
+              x.winOn !== "onDL"
+          ) &&
+          !checkFree(colorArray)
+        ) {
+          winningColor = currentColor;
+          inARow = 5;
+          colorArray.map(cA => (board[cA.x][cA.y].winON = "onDL"));
+        } else {
+          colorArray = [];
+        }
+      }
+
+      return inARow >= 5;
+    });
+    return inARow >= 5;
+  });
+  if (winning) {
+    console.log(colorArray.map(i => i.x + i.y).indexOf("44"));
+
+    console.log(checkFree(colorArray));
+    console.log(winningColor);
+    return true;
+  }
+};
