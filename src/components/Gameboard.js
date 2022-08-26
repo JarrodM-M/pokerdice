@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Tile from "./Tile";
+import checkWin from "./Win.js";
 import "./Gameboard.css";
 import "../App.css";
 
@@ -32,6 +33,7 @@ export default function Gameboard({
     if (boardState[4][4].owner !== "blue") {
       boardState[4][4].owner = "blue";
     } else boardState[4][4].owner = "red";
+    checkWin(boardState);
     setBoardState([...boardState]);
   };
 

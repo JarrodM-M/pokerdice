@@ -224,3 +224,11 @@ const testSliceD = board => {
     return true;
   }
 };
+
+checkWin = board => {
+  testSliceX(board);
+  testSliceY(board);
+  testSliceD(board);
+  testFullX(board);
+  testFullY(board);
+};
