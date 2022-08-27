@@ -1,9 +1,9 @@
-.tile{
+.tile {
   max-height: 100%;
   max-width: 100%;
 }
-.tileTwo{
-  position:relative;
+.tileTwo {
+  position: relative;
   max-height: 100%;
   max-width: 100%;
 }
@@ -19,22 +19,21 @@
   position: absolute;
 }
 
-.tileContainerSel{
+.tileContainerSel {
   pointer-events: auto;
   min-width: 0;
   min-height: 0;
-  transition: all 1s ease-in-out ;
+  transition: all 1s ease-in-out;
   background-color: rgba(190, 252, 188, 0.616);
   height: 100%;
   width: 100%;
 }
 
-
 .tileContainerRed {
   pointer-events: none;
   min-width: 0;
   min-height: 0;
-  transition: all 1s ease-in-out ;
+  transition: all 1s ease-in-out;
   height: 100%;
   width: 100%;
   display: flex;
@@ -45,8 +44,9 @@
   pointer-events: none;
   min-width: 0;
   min-height: 0;
-  transition: all 1s ease-in-out ;
-  background-color: rgba(73, 91, 250, 0.349);
+  transition: all 1s ease-in-out;
   height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
