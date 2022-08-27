@@ -209,7 +209,7 @@ const tileFunction = (xValue, yValue, dice, owner) => {
     return { imgSrc: fourThree, tile: tileBoolean };
   } else if (xValue + yValue === "44") {
     const tileBoolean = false;
-    return { imgSrc: fourFour, tile: tileBoolean };
+    return { tile: tileBoolean };
   } else if (xValue + yValue === "70") {
     const tileBoolean = isSubset([5, 5], a);
     return { imgSrc: sevenZero, tile: tileBoolean };
