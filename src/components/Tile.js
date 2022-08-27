@@ -42,8 +42,8 @@ import fourFour from "../assets/images/board/44.png";
 import sevenZero from "../assets/images/board/70.png";
 import sevenEight from "../assets/images/board/78.png";
 import eightFour from "../assets/images/board/84.png";
-import redToken from "../assets/images/die1.png";
-import blueToken from "../assets/images/die2.png";
+import redToken from "../assets/images/board/space/redspacecoin.png";
+import blueToken from "../assets/images/board/space/bluespacecoin.png";
 
 /*<img src="G:\Coding\pokerdice\src\assets\images\board\00.png"></img>*/
 let cx = classNames.bind(styles);

@@ -46,6 +46,9 @@ function App() {
 
   const [rollCount, setRollCount] = useState(0);
 
+  const [redWins, setRedWins] = useState(0);
+  const [blueWins, setBlueWins] = useState(0);
+
   return (
     <div className="app">
       <div className="title">Poker Dice</div>
@@ -63,6 +66,10 @@ function App() {
           setPlayerState={setPlayerState}
           dispatch={dispatch}
           setRollCount={setRollCount}
+          redWins={redWins}
+          setRedWins={setRedWins}
+          blueWins={blueWins}
+          setBlueWins={setBlueWins}
         />
       </div>
       <div className="player-token">

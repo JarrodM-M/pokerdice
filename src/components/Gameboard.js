@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Tile from "./Tile";
-import checkWin from "./Win.js";
+import { checkWin } from "./Win";
 import "./Gameboard.css";
 import "../App.css";
 
@@ -17,7 +17,11 @@ export default function Gameboard({
   playerState,
   setPlayerState,
   setRollCount,
-  dispatch
+  dispatch,
+  redWins,
+  setRedWins,
+  blueWins,
+  setBlueWins
 }) {
   const [boardState, setBoardState] = useState(numberArray);
   const resetAll = () => dispatch({ type: "resetAll" });
@@ -33,7 +37,7 @@ export default function Gameboard({
     if (boardState[4][4].owner !== "blue") {
       boardState[4][4].owner = "blue";
     } else boardState[4][4].owner = "red";
-    checkWin(boardState);
+    checkWin(boardState, redWins, blueWins, setRedWins, setBlueWins);
     setBoardState([...boardState]);
   };
 

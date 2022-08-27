@@ -3,7 +3,12 @@ const checkFree = arr => {
   return index === 1 || index === 2 || index === 3;
 };
 
-const testSliceX = board => {
+const checkWinningColor = (winner, red, blue, setRed, setBlue, number) => {
+  if (winner === "red") setRed(red + number);
+  else setBlue(blue + number);
+};
+
+const testSliceX = (board, redWins, blueWins, setRedWins, setBlueWins) => {
   let winningArray = [];
   let winningX = null;
   let winningColor = null;
@@ -36,6 +41,14 @@ const testSliceX = board => {
   });
 
   if (winning) {
+    checkWinningColor(
+      winningColor,
+      redWins,
+      blueWins,
+      setRedWins,
+      setBlueWins,
+      1
+    );
     setWinner = "Winner: " + winningColor;
     winningArray.unshift(winningArray[0] - 1);
     winningArray.map(y => (board[winningX][y].winOn = "onX"));
@@ -44,7 +57,7 @@ const testSliceX = board => {
   return true;
 };
 
-const testFullX = board => {
+const testFullX = (board, redWins, blueWins, setRedWins, setBlueWins) => {
   let lastY = null;
   let lastOwner = null;
   let inARow = 1;
@@ -69,13 +82,21 @@ const testFullX = board => {
     return inARow >= 9;
   });
   if (fullWinning) {
+    checkWinningColor(
+      gameWinningColor,
+      redWins,
+      blueWins,
+      setRedWins,
+      setBlueWins,
+      2
+    );
     setGameWinner = `Game Winner: ${gameWinningColor}`;
     console.log(setGameWinner + "full x");
     return true;
   }
 };
 
-const testSliceY = board => {
+const testSliceY = (board, redWins, blueWins, setRedWins, setBlueWins) => {
   let winningArray = [];
   let winningY = null;
   let winningColor = null;
@@ -110,18 +131,25 @@ const testSliceY = board => {
   });
 
   if (winning) {
+    checkWinningColor(
+      winningColor,
+      redWins,
+      blueWins,
+      setRedWins,
+      setBlueWins,
+      1
+    );
+
     setWinner = "Winner: " + winningColor;
     winningArray.unshift(winningArray[0] - 1);
-    winningArray.map(x => {
-      board[x][winningY].winOn = "onY";
-    });
+    winningArray.map(x => (board[x][winningY].winOn = "onY"));
     console.log(setWinner + "testY");
 
     return true;
   }
 };
 
-const testFullY = board => {
+const testFullY = (board, redWins, blueWins, setRedWins, setBlueWins) => {
   let gameWinningColor = null;
   let setGameWinner = null;
   let lastX = null;
@@ -149,13 +177,22 @@ const testFullY = board => {
     return inARow >= 9;
   });
   if (fullWinning) {
+    checkWinningColor(
+      gameWinningColor,
+      redWins,
+      blueWins,
+      setRedWins,
+      setBlueWins,
+      2
+    );
+
     setGameWinner = `Game Winner: ${gameWinningColor}`;
     console.log(setGameWinner + "full y");
     return true;
   }
 };
 
-const testSliceD = board => {
+const testSliceD = (board, redWins, blueWins, setRedWins, setBlueWins) => {
   let inARow = 1;
   let checkColor = [0, 1, 2, 3, 4];
   let colorArray = [];
@@ -217,6 +254,15 @@ const testSliceD = board => {
     return inARow >= 5;
   });
   if (winning) {
+    checkWinningColor(
+      winningColor,
+      redWins,
+      blueWins,
+      setRedWins,
+      setBlueWins,
+      1
+    );
+
     console.log(colorArray.map(i => i.x + i.y).indexOf("44"));
 
     console.log(checkFree(colorArray));
@@ -225,10 +271,16 @@ const testSliceD = board => {
   }
 };
 
-checkWin = board => {
-  testSliceX(board);
-  testSliceY(board);
-  testSliceD(board);
-  testFullX(board);
-  testFullY(board);
-};
+export function checkWin(
+  boardState,
+  redWins,
+  blueWins,
+  setRedWins,
+  setBlueWins
+) {
+  testSliceX(boardState, redWins, blueWins, setRedWins, setBlueWins);
+  testSliceY(boardState, redWins, blueWins, setRedWins, setBlueWins);
+  testSliceD(boardState, redWins, blueWins, setRedWins, setBlueWins);
+  testFullX(boardState, redWins, blueWins, setRedWins, setBlueWins);
+  testFullY(boardState, redWins, blueWins, setRedWins, setBlueWins);
+}
